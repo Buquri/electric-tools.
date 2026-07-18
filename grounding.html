@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ka" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>დამიწება და მეხამრიდე</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col">
+
+    <!-- ჰედერი -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">⚡</span>
+                <h1 class="text-xl font-bold tracking-wide text-amber-400">ElectroCalc Sp.</h1>
+            </div>
+            <a href="index.html" class="px-4 py-2 rounded-md text-sm font-medium bg-gray-900 text-amber-400 border border-amber-500/30 hover:bg-gray-700 transition">
+                ← მთავარზე დაბრუნება
+            </a>
+        </div>
+    </header>
+
+    <!-- მთავარი კონტენტი -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 space-y-8">
+        
+        <!-- 🧭 სექცია 1: დამიწების კონტური -->
+        <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
+            <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-amber-400 flex items-center gap-2">
+                <span>🌍</span> 1. დამიწების კონტურის გაანგარიშება (ვერტიკალური ელექტროდები)
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ნიადაგის ტიპი</label>
+                    <select id="soil-type" onchange="updateSoilResistivity()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-amber-500 outline-none">
+                        <option value="20">შავმიწა (20 ომი·მ)</option>
+                        <option value="30" selected>თიხნარი (30 ომი·მ)</option>
+                        <option value="100">თიხა / სველი ქვიშა (100 ომი·მ)</option>
+                        <option value="700">მშრალი ქვიშა (700 ომი·მ)</option>
+                        <option value="2000">კლდოვანი ნიადაგი (2000 ომი·მ)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ზუსტი წინაღობა, ρ (ომი·მ)</label>
+                    <input type="number" id="soil-rho" value="30" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სასურველი წინაღობა (ომი)</label>
+                    <input type="number" id="target-r" value="4" step="0.1" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ელექტროდის სიგრძე, L (მეტრი)</label>
+                    <input type="number" id="electrode-l" value="2.5" step="0.1" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ღეროს დიამეტრი, d (მმ)</label>
+                    <input type="number" id="electrode-d" value="16" step="1" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                </div>
+            </div>
+
+            <!-- დამიწების შედეგი -->
+            <div id="grounding-result" class="bg-gray-900 p-4 rounded-lg border border-gray-700 hidden">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">✓ გაანგარიშების შედეგი:</h4>
+                <p id="g-res-text" class="text-sm text-gray-300 leading-relaxed font-mono"></p>
+            </div>
+        </section>
+
+        <!-- 🧭 სექცია 2: მეხამრიდე -->
+        <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
+            <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-cyan-400 flex items-center gap-2">
+                <span>🛡️</span> 2. მეხამრიდის დამცავი ზონის გაანგარიშება (კონუსური მეთოდი)
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მეხამრიდის სიმაღლე, h (მ)</label>
+                    <input type="number" id="lightning-h" value="10" step="0.5" oninput="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ობიექტის სიმაღლე, hx (მ)</label>
+                    <input type="number" id="building-hx" value="6" step="0.5" oninput="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">დაცვის კუთხე, α</label>
+                    <select id="protection-angle" onchange="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-cyan-500 outline-none">
+                        <option value="45" selected>45° (სტანდარტული დაცვა)</option>
+                        <option value="60">60° (გაფართოებული ზონა)</option>
+                        <option value="30">30° (მაღალი საიმედოობა)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- მეხამრიდის შედეგი -->
+            <div id="lightning-result" class="bg-gray-900 p-4 rounded-lg border border-gray-700 hidden">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-2">✓ გაანგარიშების შედეგი:</h4>
+                <p id="l-res-text" class="text-sm text-gray-300 leading-relaxed font-mono"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function updateSoilResistivity() {
+            const select = document.getElementById('soil-type');
+            document.getElementById('soil-rho').value = select.value;
+            calculateGrounding();
+        }
+
+        // 🌍 [ფორმულა]: დამიწების კონტურის მათემატიკური მოდელი
+        function calculateGrounding() {
+            const rho = parseFloat(document.getElementById('soil-rho').value);
+            const L = parseFloat(document.getElementById('electrode-l').value);
+            const dMm = parseFloat(document.getElementById('electrode-d').value);
+            const targetR = parseFloat(document.getElementById('target-r').value);
+            
+            const resultBox = document.getElementById('grounding-result');
+            const resText = document.getElementById('g-res-text');
+
+            if (!rho || !L || !dMm || !targetR || L <= 0 || dMm <= 0 || targetR <= 0) {
+                resultBox.classList.add('hidden');
+                return;
+            }
+
+            const d = dMm / 1000; // მილიმეტრი მეტრებში
+            
+            // ომის კანონი ვერტიკალური ღეროსთვის მიწაში: R0 = (rho / (2*pi*L)) * ln(4L/d)
+            const R0 = (rho / (2 * Math.PI * L)) * Math.log((4 * L) / d);
+            const eta = 0.85; // ეკრანირების საშუალო კოეფიციენტი
+            const finalCount = Math.ceil(R0 / (targetR * eta));
+
+            resultBox.classList.remove('hidden');
+            resText.innerHTML = `
+                ერთი ელექტროდის წინაღობა (R₀): <span class="text-emerald-400 font-bold">${R0.toFixed(2)} ომი</span><br>
+                საჭირო ელექტროდების რაოდენობა: <span class="text-emerald-400 font-bold">${finalCount} ცალი</span><br>
+                რეკომენდებული მანძილი ღეროებს შორის: <span class="text-amber-400">${(L * 2).toFixed(1)} მეტრი</span>
+            `;
+        }
+
+        // 🛡️ [ფორმულა]: მეხამრიდის დამცავი კონუსი
+        function calculateLightning() {
+            const h = parseFloat(document.getElementById('lightning-h').value);
+            const hx = parseFloat(document.getElementById('building-hx').value);
+            const angleDeg = parseFloat(document.getElementById('protection-angle').value);
+
+            const resultBox = document.getElementById('lightning-result');
+            const resText = document.getElementById('l-res-text');
+
+            if (!h || !hx || h <= 0 || hx < 0 || hx >= h) {
+                resultBox.classList.add('hidden');
+                return;
+            }
+
+            // რადიანებში გადაყვანა: rx = (h - hx) * tan(alpha)
+            const angleRad = (angleDeg * Math.PI) / 180;
+            const rx = (h - hx) * Math.tan(angleRad);
+
+            resultBox.classList.remove('hidden');
+            resText.innerHTML = `
+                დაცვის რადიუსი ობიექტის სიმაღლეზე (rx): <span class="text-cyan-400 font-bold">${rx.toFixed(2)} მეტრი</span><br>
+                <em>ამ რადიუსის შიგნით მოქცეული ფართობი სრულად დაცულია მეხის პირდაპირი დარტყმისგან.</em>
+            `;
+        }
+
+        // პირველადი გაშვება გვერდის ჩატვირთვისას
+        window.onload = function() {
+            calculateGrounding();
+            calculateLightning();
+        }
+    </script>
+</body>
+</html>
