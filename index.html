@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ka" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ელექტრო ასისტენტი</title>
+    <!-- Tailwind CSS პირდაპირი ბმულით -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col">
+
+    <!-- ჰედერი და ნავიგაცია -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">⚡</span>
+                <h1 class="text-xl font-bold tracking-wide text-amber-400">ElectroCalc</h1>
+            </div>
+            
+            <!-- მთავარი მენიუ (ტაბები) -->
+            <nav class="flex space-x-1 bg-gray-900 p-1 rounded-lg">
+                <button onclick="switchTab('calc-tab')" id="btn-calc-tab" class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition bg-amber-500 text-gray-900 font-semibold">
+                    კალკულატორი
+                </button>
+                <button onclick="switchTab('books-tab')" id="btn-books-tab" class="tab-btn px-4 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-gray-200 transition">
+                    ბიბლიოთეკა
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- მთავარი კონტენტი -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6">
+        
+        <!-- 📐 ჩანართი 1: კალკულატორი -->
+        <section id="calc-tab" class="tab-content block animate-fadeIn">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- ინპუტების ბლოკი -->
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
+                    <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-gray-300">პარამეტრები</h2>
+                    
+                    <!-- კვეთის შერჩევა -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ²)</label>
+                        <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
+                            <option value="1.5">1.5 მმ²</option>
+                            <option value="2.5" selected>2.5 მმ²</option>
+                            <option value="4.0">4.0 მმ²</option>
+                            <option value="6.0">6.0 მმ²</option>
+                        </select>
+                    </div>
+
+                    <!-- მონტაჟის პირობები -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მონტაჟის ტიპი</label>
+                        <select id="install-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
+                            <option value="conduit" selected>მილში (კედელში)</option>
+                            <option value="air">ღიად ჰაერზე</option>
+                            <option value="ground">მიწაში</option>
+                        </select>
+                    </div>
+
+                    <!-- ძაბვა -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სამუშაო ძაბვა (V)</label>
+                        <div class="flex space-x-4 mt-1">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="voltage" value="220" checked onchange="calculateLoad()" class="w-4 h-4 text-amber-500 border-gray-700 bg-gray-900 focus:ring-0">
+                                <span>220 ვოლტი (1 ფაზა)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="voltage" value="380" onchange="calculateLoad()" class="w-4 h-4 text-amber-500 border-gray-700 bg-gray-900 focus:ring-0">
+                                <span>380 ვოლტი (3 ფაზა)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- შედეგების ბლოკი -->
+                <div class="flex flex-col justify-between space-y-4">
+                    
+                    <!-- დენი (ამპერაჟი) -->
+                    <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold uppercase text-gray-400">მაქსიმალური დენი</p>
+                            <p id="res-amperage" class="text-3xl font-extrabold text-amber-400 mt-1">0 A</p>
+                        </div>
+                        <span class="text-3xl bg-gray-900 p-3 rounded-lg">⚡</span>
+                    </div>
+
+                    <!-- სიმძლავრე (კილოვატი) -->
+                    <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold uppercase text-gray-400">მაქსიმალური სიმძლავრე</p>
+                            <p id="res-power" class="text-3xl font-extrabold text-emerald-400 mt-1">0 kW</p>
+                        </div>
+                        <span class="text-3xl bg-gray-900 p-3 rounded-lg">🔌</span>
+                    </div>
+
+                    <!-- ფასი მეტრზე -->
+                    <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold uppercase text-gray-400">ორიენტირებული ფასი</p>
+                            <p id="res-price" class="text-xl font-bold text-blue-400 mt-1">0.00 ₾ / მეტრი</p>
+                        </div>
+                        <span class="text-2xl bg-gray-900 p-3 rounded-lg">🏷️</span>
+                    </div>
+
+                    <!-- რეკომენდაცია -->
+                    <div class="bg-amber-950/40 border border-amber-800/60 p-4 rounded-xl text-sm text-amber-200">
+                        <strong>📌 მინიშნება:</strong> დაცვის მიზნით, ხაზზე დააყენეთ შესაბამისი ავტომატური ამომრთველი, რომლის ნომინალიც ნაკლებია ან ტოლია მაქსიმალურ დენზე.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 📚 ჩანართი 2: ბიბლიოთეკა (საწყისი შაბლონი) -->
+        <section id="books-tab" class="tab-content hidden animate-fadeIn bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
+            <h2 class="text-xl font-bold text-amber-400 mb-2">ელექტრო ბიბლიოთეკა</h2>
+            <p class="text-gray-400 text-sm">აქ განთავსდება შენი წიგნების საქაღალდეები ტექსტებითა და ფოტოებით. მომდევნო ნაბიჯზე ამ განყოფილებასაც სრულად ავამუშავებთ.</p>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 border-t border-gray-700 text-center py-4 text-xs text-gray-500">
+        ElectroCalc App &copy; 2026 • დამზადებულია GitHub-ზე
+    </footer>
+
+    <!-- 🧠 საიტის ლოგიკა (JavaScript) -->
+    <script>
+        let cableData = null;
+
+        // 1. ტაბების გადართვის ფუნქცია
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-gray-900', 'font-semibold');
+                btn.classList.add('text-gray-400', 'hover:text-gray-200');
+            });
+            
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('text-gray-400', 'hover:text-gray-200');
+            activeBtn.classList.add('bg-amber-500', 'text-gray-900', 'font-semibold');
+        }
+
+        // 2. JSON ბაზის დინამიკურად წამოღება (Fetch)
+        async function loadDatabase() {
+            try {
+                const response = await fetch('data/cables.json');
+                cableData = await response.json();
+                calculateLoad(); // ბაზის ჩატვირთვისთანავე პირველი გამოთვლა
+            } catch (error) {
+                console.error("ბაზის ჩატვირთვისას მოხდა შეცდომა:", error);
+            }
+        }
+
+        // 3. ელექტრო გამოთვლების ფორმულა
+        function calculateLoad() {
+            if (!cableData) return;
+
+            const size = document.getElementById('wire-size').value;
+            const install = document.getElementById('install-type').value;
+            const voltage = parseInt(document.querySelector('input[name="voltage"]:checked').value);
+
+            // ინფორმაციის ამოღება ლოკალური ბაზიდან
+            const cableSpecs = cableData.copper[size];
+            const maxAmperage = cableSpecs.amperage[install];
+            const price = cableSpecs.price_per_meter;
+
+            // სიმძლავრის გამოთვლა: P = I * U (1 ფაზა) ან P = I * U * √3 (3 ფაზა)
+            let maxPowerkW = 0;
+            if (voltage === 220) {
+                maxPowerkW = (maxAmperage * voltage) / 1000;
+            } else {
+                maxPowerkW = (maxAmperage * voltage * Math.sqrt(3)) / 1000;
+            }
+
+            // შედეგების გამოტანა ეკრანზე
+            document.getElementById('res-amperage').innerText = maxAmperage + " A";
+            document.getElementById('res-power').innerText = maxPowerkW.toFixed(2) + " kW";
+            document.getElementById('res-price').innerText = price.toFixed(2) + " ₾ / მეტრი";
+        }
+
+        // საიტის გახსნისთანავე ირთვება ბაზის ჩატვირთვის ფუნქცია
+        window.onload = loadDatabase;
+    </script>
+</body>
+</html>
