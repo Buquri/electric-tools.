@@ -1,0 +1,36 @@
+{
+  "copper": {
+    "1.5": {
+      "amperage": {
+        "conduit": 15,
+        "air": 19,
+        "ground": 26
+      },
+      "price_per_meter": 1.60
+    },
+    "2.5": {
+      "amperage": {
+        "conduit": 21,
+        "air": 27,
+        "ground": 38
+      },
+      "price_per_meter": 2.50
+    },
+    "4.0": {
+      "amperage": {
+        "conduit": 27,
+        "air": 36,
+        "ground": 49
+      },
+      "price_per_meter": 3.80
+    },
+    "6.0": {
+      "amperage": {
+        "conduit": 34,
+        "air": 46,
+        "ground": 60
+      },
+      "price_per_meter": 5.20
+    }
+  }
+}
