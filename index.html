@@ -35,7 +35,7 @@
         <!-- 📐 ჩანართი 1: კალკულატორი -->
         <section id="calc-tab" class="tab-content block">
             
-            <!-- 🔄 მასალის გადამრთველი ზოლი (სპილენძი / ალუმინი) -->
+            <!-- 🔄 მასალის გადამრთველი ზოლი -->
             <div class="flex justify-center mb-6">
                 <div class="bg-gray-800 p-1.5 rounded-xl border border-gray-700 flex space-x-2 shadow-lg">
                     <button onclick="setMaterial('copper')" id="btn-cu" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-amber-500 text-gray-900 shadow-md cursor-pointer">
@@ -58,16 +58,27 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კვეთა (მმ²)</label>
-                            <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition font-mono">
-                                <option value="1.5">1.5 მმ²</option>
-                                <option value="2.5" selected>2.5 მმ²</option>
-                                <option value="4.0">4.0 მმ²</option>
-                                <option value="6.0">6.0 მმ²</option>
-                            </select>
+                            <!-- შეცვლილია: Select-ის ნაცვლად Input თავისუფალი კვეთისთვის 0.01-დან 300-მდე -->
+                            <input type="number" id="wire-size" value="2.5" min="0.01" max="1000" step="0.01" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ხაზის სიგრძე (მეტრი)</label>
                             <input type="number" id="wire-length" value="20" min="1" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სამუშაო ძაბვა (V)</label>
+                            <!-- შეცვლილია: Radio ღილაკების ნაცვლად თავისუფალი ძაბვის ველი (მაგ. 9, 12, 220) -->
+                            <input type="number" id="wire-voltage" value="220" min="1" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ფაზების რაოდენობა</label>
+                            <select id="phase-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
+                                <option value="1" selected>1 ფაზა (DC / AC)</option>
+                                <option value="3">3 ფაზა (AC)</option>
+                            </select>
                         </div>
                     </div>
 
@@ -78,20 +89,6 @@
                             <option value="air">ღიად ჰაერზე</option>
                             <option value="ground">მიწაში</option>
                         </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სამუშაო ძაბვა (V)</label>
-                        <div class="flex space-x-4 mt-1">
-                            <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="voltage" value="220" checked onchange="calculateLoad()" class="w-4 h-4 text-amber-500 border-gray-700 bg-gray-900 focus:ring-0">
-                                <span>220 ვოლტი (1 ფაზა)</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="voltage" value="380" onchange="calculateLoad()" class="w-4 h-4 text-amber-500 border-gray-700 bg-gray-900 focus:ring-0">
-                                <span>380 ვოლტი (3 ფაზა)</span>
-                            </label>
-                        </div>
                     </div>
                 </div>
 
@@ -136,7 +133,7 @@
                     </div>
                     
                     <div class="bg-amber-950/40 border border-amber-800/60 p-4 rounded-xl text-sm text-amber-200">
-                        <strong>📌 მინიშნება:</strong> ალუმინის კაბელს აქვს უფრო მაღალი წინაღობა ვიდრე სპილენძს, ამიტომ მასზე ძაბვის ვარდნა უფრო მეტია იმავე სიგრძესა და კვეთაზე.
+                        <strong>📌 მინიშნება:</strong> დაბალ ძაბვებზე (მაგ. 9V ან 12V) კაბელის სიგრძის ზრდასთან ერთად ძაბვის ვარდნა პროცენტულად ძალიან სწრაფად იზრდება. გამოიყენეთ მსხვილი კვეთა.
                     </div>
                 </div>
             </div>
@@ -247,13 +244,13 @@
                 calculateLoad();
             } catch (error) {
                 console.error("ბაზის ჩატვირთვის შეცდომა:", error);
+                // ბაზის გარეშეც რომ იმუშაოს მათემატიკურმა მოდელმა:
+                calculateLoad();
             }
         }
 
-        // 🔄 მასალის გადართვის ფუნქცია (სპილენძი / ალუმინი)
         function setMaterial(material) {
             currentMaterial = material;
-            
             const btnCu = document.getElementById('btn-cu');
             const btnAl = document.getElementById('btn-al');
             const badge = document.getElementById('material-badge');
@@ -269,37 +266,52 @@
                 badge.innerText = "ალუმინის ხაზი";
                 badge.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-slate-400/10 text-slate-300 border border-slate-500/30 uppercase tracking-wider";
             }
-
             calculateLoad(); 
         }
 
         // ==========================================
-        // 📐 მთავარი გამოთვლების ფუნქცია
+        // 📐 მთავარი გამოთვლების განახლებული ფუნქცია
         // ==========================================
         function calculateLoad() {
-            if (!database || !database[currentMaterial]) return;
-            
-            const sizeValue = parseFloat(document.getElementById('wire-size').value);
-            const sizeKey = sizeValue.toFixed(1); 
-            
+            const sizeValue = parseFloat(document.getElementById('wire-size').value) || 0.01;
             const length = parseFloat(document.getElementById('wire-length').value) || 0;
+            const voltage = parseFloat(document.getElementById('wire-voltage').value) || 220;
+            const phase = parseInt(document.getElementById('phase-type').value) || 1;
             const install = document.getElementById('install-type').value;
-            const voltage = parseInt(document.querySelector('input[name="voltage"]:checked').value);
 
-            const materialData = database[currentMaterial];
-            const cableSpecs = materialData[sizeKey];
-            
-            if (!cableSpecs) return; 
+            let maxAmperage = 0;
+            let price = 0;
 
-            const maxAmperage = cableSpecs.amperage[install];
-            const price = cableSpecs.price_per_meter;
+            // ვამოწმებთ არსებობს თუ არა ეს კვეთა ჯეისონ ბაზაში
+            const sizeKey = sizeValue.toFixed(1);
+            if (database && database[currentMaterial] && database[currentMaterial][sizeKey]) {
+                maxAmperage = database[currentMaterial][sizeKey].amperage[install];
+                price = database[currentMaterial][sizeKey].price_per_meter;
+            } else {
+                // ------------------------------------------
+                // 🧮 [ფორმულა 3]: დენის სიმკვრივის დინამიური გამოთვლა (არასტანდარტული კვეთებისთვის)
+                // უსაფრთხო სიმკვრივის კოეფიციენტი: სპილენძი ~ 7 A/მმ², ალუმინი ~ 5 A/მმ²
+                // ------------------------------------------
+                const currentDensity = (currentMaterial === 'copper') ? 7 : 5;
+                maxAmperage = sizeValue * currentDensity;
+                
+                // მონტაჟის ტიპის კორექტირება დინამიურ გამოთვლაში
+                if (install === 'air') maxAmperage *= 1.15;    // ჰაერზე უკეთ გრილდება (+15%)
+                if (install === 'ground') maxAmperage *= 1.25; // მიწაში ყველაზე კარგად გრილდება (+25%)
+                
+                // ფასის პროპორციული მიახლოება კვეთასთან
+                price = sizeValue * (currentMaterial === 'copper' ? 1.8 : 0.9);
+            }
+
+            // დენის დამრგვალება
+            maxAmperage = parseFloat(maxAmperage.toFixed(1));
 
             // ------------------------------------------
             // 🏷️ [ფორმულა 1]: მაქსიმალური სიმძლავრის გამოთვლა (kW)
             // ------------------------------------------
             let maxPowerkW = 0;
-            if (voltage === 220) {
-                // 1 ფაზა: (დენი * ძაბვა) / 1000
+            if (phase === 1) {
+                // 1 ფაზა / DC: (დენი * ძაბვა) / 1000
                 maxPowerkW = (maxAmperage * voltage) / 1000;
             } else {
                 // 3 ფაზა: (დენი * ძაბვა * ფესვი 3-დან) / 1000
@@ -316,7 +328,7 @@
             // ------------------------------------------
             // 📉 [ფორმულა 2]: ძაბვის ვარდნის გამოთვლა (V)
             // ------------------------------------------
-            if (voltage === 220) {
+            if (phase === 1) {
                 // 1 ფაზა: (2 * რო * სიგრძე * დენი) / კვეთა
                 voltageDrop = (2 * rho * length * maxAmperage) / sizeValue;
             } else {
@@ -324,8 +336,8 @@
                 voltageDrop = (Math.sqrt(3) * rho * length * maxAmperage) / sizeValue;
             }
 
-            // პროცენტული ვარდნის შეფარდება საწყის ძაბვასთან
-            const dropPercent = (voltageDrop / voltage) * 100;
+            // პროცენტული ვარდნის შეფარდება დინამიურ ძაბვასთან
+            const dropPercent = voltage > 0 ? (voltageDrop / voltage) * 100 : 0;
 
             // შედეგების ასახვა ეკრანზე
             document.getElementById('res-amperage').innerText = maxAmperage + " A";
