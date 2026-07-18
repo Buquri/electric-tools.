@@ -1,36 +1,14 @@
 {
   "copper": {
-    "1.5": {
-      "amperage": {
-        "conduit": 15,
-        "air": 19,
-        "ground": 26
-      },
-      "price_per_meter": 1.60
-    },
-    "2.5": {
-      "amperage": {
-        "conduit": 21,
-        "air": 27,
-        "ground": 38
-      },
-      "price_per_meter": 2.50
-    },
-    "4.0": {
-      "amperage": {
-        "conduit": 27,
-        "air": 36,
-        "ground": 49
-      },
-      "price_per_meter": 3.80
-    },
-    "6.0": {
-      "amperage": {
-        "conduit": 34,
-        "air": 46,
-        "ground": 60
-      },
-      "price_per_meter": 5.20
-    }
+    "1.5": { "amperage": { "conduit": 15, "air": 19, "ground": 26 }, "price_per_meter": 1.50 },
+    "2.5": { "amperage": { "conduit": 21, "air": 27, "ground": 38 }, "price_per_meter": 2.40 },
+    "4.0": { "amperage": { "conduit": 27, "air": 38, "ground": 49 }, "price_per_meter": 3.80 },
+    "6.0": { "amperage": { "conduit": 34, "air": 46, "ground": 60 }, "price_per_meter": 5.50 }
+  },
+  "aluminum": {
+    "1.5": { "amperage": { "conduit": 11, "air": 14, "ground": 20 }, "price_per_meter": 0.60 },
+    "2.5": { "amperage": { "conduit": 16, "air": 20, "ground": 29 }, "price_per_meter": 0.90 },
+    "4.0": { "amperage": { "conduit": 21, "air": 28, "ground": 37 }, "price_per_meter": 1.40 },
+    "6.0": { "amperage": { "conduit": 26, "air": 36, "ground": 46 }, "price_per_meter": 2.00 }
   }
 }
