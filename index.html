@@ -17,7 +17,6 @@
                 <h1 class="text-xl font-bold tracking-wide text-amber-400">ElectroCalc</h1>
             </div>
             
-            <!-- მთავარი მენიუ - დაემატა ახალი ფანჯრის ღილაკი -->
             <nav class="flex space-x-1 bg-gray-900 p-1 rounded-lg">
                 <button onclick="switchTab('calc-tab')" id="btn-calc-tab" class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition bg-amber-500 text-gray-900 font-semibold cursor-pointer">
                     კალკულატორი
@@ -35,10 +34,8 @@
     <!-- მთავარი კონტენტი -->
     <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6">
         
-        <!-- 📐 ჩანართი 1: კალკულატორი (კაბელის გაანგარიშება) -->
+        <!-- 📐 ჩანართი 1: კალკულატორი -->
         <section id="calc-tab" class="tab-content block">
-            
-            <!-- 🔄 მასალის გადამრთველი ზოლი -->
             <div class="flex justify-center mb-6">
                 <div class="bg-gray-800 p-1.5 rounded-xl border border-gray-700 flex space-x-2 shadow-lg">
                     <button onclick="setMaterial('copper')" id="btn-cu" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-amber-500 text-gray-900 shadow-md cursor-pointer">
@@ -51,10 +48,10 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- ინპუტების ბლოკი -->
+                <!-- პარამეტრები -->
                 <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
                     <div class="flex justify-between items-center border-b border-gray-700 pb-2">
-                        <h2 class="text-lg font-bold text-gray-300">პარამეტრები</h2>
+                        <h2 class="text-lg font-bold text-gray-300">ძირითადი პარამეტრები</h2>
                         <span id="material-badge" class="text-xs px-2.5 py-1 rounded-full font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 uppercase tracking-wider">სპილენძის ხაზი</span>
                     </div>
                     
@@ -75,10 +72,11 @@
                             <input type="number" id="wire-voltage" value="220" min="1" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ფაზების რაოდენობა</label>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">დენის ტიპი და ფაზა</label>
                             <select id="phase-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
-                                <option value="1" selected>1 ფაზა (DC / AC)</option>
-                                <option value="3">3 ფაზა (AC)</option>
+                                <option value="1" selected>1 ფაზა (AC 220V)</option>
+                                <option value="3">3 ფაზა (AC 380V)</option>
+                                <option value="dc">მუდმივი დენი (DC)</option>
                             </select>
                         </div>
                     </div>
@@ -93,7 +91,7 @@
                     </div>
                 </div>
 
-                <!-- შედეგების ბლოკი -->
+                <!-- შედეგები -->
                 <div class="flex flex-col justify-between space-y-4">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
@@ -112,10 +110,9 @@
                         </div>
                     </div>
 
-                    <!-- ძაბვის ვარდნა -->
                     <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold uppercase text-gray-400">ძაბვის ვარდნა (მაქს. დენზე)</p>
+                            <p class="text-xs font-semibold uppercase text-gray-400">ძაბვის ვარდნა (ხაზის ბოლოს)</p>
                             <div class="flex items-baseline space-x-2 mt-1">
                                 <p id="res-drop-volt" class="text-3xl font-extrabold text-rose-400">0.00 V</p>
                                 <p id="res-drop-percent" class="text-lg font-bold text-gray-400">(0.00%)</p>
@@ -136,11 +133,11 @@
             </div>
         </section>
 
-        <!-- 📑 ჩანართი 2: ახალი ფანჯარა - ყველა ელექტრო ფორმულა -->
+        <!-- 📑 ჩანართი 2: ფორმულები და დამატებითი კალკულატორები -->
         <section id="formulas-tab" class="tab-content hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- კალკულატორი ა: დენის გამოთვლა (ამპერები) -->
+                <!-- კალკულატორი 1: დენის გამოთვლა (Amperage) -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-amber-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>⚡</span> დენის ძალის გამოთვლა (Amperage)</h3>
                     <div class="grid grid-cols-2 gap-3">
@@ -154,10 +151,11 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">ტიპი</label>
+                        <label class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
                         <select id="f-amp-phase" onchange="calcFormulaAmperage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm">
-                            <option value="1">1 ფაზა (DC / AC)</option>
+                            <option value="1">1 ფაზა (AC)</option>
                             <option value="3">3 ფაზა (AC)</option>
+                            <option value="dc">მუდმივი დენი (DC)</option>
                         </select>
                     </div>
                     <div class="bg-gray-900 p-3 rounded-lg flex justify-between items-center border border-gray-700/50">
@@ -166,7 +164,7 @@
                     </div>
                 </div>
 
-                <!-- კალკულატორი ბ: სიმძლავრის გამოთვლა (ვატები) -->
+                <!-- კალკულატორი 2: სიმძლავრის გამოთვლა (Watts) -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-emerald-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>🔌</span> სიმძლავრის გამოთვლა (Watts)</h3>
                     <div class="grid grid-cols-2 gap-3">
@@ -180,10 +178,11 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">ტიპი</label>
+                        <label class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
                         <select id="f-watt-phase" onchange="calcFormulaWatts()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm">
-                            <option value="1">1 ფაზა (DC / AC)</option>
+                            <option value="1">1 ფაზა (AC)</option>
                             <option value="3">3 ფაზა (AC)</option>
+                            <option value="dc">მუდმივი დენი (DC)</option>
                         </select>
                     </div>
                     <div class="bg-gray-900 p-3 rounded-lg flex justify-between items-center border border-gray-700/50">
@@ -192,7 +191,7 @@
                     </div>
                 </div>
 
-                <!-- კალკულატორი გ: ძაბვის გამოთვლა (ვოლტები) -->
+                <!-- კალკულატორი 3: ძაბვის გამოთვლა (Voltage) -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-rose-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📉</span> ძაბვის გამოთვლა (Voltage)</h3>
                     <div class="grid grid-cols-2 gap-3">
@@ -205,28 +204,92 @@
                             <input type="number" id="f-volt-amp" value="10" oninput="calcFormulaVoltage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-rose-500 transition font-mono text-sm">
                         </div>
                     </div>
-                    <div class="bg-gray-900 p-3 rounded-lg flex justify-between items-center border border-gray-700/50 pt-4">
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
+                        <select id="f-volt-phase" onchange="calcFormulaVoltage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm">
+                            <option value="1">1 ფაზა / DC მუდმივი</option>
+                            <option value="3">3 ფაზა (AC)</option>
+                        </select>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-lg flex justify-between items-center border border-gray-700/50">
                         <span class="text-xs text-gray-400 uppercase">საჭირო ძაბვა:</span>
                         <span id="f-volt-result" class="text-xl font-extrabold text-rose-400 font-mono">220.00 V</span>
                     </div>
                 </div>
 
-                <!-- კალკულატორი დ: ომის კანონი (წინაღობა) -->
+                <!-- კალკულატორი 4: დამოუკიდებელი ხაზის დანაკარგი (Advanced Voltage Drop) -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
-                    <h3 class="text-md font-bold text-blue-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>🔄</span> ომის კანონი და წინაღობა (Ohm's Law)</h3>
-                    <div class="grid grid-cols-2 gap-3">
+                    <h3 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📏</span> ხაზის სიგრძის დანაკარგი (ზუსტი)</h3>
+                    <div class="grid grid-cols-3 gap-2">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">ძაბვა (ვოლტი - V)</label>
-                            <input type="number" id="f-ohm-volt" value="12" oninput="calcOhmLaw()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-blue-500 transition font-mono text-sm">
+                            <label class="block text-[11px] text-gray-400 mb-1">კვეთა (მმ²)</label>
+                            <input type="number" id="vdrop-size" value="4" oninput="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs font-mono">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">დენი (ამპერი - A)</label>
-                            <input type="number" id="f-ohm-amp" value="2" oninput="calcOhmLaw()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-blue-500 transition font-mono text-sm">
+                            <label class="block text-[11px] text-gray-400 mb-1">მანძილი (მ)</label>
+                            <input type="number" id="vdrop-len" value="50" oninput="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-gray-400 mb-1">დენი (A)</label>
+                            <input type="number" id="vdrop-amp" value="16" oninput="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs font-mono">
                         </div>
                     </div>
-                    <div class="bg-gray-900 p-3 rounded-lg flex justify-between items-center border border-gray-700/50">
-                        <span class="text-xs text-gray-400 uppercase">წინაღობა (R):</span>
-                        <span id="f-ohm-result" class="text-xl font-extrabold text-blue-400 font-mono">6.00 Ω</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">მასალა</label>
+                            <select id="vdrop-mat" onchange="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs">
+                                <option value="cu">სპილენძი</option>
+                                <option value="al">ალუმინი</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">სისტემა</label>
+                            <select id="vdrop-sys" onchange="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs">
+                                <option value="1">1 ფაზა (AC 220V)</option>
+                                <option value="3">3 ფაზა (AC 380V)</option>
+                                <option value="dc">მუდმივი (DC)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-2.5 rounded-lg flex justify-between items-center border border-gray-700/50 text-xs">
+                        <span class="text-gray-400">დანაკარგი ვოლტებში:</span>
+                        <span id="vdrop-res-volt" class="font-bold text-violet-400 font-mono">0.00 V</span>
+                    </div>
+                </div>
+
+                <!-- ახალი კალკულატორი 5: დიამეტრის და კვეთის კონვერტორი -->
+                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
+                    <h3 class="text-md font-bold text-blue-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📐</span> კვეთის ფართობი ↔ დიამეტრი</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">შეიყვანეთ დიამეტრი (Ø მმ)</label>
+                            <input type="number" id="conv-dia" value="1.78" step="0.01" oninput="convertDiaToSize()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-blue-500 font-mono text-sm">
+                            <span class="text-[11px] text-gray-500 mt-1 block">შედეგი: <strong id="conv-res-size" class="text-blue-400">2.50 მმ²</strong></span>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">შეიყვანეთ კვეთა (მმ²)</label>
+                            <input type="number" id="conv-size" value="2.5" step="0.1" oninput="convertSizeToDia()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-blue-500 font-mono text-sm">
+                            <span class="text-[11px] text-gray-500 mt-1 block">შედეგი: <strong id="conv-res-dia" class="text-blue-400">1.78 Ø მმ</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ახალი კალკულატორი 6: LED ლენტები და კვების ბლოკი -->
+                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
+                    <h3 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>💡</span> LED განათება და კვების ბლოკი</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">ლენტის სიგრძე (მეტრი)</label>
+                            <input type="number" id="led-len" value="5" oninput="calcLedPower()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">სიმძლავრე (W / მეტრზე)</label>
+                            <input type="number" id="led-wpm" value="14.4" oninput="calcLedPower()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm">
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-lg space-y-1.5 border border-gray-700/50 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">სუფთა დატვირთვა:</span> <span id="led-res-pure" class="font-mono text-white">72 W</span></div>
+                        <div class="flex justify-between font-bold text-cyan-400"><span class="text-gray-300">საჭირო კვების ბლოკი (+20% რეზერვით):</span> <span id="led-res-total">≥ 86.4 W</span></div>
                     </div>
                 </div>
 
@@ -313,7 +376,6 @@
         let calcStoredExpression = '';
         let isEquationFinished = false;
 
-        // 🔄 ფანჯრების (ტაბების) გადართვის განახლებული ფუნქცია
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             document.getElementById(tabId).classList.remove('hidden');
@@ -329,11 +391,11 @@
                 loadBooksIndex();
             }
             if (tabId === 'formulas-tab') {
-                // ფანჯრის გახსნისთანავე პირველადი გათვლების გაშვება
                 calcFormulaAmperage();
                 calcFormulaWatts();
                 calcFormulaVoltage();
-                calcOhmLaw();
+                calcAdvancedDrop();
+                calcLedPower();
             }
         }
 
@@ -368,11 +430,12 @@
             calculateLoad(); 
         }
 
+        // 📐 მთავარი კალკულატორი: დანაკარგების გამიჯვნა AC/DC რეჟიმისთვის
         function calculateLoad() {
             const sizeValue = parseFloat(document.getElementById('wire-size').value) || 0.01;
             const length = parseFloat(document.getElementById('wire-length').value) || 0;
             const voltage = parseFloat(document.getElementById('wire-voltage').value) || 220;
-            const phase = parseInt(document.getElementById('phase-type').value) || 1;
+            const phase = document.getElementById('phase-type').value;
             const install = document.getElementById('install-type').value;
 
             let maxAmperage = 0;
@@ -393,18 +456,22 @@
             maxAmperage = parseFloat(maxAmperage.toFixed(1));
 
             let maxPowerkW = 0;
-            if (phase === 1) {
+            if (phase === '1' || phase === 'dc') {
                 maxPowerkW = (maxAmperage * voltage) / 1000;
             } else {
                 maxPowerkW = (maxAmperage * voltage * Math.sqrt(3)) / 1000;
             }
 
+            // კუთრი წინაღობის კოეფიციენტები
             const rho = (currentMaterial === 'copper') ? 0.0175 : 0.028;
             let voltageDrop = 0;
 
-            if (phase === 1) {
+            // ზუსტი ფორმულები დენის ტიპის მიხედვით
+            if (phase === '1' || phase === 'dc') {
+                // 1 ფაზა და მუდმივი დენი (DC) ორმაგ მანძილს გადის (მიდის-ბრუნდება)
                 voltageDrop = (2 * rho * length * maxAmperage) / sizeValue;
             } else {
+                // 3 ფაზა AC
                 voltageDrop = (Math.sqrt(3) * rho * length * maxAmperage) / sizeValue;
             }
 
@@ -417,88 +484,123 @@
             document.getElementById('res-drop-percent').innerText = `(${dropPercent.toFixed(2)}%)`;
 
             const statusEl = document.getElementById('res-drop-status');
-            const voltEl = document.getElementById('res-drop-volt');
-
             if (dropPercent <= 3) {
                 statusEl.innerText = "✓ ვარდნა იდეალურ ნორმაშია (≤ 3%)";
                 statusEl.className = "text-xs mt-1 font-medium text-emerald-400";
-                voltEl.className = currentMaterial === 'copper' ? "text-3xl font-extrabold text-amber-400" : "text-3xl font-extrabold text-slate-300";
             } else if (dropPercent <= 5) {
                 statusEl.innerText = "⚠ ვარდნა დასაშვებ ზღვარზეა (3% - 5%)";
                 statusEl.className = "text-xs mt-1 font-medium text-amber-400";
-                voltEl.className = "text-3xl font-extrabold text-amber-500";
             } else {
                 statusEl.innerText = "❌ კრიტიკული ვარდნა (> 5%)! გაზარდეთ კვეთა!";
                 statusEl.className = "text-xs mt-1 font-medium text-rose-400 animate-pulse";
-                voltEl.className = "text-3xl font-extrabold text-rose-400";
             }
         }
 
         // ==========================================
-        // ⚡ [ფორმულა ა]: დენის ძალის გამოთვლა (W -> A)
+        // ⚡ დენის გამოთვლა (გამიჯნული AC / DC)
         // ==========================================
         function calcFormulaAmperage() {
             const power = parseFloat(document.getElementById('f-amp-power').value) || 0;
             const volt = parseFloat(document.getElementById('f-amp-volt').value) || 1;
-            const phase = parseInt(document.getElementById('f-amp-phase').value);
+            const phase = document.getElementById('f-amp-phase').value;
             
             let amperage = 0;
-            if (phase === 1) {
-                // 1 ფაზა: I = P / U
+            if (phase === '1' || phase === 'dc') {
                 amperage = power / volt;
             } else {
-                // 3 ფაზა: I = P / (U * ფესვი 3)
                 amperage = power / (volt * Math.sqrt(3));
             }
-            
             document.getElementById('f-amp-result').innerText = amperage.toFixed(2) + " A";
         }
 
         // ==========================================
-        // 🔌 [ფორმულა ბ]: სიმძლავრის გამოთვლა (A -> W)
+        // 🔌 სიმძლავრის გამოთვლა
         // ==========================================
         function calcFormulaWatts() {
             const amp = parseFloat(document.getElementById('f-watt-amp').value) || 0;
             const volt = parseFloat(document.getElementById('f-watt-volt').value) || 0;
-            const phase = parseInt(document.getElementById('f-watt-phase').value);
+            const phase = document.getElementById('f-watt-phase').value;
             
             let watts = 0;
-            if (phase === 1) {
-                // 1 ფაზა: P = I * U
+            if (phase === '1' || phase === 'dc') {
                 watts = amp * volt;
             } else {
-                // 3 ფაზა: P = I * U * ფესვი 3
                 watts = amp * volt * Math.sqrt(3);
             }
-            
             const kw = watts / 1000;
             document.getElementById('f-watt-result').innerText = `${watts.toFixed(0)} W (${kw.toFixed(2)} kW)`;
         }
 
         // ==========================================
-        // 📉 [ფორმულა გ]: ძაბვის გამოთვლა (W + A -> V)
+        // 📉 ძაბვის გამოთვლა
         // ==========================================
         function calcFormulaVoltage() {
             const power = parseFloat(document.getElementById('f-volt-power').value) || 0;
             const amp = parseFloat(document.getElementById('f-volt-amp').value) || 1;
+            const phase = document.getElementById('f-volt-phase').value;
             
-            // ძაბვა: U = P / I
-            const volt = power / amp;
+            let volt = 0;
+            if (phase === '3') {
+                volt = power / (amp * Math.sqrt(3));
+            } else {
+                volt = power / amp;
+            }
             document.getElementById('f-volt-result').innerText = volt.toFixed(2) + " V";
         }
 
         // ==========================================
-        // 🔄 [ფორმულა დ]: ომის კანონი (V + A -> Ω)
+        // 📏 ხაზის სიგრძის ზუსტი დანაკარგი (ახალი ჩანართი)
         // ==========================================
-        function calcOhmLaw() {
-            const volt = parseFloat(document.getElementById('f-ohm-volt').value) || 0;
-            const amp = parseFloat(document.getElementById('f-ohm-amp').value) || 1;
-            
-            // წინაღობა: R = U / I
-            const ohm = volt / amp;
-            document.getElementById('f-ohm-result').innerText = ohm.toFixed(2) + " Ω";
+        function calcAdvancedDrop() {
+            const size = parseFloat(document.getElementById('vdrop-size').value) || 0.01;
+            const len = parseFloat(document.getElementById('vdrop-len').value) || 0;
+            const amp = parseFloat(document.getElementById('vdrop-amp').value) || 0;
+            const mat = document.getElementById('vdrop-mat').value;
+            const sys = document.getElementById('vdrop-sys').value;
+
+            const rho = (mat === 'cu') ? 0.0175 : 0.028;
+            let drop = 0;
+
+            if (sys === '1' || sys === 'dc') {
+                drop = (2 * rho * len * amp) / size;
+            } else {
+                drop = (Math.sqrt(3) * rho * len * amp) / size;
+            }
+            document.getElementById('vdrop-res-volt').innerText = drop.toFixed(2) + " V";
         }
 
+        // ==========================================
+        // 📐 კვეთის და დიამეტრის კონვერტორები
+        // ==========================================
+        function convertDiaToSize() {
+            const dia = parseFloat(document.getElementById('conv-dia').value) || 0;
+            // ფართობი S = (π * d²) / 4
+            const size = (Math.PI * Math.pow(dia, 2)) / 4;
+            document.getElementById('conv-res-size').innerText = size.toFixed(2) + " მმ²";
+        }
+
+        function convertSizeToDia() {
+            const size = parseFloat(document.getElementById('conv-size').value) || 0;
+            // დიამეტრი d = 2 * ფესვი(S / π)
+            const dia = 2 * Math.sqrt(size / Math.PI);
+            document.getElementById('conv-res-dia').innerText = dia.toFixed(2) + " Ø მმ";
+        }
+
+        // ==========================================
+        // 💡 LED ლენტების სიმძლავრის კალკულატორი
+        // ==========================================
+        function calcLedPower() {
+            const len = parseFloat(document.getElementById('led-len').value) || 0;
+            const wpm = parseFloat(document.getElementById('led-wpm').value) || 0;
+
+            const pure = len * wpm;
+            const total = pure * 1.20; // 20% უსაფრთხოების რეზერვი
+
+            document.getElementById('led-res-pure').innerText = pure.toFixed(1) + " W";
+            document.getElementById('led-res-total').innerText = "≥ " + total.toFixed(1) + " W";
+        }
+
+        // ბიბლიოთეკა და მათემატიკური კალკულატორი უცვლელია...
         async function loadBooksIndex() {
             try {
                 const response = await fetch('data/books/books-list.json');
@@ -550,7 +652,6 @@
             }
         }
 
-        // მათემატიკური კალკულატორი
         function toggleMathCalc() {
             const sidebar = document.getElementById('math-calc-sidebar');
             sidebar.classList.toggle('translate-x-full');
