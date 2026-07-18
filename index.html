@@ -38,15 +38,23 @@
                 <!-- ინპუტების ბლოკი -->
                 <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
                     <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-gray-300">პარამეტრები</h2>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ²)</label>
-                        <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
-                            <option value="1.5">1.5 მმ²</option>
-                            <option value="2.5" selected>2.5 მმ²</option>
-                            <option value="4.0">4.0 მმ²</option>
-                            <option value="6.0">6.0 მმ²</option>
-                        </select>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კვეთა (მმ²)</label>
+                            <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
+                                <option value="1.5">1.5 მმ²</option>
+                                <option value="2.5" selected>2.5 მმ²</option>
+                                <option value="4.0">4.0 მმ²</option>
+                                <option value="6.0">6.0 მმ²</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ხაზის სიგრძე (მეტრი)</label>
+                            <input type="number" id="wire-length" value="20" min="1" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
+                        </div>
                     </div>
+
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მონტაჟის ტიპი</label>
                         <select id="install-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
@@ -55,6 +63,7 @@
                             <option value="ground">მიწაში</option>
                         </select>
                     </div>
+
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სამუშაო ძაბვა (V)</label>
                         <div class="flex space-x-4 mt-1">
@@ -72,20 +81,36 @@
 
                 <!-- შედეგების ბლოკი -->
                 <div class="flex flex-col justify-between space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-semibold uppercase text-gray-400">მაქს. დენი</p>
+                                <p id="res-amperage" class="text-2xl font-extrabold text-amber-400 mt-1">0 A</p>
+                            </div>
+                            <span class="text-2xl bg-gray-900 p-2 rounded-lg">⚡</span>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-semibold uppercase text-gray-400">მაქს. სიმძლავრე</p>
+                                <p id="res-power" class="text-2xl font-extrabold text-emerald-400 mt-1">0 kW</p>
+                            </div>
+                            <span class="text-2xl bg-gray-900 p-2 rounded-lg">🔌</span>
+                        </div>
+                    </div>
+
+                    <!-- 🔴 ახალი ბლოკი: ძაბვის ვარდნა მაქსიმალურ დატვირთვაზე -->
                     <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold uppercase text-gray-400">მაქსიმალური დენი</p>
-                            <p id="res-amperage" class="text-3xl font-extrabold text-amber-400 mt-1">0 A</p>
+                            <p class="text-xs font-semibold uppercase text-gray-400">ძაბვის ვარდნა (მაქს. დენზე)</p>
+                            <div class="flex items-baseline space-x-2 mt-1">
+                                <p id="res-drop-volt" class="text-3xl font-extrabold text-rose-400">0.00 V</p>
+                                <p id="res-drop-percent" class="text-lg font-bold text-gray-400">(0.00%)</p>
+                            </div>
+                            <p id="res-drop-status" class="text-xs mt-1 font-medium text-emerald-400">✓ ვარდნა ნორმის ფარგლებშია</p>
                         </div>
-                        <span class="text-3xl bg-gray-900 p-3 rounded-lg">⚡</span>
+                        <span class="text-3xl bg-gray-900 p-3 rounded-lg">📉</span>
                     </div>
-                    <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-semibold uppercase text-gray-400">მაქსიმალური სიმძლავრე</p>
-                            <p id="res-power" class="text-3xl font-extrabold text-emerald-400 mt-1">0 kW</p>
-                        </div>
-                        <span class="text-3xl bg-gray-900 p-3 rounded-lg">🔌</span>
-                    </div>
+
                     <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold uppercase text-gray-400">ორიენტირებული ფასი</p>
@@ -93,8 +118,9 @@
                         </div>
                         <span class="text-2xl bg-gray-900 p-3 rounded-lg">🏷️</span>
                     </div>
+                    
                     <div class="bg-amber-950/40 border border-amber-800/60 p-4 rounded-xl text-sm text-amber-200">
-                        <strong>📌 მინიშნება:</strong> დაცვის მიზნით, ხაზზე დააყენეთ შესაბამისი ავტომატური ამომრთველი, რომლის ნომინალიც ნაკლებია ან ტოლია მაქსიმალურ დენზე.
+                        <strong>📌 მინიშნება:</strong> თუ ძაბვის ვარდნა აჭარბებს 5%-ს (წითელი ინდიკატორი), რეკომენდებულია უფრო დიდი კვეთის კაბელის შერჩევა ან ხაზის სიგრძის შემცირება.
                     </div>
                 </div>
             </div>
@@ -103,14 +129,12 @@
         <!-- 📚 ჩანართი 2: ბიბლიოთეკა -->
         <section id="books-tab" class="tab-content hidden">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- მარცხენა პანელი: წიგნების სია -->
                 <div class="md:col-span-1 bg-gray-800 p-4 rounded-xl border border-gray-700 h-[calc(100vh-12rem)] overflow-y-auto space-y-2">
                     <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3 px-2">წიგნების კატალოგი</h2>
                     <div id="books-menu-list" class="space-y-1">
                         <p class="text-gray-500 text-sm p-2">იტვირთება...</p>
                     </div>
                 </div>
-                <!-- მარჯვენა პანელი: წიგნის შინაარსი -->
                 <div class="md:col-span-2 bg-gray-800 p-6 rounded-xl border border-gray-700 h-[calc(100vh-12rem)] overflow-y-auto">
                     <div id="book-viewer-default" class="h-full flex flex-col items-center justify-center text-center text-gray-500">
                         <span class="text-5xl mb-3">📖</span>
@@ -126,28 +150,21 @@
 
     </main>
 
-    <!-- 🧮 მცურავი მათემატიკური კალკულატორის პანელი (Sidebar Drawer) -->
-    <!-- გამოძახების მცურავი ღილაკი -->
+    <!-- 🧮 მცურავი მათემატიკური კალკულატორი -->
     <button onclick="toggleMathCalc()" class="fixed bottom-6 right-6 z-50 bg-amber-500 hover:bg-amber-600 text-gray-900 p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 text-2xl focus:outline-none cursor-pointer">
         🧮
     </button>
 
-    <!-- თავად კალკულატორის კონტეინერი -->
     <div id="math-calc-sidebar" class="fixed top-0 right-0 h-full w-80 bg-gray-800 border-l border-gray-700 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 p-4 flex flex-col justify-between">
         <div>
-            <!-- ზედა ზოლი და დახურვის ღილაკი -->
             <div class="flex justify-between items-center border-b border-gray-700 pb-3 mb-4">
                 <h3 class="font-bold text-amber-400 flex items-center gap-2"><span>🧮</span> მათ. კალკულატორი</h3>
                 <button onclick="toggleMathCalc()" class="text-gray-400 hover:text-white text-xl p-1 focus:outline-none cursor-pointer">&times;</button>
             </div>
-
-            <!-- კალკულატორის ეკრანი -->
             <div class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-right mb-4">
                 <div id="calc-history" class="text-xs text-gray-500 h-4 overflow-hidden tracking-wide"></div>
                 <div id="calc-display" class="text-2xl font-mono font-bold text-white truncate mt-1">0</div>
             </div>
-
-            <!-- კალკულატორის ღილაკების ბადე (Grid) -->
             <div class="grid grid-cols-4 gap-2">
                 <button onclick="clearCalc()" class="col-span-2 bg-red-950/40 border border-red-900/60 text-red-400 p-3 rounded-lg font-bold hover:bg-red-900/40 transition">C</button>
                 <button onclick="backspaceCalc()" class="bg-gray-700 border border-gray-600 text-gray-200 p-3 rounded-lg font-bold hover:bg-gray-600 transition">⌫</button>
@@ -184,12 +201,10 @@
         let cableData = null;
         let booksIndex = null;
 
-        // მათემატიკური კალკულატორის ცვლადები
         let calcCurrentInput = '0';
         let calcStoredExpression = '';
         let isEquationFinished = false;
 
-        // 1. ტაბების გადართვა
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             document.getElementById(tabId).classList.remove('hidden');
@@ -208,7 +223,6 @@
             }
         }
 
-        // 2. კაბელების ბაზის ჩატვირთვა და გამოთვლა
         async function loadDatabase() {
             try {
                 const response = await fetch('data/cables.json');
@@ -219,16 +233,19 @@
             }
         }
 
+        // 📐 განახლებული გამოთვლის ფუნქცია ძაბვის ვარდნის ინტეგრაციით
         function calculateLoad() {
             if (!cableData) return;
-            const size = document.getElementById('wire-size').value;
+            const size = parseFloat(document.getElementById('wire-size').value);
+            const length = parseFloat(document.getElementById('wire-length').value) || 0;
             const install = document.getElementById('install-type').value;
             const voltage = parseInt(document.querySelector('input[name="voltage"]:checked').value);
 
-            const cableSpecs = cableData.copper[size];
+            const cableSpecs = cableData.copper[size.toFixed(1)];
             const maxAmperage = cableSpecs.amperage[install];
             const price = cableSpecs.price_per_meter;
 
+            // 1. მაქსიმალური სიმძლავრის გამოთვლა
             let maxPowerkW = 0;
             if (voltage === 220) {
                 maxPowerkW = (maxAmperage * voltage) / 1000;
@@ -236,20 +253,55 @@
                 maxPowerkW = (maxAmperage * voltage * Math.sqrt(3)) / 1000;
             }
 
+            // 2. ძაბვის ვარდნის (Voltage Drop) გამოთვლა მაქსიმალურ დენზე
+            // სპილენძის ხვედრითი წინაღობა ρ = 0.0175 ომი * მმ² / მ
+            const rho = 0.0175; 
+            let voltageDrop = 0;
+
+            if (voltage === 220) {
+                // 1 ფაზა: ვარდნა ორმხრივ ხაზზე (ფაზა + ნოლი), ამიტომ ვამრავლებთ 2-ზე
+                voltageDrop = (2 * rho * length * maxAmperage) / size;
+            } else {
+                // 3 ფაზა: სიმეტრიული დატვირთვისას ფორმულაში შედის ფესვი 3-დან
+                voltageDrop = (Math.sqrt(3) * rho * length * maxAmperage) / size;
+            }
+
+            const dropPercent = (voltageDrop / voltage) * 100;
+
+            // 3. შედეგების ეკრანზე გამოტანა
             document.getElementById('res-amperage').innerText = maxAmperage + " A";
             document.getElementById('res-power').innerText = maxPowerkW.toFixed(2) + " kW";
             document.getElementById('res-price').innerText = price.toFixed(2) + " ₾ / მეტრი";
+            
+            document.getElementById('res-drop-volt').innerText = voltageDrop.toFixed(2) + " V";
+            document.getElementById('res-drop-percent').innerText = `(${dropPercent.toFixed(2)}%)`;
+
+            // 4. ვიზუალური სტატუსის მართვა ვარდნის პროცენტის მიხედვით
+            const statusEl = document.getElementById('res-drop-status');
+            const voltEl = document.getElementById('res-drop-volt');
+
+            if (dropPercent <= 3) {
+                statusEl.innerText = "✓ ვარდნა იდეალურ ნორმაშია (≤ 3%)";
+                statusEl.className = "text-xs mt-1 font-medium text-emerald-400";
+                voltEl.className = "text-3xl font-extrabold text-emerald-400";
+            } else if (dropPercent <= 5) {
+                statusEl.innerText = "⚠ ვარდნა დასაშვებ ზღვარზეა (3% - 5%)";
+                statusEl.className = "text-xs mt-1 font-medium text-amber-400";
+                voltEl.className = "text-3xl font-extrabold text-amber-400";
+            } else {
+                statusEl.innerText = "❌ კრიტიკული ვარდნა (> 5%)! გაზარდეთ კვეთა!";
+                statusEl.className = "text-xs mt-1 font-medium text-rose-400 animate-pulse";
+                voltEl.className = "text-3xl font-extrabold text-rose-400";
+            }
         }
 
-        // 3. ბიბლიოთეკის მენიუს ჩატვირთვა
+        // ბიბლიოთეკის კოდი
         async function loadBooksIndex() {
             try {
                 const response = await fetch('data/books/books-list.json');
                 booksIndex = await response.json();
-                
                 const menuContainer = document.getElementById('books-menu-list');
                 menuContainer.innerHTML = '';
-                
                 booksIndex.forEach(book => {
                     const btn = document.createElement('button');
                     btn.className = "w-full text-left p-3 rounded-lg hover:bg-gray-700/50 transition border border-transparent hover:border-gray-700 text-sm group block focus:outline-none cursor-pointer";
@@ -265,31 +317,24 @@
             }
         }
 
-        // 4. კონკრეტული წიგნის ჩატვირთვა
         async function loadSpecificBook(bookId) {
             try {
                 document.getElementById('book-viewer-default').classList.add('hidden');
                 const contentPanel = document.getElementById('book-viewer-content');
                 contentPanel.classList.remove('hidden');
-                
                 const chaptersContainer = document.getElementById('view-book-chapters');
                 chaptersContainer.innerHTML = '<p class="text-gray-400 text-sm animate-pulse">წიგნი იხსნება...</p>';
-
                 const response = await fetch(`data/books/${bookId}/book.json`);
                 const bookData = await response.json();
-
                 document.getElementById('view-book-title').innerText = bookData.book_title;
                 chaptersContainer.innerHTML = '';
-
                 bookData.chapters.forEach(ch => {
                     const chDiv = document.createElement('div');
                     chDiv.className = "bg-gray-900/40 p-5 rounded-lg border border-gray-700/60 space-y-3";
-                    
                     let imgHtml = '';
                     if (ch.image && ch.image.trim() !== '') {
                         imgHtml = `<div class="mt-3"><img src="${ch.image}" alt="${ch.title}" class="rounded-lg max-h-64 object-contain bg-gray-800 p-2 border border-gray-700"></div>`;
                     }
-
                     chDiv.innerHTML = `
                         <h3 class="text-md font-bold text-gray-200">${ch.title}</h3>
                         <p class="text-sm text-gray-300 leading-relaxed">${ch.content}</p>
@@ -302,96 +347,48 @@
             }
         }
 
-        // 🧮 5. მათემატიკური კალკულატორის ლოგიკა
+        // მათემატიკური კალკულატორი
         function toggleMathCalc() {
             const sidebar = document.getElementById('math-calc-sidebar');
             sidebar.classList.toggle('translate-x-full');
         }
-
         function updateCalcDisplay() {
             document.getElementById('calc-display').innerText = calcCurrentInput;
             document.getElementById('calc-history').innerText = calcStoredExpression;
         }
-
-        function inputNum(num) {
-            if (isEquationFinished) {
-                calcCurrentInput = num;
-                isEquationFinished = false;
-            } else {
-                if (calcCurrentInput === '0') {
-                    calcCurrentInput = num;
-                } else {
-                    calcCurrentInput += num;
-                }
-            }
+         Tar = function inputNum(num) {
+            if (isEquationFinished) { calcCurrentInput = num; isEquationFinished = false; }
+            else { if (calcCurrentInput === '0') calcCurrentInput = num; else calcCurrentInput += num; }
             updateCalcDisplay();
         }
-
         function inputDecimal() {
-            if (isEquationFinished) {
-                calcCurrentInput = '0.';
-                isEquationFinished = false;
-                updateCalcDisplay();
-                return;
-            }
-            if (!calcCurrentInput.includes('.')) {
-                calcCurrentInput += '.';
-            }
+            if (isEquationFinished) { calcCurrentInput = '0.'; isEquationFinished = false; updateCalcDisplay(); return; }
+            if (!calcCurrentInput.includes('.')) calcCurrentInput += '.';
             updateCalcDisplay();
         }
-
         function inputOperator(op) {
-            if (isEquationFinished) {
-                calcStoredExpression = calcCurrentInput + ' ' + op + ' ';
-                isEquationFinished = false;
-            } else {
-                calcStoredExpression += calcCurrentInput + ' ' + op + ' ';
-            }
+            if (isEquationFinished) { calcStoredExpression = calcCurrentInput + ' ' + op + ' '; isEquationFinished = false; }
+            else { calcStoredExpression += calcCurrentInput + ' ' + op + ' '; }
             calcCurrentInput = '0';
             updateCalcDisplay();
         }
-
-        function clearCalc() {
-            calcCurrentInput = '0';
-            calcStoredExpression = '';
-            isEquationFinished = false;
-            updateCalcDisplay();
-        }
-
+        function clearCalc() { calcCurrentInput = '0'; calcStoredExpression = ''; isEquationFinished = false; updateCalcDisplay(); }
         function backspaceCalc() {
-            if (isEquationFinished) {
-                clearCalc();
-                return;
-            }
-            if (calcCurrentInput.length > 1) {
-                calcCurrentInput = calcCurrentInput.slice(0, -1);
-            } else {
-                calcCurrentInput = '0';
-            }
+            if (isEquationFinished) { clearCalc(); return; }
+            if (calcCurrentInput.length > 1) calcCurrentInput = calcCurrentInput.slice(0, -1);
+            else calcCurrentInput = '0';
             updateCalcDisplay();
         }
-
         function calculateResult() {
             if (calcStoredExpression === '') return;
-            
             let fullExpression = calcStoredExpression + calcCurrentInput;
             try {
-                // უსაფრთხო მათემატიკური გამოთვლა Function კონსტრუქტორით
                 let result = new Function(`return (${fullExpression})`)();
-                
-                // ათწილადების დამრგვალება მაქს. 4 ნიშნამდე
-                if (result.toString().includes('.')) {
-                    result = parseFloat(result.toFixed(4));
-                }
-                
+                if (result.toString().includes('.')) result = parseFloat(result.toFixed(4));
                 calcStoredExpression = fullExpression + ' =';
                 calcCurrentInput = result.toString();
                 isEquationFinished = true;
-            } catch (e) {
-                calcCurrentInput = 'Error';
-                calcStoredExpression = '';
-                isEquationFinished = true;
-            }
+            } catch (e) { calcCurrentInput = 'Error'; calcStoredExpression = ''; isEquationFinished = true; }
             updateCalcDisplay();
         }
 
