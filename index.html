@@ -7,10 +7,10 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col">
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col relative overflow-x-hidden">
 
     <!-- ჰედერი და ნავიგაცია -->
-    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
         <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
             <div class="flex items-center space-x-2">
                 <span class="text-2xl">⚡</span>
@@ -103,35 +103,78 @@
         <!-- 📚 ჩანართი 2: ბიბლიოთეკა -->
         <section id="books-tab" class="tab-content hidden">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
                 <!-- მარცხენა პანელი: წიგნების სია -->
                 <div class="md:col-span-1 bg-gray-800 p-4 rounded-xl border border-gray-700 h-[calc(100vh-12rem)] overflow-y-auto space-y-2">
                     <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3 px-2">წიგნების კატალოგი</h2>
                     <div id="books-menu-list" class="space-y-1">
-                        <!-- აქ ჩაიყრება წიგნების სათაურები დინამიკურად -->
                         <p class="text-gray-500 text-sm p-2">იტვირთება...</p>
                     </div>
                 </div>
-
-                <!-- მარჯვენა პანელი: წიგნის შინაარსის საკითხავი ზონა -->
+                <!-- მარჯვენა პანელი: წიგნის შინაარსი -->
                 <div class="md:col-span-2 bg-gray-800 p-6 rounded-xl border border-gray-700 h-[calc(100vh-12rem)] overflow-y-auto">
                     <div id="book-viewer-default" class="h-full flex flex-col items-center justify-center text-center text-gray-500">
                         <span class="text-5xl mb-3">📖</span>
                         <p class="text-lg font-medium">ასარჩევად დააწკაპუნეთ რომელიმე წიგნს მარცხენა მენიუში</p>
                     </div>
-                    
                     <div id="book-viewer-content" class="hidden space-y-6">
                         <h2 id="view-book-title" class="text-2xl font-extrabold text-amber-400 border-b border-gray-700 pb-3"></h2>
-                        <div id="view-book-chapters" class="space-y-6">
-                            <!-- აქ ჩაიყრება თავები ტექსტებით და ფოტოებით -->
-                        </div>
+                        <div id="view-book-chapters" class="space-y-6"></div>
                     </div>
                 </div>
-
             </div>
         </section>
 
     </main>
+
+    <!-- 🧮 მცურავი მათემატიკური კალკულატორის პანელი (Sidebar Drawer) -->
+    <!-- გამოძახების მცურავი ღილაკი -->
+    <button onclick="toggleMathCalc()" class="fixed bottom-6 right-6 z-50 bg-amber-500 hover:bg-amber-600 text-gray-900 p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 text-2xl focus:outline-none cursor-pointer">
+        🧮
+    </button>
+
+    <!-- თავად კალკულატორის კონტეინერი -->
+    <div id="math-calc-sidebar" class="fixed top-0 right-0 h-full w-80 bg-gray-800 border-l border-gray-700 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 p-4 flex flex-col justify-between">
+        <div>
+            <!-- ზედა ზოლი და დახურვის ღილაკი -->
+            <div class="flex justify-between items-center border-b border-gray-700 pb-3 mb-4">
+                <h3 class="font-bold text-amber-400 flex items-center gap-2"><span>🧮</span> მათ. კალკულატორი</h3>
+                <button onclick="toggleMathCalc()" class="text-gray-400 hover:text-white text-xl p-1 focus:outline-none cursor-pointer">&times;</button>
+            </div>
+
+            <!-- კალკულატორის ეკრანი -->
+            <div class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-right mb-4">
+                <div id="calc-history" class="text-xs text-gray-500 h-4 overflow-hidden tracking-wide"></div>
+                <div id="calc-display" class="text-2xl font-mono font-bold text-white truncate mt-1">0</div>
+            </div>
+
+            <!-- კალკულატორის ღილაკების ბადე (Grid) -->
+            <div class="grid grid-cols-4 gap-2">
+                <button onclick="clearCalc()" class="col-span-2 bg-red-950/40 border border-red-900/60 text-red-400 p-3 rounded-lg font-bold hover:bg-red-900/40 transition">C</button>
+                <button onclick="backspaceCalc()" class="bg-gray-700 border border-gray-600 text-gray-200 p-3 rounded-lg font-bold hover:bg-gray-600 transition">⌫</button>
+                <button onclick="inputOperator('/')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">/</button>
+
+                <button onclick="inputNum('7')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">7</button>
+                <button onclick="inputNum('8')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">8</button>
+                <button onclick="inputNum('9')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">9</button>
+                <button onclick="inputOperator('*')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">*</button>
+
+                <button onclick="inputNum('4')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">4</button>
+                <button onclick="inputNum('5')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">5</button>
+                <button onclick="inputNum('6')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">6</button>
+                <button onclick="inputOperator('-')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">-</button>
+
+                <button onclick="inputNum('1')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">1</button>
+                <button onclick="inputNum('2')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">2</button>
+                <button onclick="inputNum('3')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">3</button>
+                <button onclick="inputOperator('+')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">+</button>
+
+                <button onclick="inputNum('0')" class="col-span-2 bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">0</button>
+                <button onclick="inputDecimal()" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">.</button>
+                <button onclick="calculateResult()" class="bg-emerald-600 border border-emerald-500 text-white p-3 rounded-lg font-bold hover:bg-emerald-500 transition">=</button>
+            </div>
+        </div>
+        <div class="text-[10px] text-gray-600 text-center tracking-wider uppercase border-t border-gray-700/50 pt-3">მოხერხებული გათვლებისთვის</div>
+    </div>
 
     <footer class="bg-gray-800 border-t border-gray-700 text-center py-4 text-xs text-gray-500">
         ElectroCalc App &copy; 2026 • დამზადებულია GitHub-ზე
@@ -140,6 +183,11 @@
     <script>
         let cableData = null;
         let booksIndex = null;
+
+        // მათემატიკური კალკულატორის ცვლადები
+        let calcCurrentInput = '0';
+        let calcStoredExpression = '';
+        let isEquationFinished = false;
 
         // 1. ტაბების გადართვა
         function switchTab(tabId) {
@@ -155,7 +203,6 @@
             activeBtn.classList.remove('text-gray-400', 'hover:text-gray-200');
             activeBtn.classList.add('bg-amber-500', 'text-gray-900', 'font-semibold');
 
-            // თუ ბიბლიოთეკაში გადავდივართ და სია ჯერ არ ჩატვირთულა
             if (tabId === 'books-tab' && !booksIndex) {
                 loadBooksIndex();
             }
@@ -194,18 +241,18 @@
             document.getElementById('res-price').innerText = price.toFixed(2) + " ₾ / მეტრი";
         }
 
-        // 3. ბიბლიოთეკის მენიუს ჩატვირთვა (Index)
+        // 3. ბიბლიოთეკის მენიუს ჩატვირთვა
         async function loadBooksIndex() {
             try {
                 const response = await fetch('data/books/books-list.json');
                 booksIndex = await response.json();
                 
                 const menuContainer = document.getElementById('books-menu-list');
-                menuContainer.innerHTML = ''; // გასუფთავება
+                menuContainer.innerHTML = '';
                 
                 booksIndex.forEach(book => {
                     const btn = document.createElement('button');
-                    btn.className = "w-full text-left p-3 rounded-lg hover:bg-gray-700/50 transition border border-transparent hover:border-gray-700 text-sm group block focus:outline-none";
+                    btn.className = "w-full text-left p-3 rounded-lg hover:bg-gray-700/50 transition border border-transparent hover:border-gray-700 text-sm group block focus:outline-none cursor-pointer";
                     btn.onclick = () => loadSpecificBook(book.id);
                     btn.innerHTML = `
                         <div class="font-semibold text-gray-200 group-hover:text-amber-400 transition">${book.title}</div>
@@ -218,10 +265,9 @@
             }
         }
 
-        // 4. კონკრეტული წიგნის Lazy ჩატვირთვა საქაღალდიდან კლიკზე
+        // 4. კონკრეტული წიგნის ჩატვირთვა
         async function loadSpecificBook(bookId) {
             try {
-                // დეფოლტ შეტყობინების დამალვა და კონტენტის პანელის ჩვენება
                 document.getElementById('book-viewer-default').classList.add('hidden');
                 const contentPanel = document.getElementById('book-viewer-content');
                 contentPanel.classList.remove('hidden');
@@ -229,19 +275,17 @@
                 const chaptersContainer = document.getElementById('view-book-chapters');
                 chaptersContainer.innerHTML = '<p class="text-gray-400 text-sm animate-pulse">წიგნი იხსნება...</p>';
 
-                // მოთხოვნის გაგზავნა მხოლოდ არჩეული წიგნის საქაღალდეში
                 const response = await fetch(`data/books/${bookId}/book.json`);
                 const bookData = await response.json();
 
                 document.getElementById('view-book-title').innerText = bookData.book_title;
-                chaptersContainer.innerHTML = ''; // გასუფთავება
+                chaptersContainer.innerHTML = '';
 
                 bookData.chapters.forEach(ch => {
                     const chDiv = document.createElement('div');
                     chDiv.className = "bg-gray-900/40 p-5 rounded-lg border border-gray-700/60 space-y-3";
                     
                     let imgHtml = '';
-                    // თუ სურათის ლინკი არსებობს, ჩავსვამთ თეგს
                     if (ch.image && ch.image.trim() !== '') {
                         imgHtml = `<div class="mt-3"><img src="${ch.image}" alt="${ch.title}" class="rounded-lg max-h-64 object-contain bg-gray-800 p-2 border border-gray-700"></div>`;
                     }
@@ -253,10 +297,102 @@
                     `;
                     chaptersContainer.appendChild(chDiv);
                 });
-
             } catch (error) {
                 console.error("წიგნის გახსნის შეცდომა:", error);
             }
+        }
+
+        // 🧮 5. მათემატიკური კალკულატორის ლოგიკა
+        function toggleMathCalc() {
+            const sidebar = document.getElementById('math-calc-sidebar');
+            sidebar.classList.toggle('translate-x-full');
+        }
+
+        function updateCalcDisplay() {
+            document.getElementById('calc-display').innerText = calcCurrentInput;
+            document.getElementById('calc-history').innerText = calcStoredExpression;
+        }
+
+        function inputNum(num) {
+            if (isEquationFinished) {
+                calcCurrentInput = num;
+                isEquationFinished = false;
+            } else {
+                if (calcCurrentInput === '0') {
+                    calcCurrentInput = num;
+                } else {
+                    calcCurrentInput += num;
+                }
+            }
+            updateCalcDisplay();
+        }
+
+        function inputDecimal() {
+            if (isEquationFinished) {
+                calcCurrentInput = '0.';
+                isEquationFinished = false;
+                updateCalcDisplay();
+                return;
+            }
+            if (!calcCurrentInput.includes('.')) {
+                calcCurrentInput += '.';
+            }
+            updateCalcDisplay();
+        }
+
+        function inputOperator(op) {
+            if (isEquationFinished) {
+                calcStoredExpression = calcCurrentInput + ' ' + op + ' ';
+                isEquationFinished = false;
+            } else {
+                calcStoredExpression += calcCurrentInput + ' ' + op + ' ';
+            }
+            calcCurrentInput = '0';
+            updateCalcDisplay();
+        }
+
+        function clearCalc() {
+            calcCurrentInput = '0';
+            calcStoredExpression = '';
+            isEquationFinished = false;
+            updateCalcDisplay();
+        }
+
+        function backspaceCalc() {
+            if (isEquationFinished) {
+                clearCalc();
+                return;
+            }
+            if (calcCurrentInput.length > 1) {
+                calcCurrentInput = calcCurrentInput.slice(0, -1);
+            } else {
+                calcCurrentInput = '0';
+            }
+            updateCalcDisplay();
+        }
+
+        function calculateResult() {
+            if (calcStoredExpression === '') return;
+            
+            let fullExpression = calcStoredExpression + calcCurrentInput;
+            try {
+                // უსაფრთხო მათემატიკური გამოთვლა Function კონსტრუქტორით
+                let result = new Function(`return (${fullExpression})`)();
+                
+                // ათწილადების დამრგვალება მაქს. 4 ნიშნამდე
+                if (result.toString().includes('.')) {
+                    result = parseFloat(result.toFixed(4));
+                }
+                
+                calcStoredExpression = fullExpression + ' =';
+                calcCurrentInput = result.toString();
+                isEquationFinished = true;
+            } catch (e) {
+                calcCurrentInput = 'Error';
+                calcStoredExpression = '';
+                isEquationFinished = true;
+            }
+            updateCalcDisplay();
         }
 
         window.onload = loadDatabase;
