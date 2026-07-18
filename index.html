@@ -38,10 +38,10 @@
             <!-- 🔄 მასალის გადამრთველი ზოლი (სპილენძი / ალუმინი) -->
             <div class="flex justify-center mb-6">
                 <div class="bg-gray-800 p-1.5 rounded-xl border border-gray-700 flex space-x-2 shadow-lg">
-                    <button onclick="setMaterial('copper')" id="btn-cu" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-amber-500 text-gray-900 shadow-md">
+                    <button onclick="setMaterial('copper')" id="btn-cu" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-amber-500 text-gray-900 shadow-md cursor-pointer">
                         <span>🔴</span> <span>სპილენძი (Cu)</span>
                     </button>
-                    <button onclick="setMaterial('aluminum')" id="btn-al" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 text-gray-400 hover:text-gray-200">
+                    <button onclick="setMaterial('aluminum')" id="btn-al" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 text-gray-400 hover:text-gray-200 cursor-pointer">
                         <span>⚪</span> <span>ალუმინი (Al)</span>
                     </button>
                 </div>
@@ -215,7 +215,7 @@
 
     <script>
         let database = null;
-        let currentMaterial = 'copper'; // დეფოლტ მასალა
+        let currentMaterial = 'copper'; 
         let booksIndex = null;
 
         let calcCurrentInput = '0';
@@ -250,7 +250,7 @@
             }
         }
 
-        // 🔄 მასალის შეცვლის ფუნქცია
+        // 🔄 მასალის გადართვის ფუნქცია (სპილენძი / ალუმინი)
         function setMaterial(material) {
             currentMaterial = material;
             
@@ -270,44 +270,64 @@
                 badge.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-slate-400/10 text-slate-300 border border-slate-500/30 uppercase tracking-wider";
             }
 
-            calculateLoad(); // ეგრევე გადავითვალოთ ახალი მასალით
+            calculateLoad(); 
         }
 
-        // 📐 გამოთვლა დინამიკური მასალის მიხედვით
+        // ==========================================
+        // 📐 მთავარი გამოთვლების ფუნქცია
+        // ==========================================
         function calculateLoad() {
-            if (!database) return;
-            const size = parseFloat(document.getElementById('wire-size').value);
+            if (!database || !database[currentMaterial]) return;
+            
+            const sizeValue = parseFloat(document.getElementById('wire-size').value);
+            const sizeKey = sizeValue.toFixed(1); 
+            
             const length = parseFloat(document.getElementById('wire-length').value) || 0;
             const install = document.getElementById('install-type').value;
             const voltage = parseInt(document.querySelector('input[name="voltage"]:checked').value);
 
-            // ვიღებთ შესაბამისი მასალის ქვე-ბაზას (copper ან aluminum)
             const materialData = database[currentMaterial];
-            const cableSpecs = materialData[size.toFixed(1)];
+            const cableSpecs = materialData[sizeKey];
+            
+            if (!cableSpecs) return; 
+
             const maxAmperage = cableSpecs.amperage[install];
             const price = cableSpecs.price_per_meter;
 
-            // 1. მაქსიმალური სიმძლავრე
+            // ------------------------------------------
+            // 🏷️ [ფორმულა 1]: მაქსიმალური სიმძლავრის გამოთვლა (kW)
+            // ------------------------------------------
             let maxPowerkW = 0;
             if (voltage === 220) {
+                // 1 ფაზა: (დენი * ძაბვა) / 1000
                 maxPowerkW = (maxAmperage * voltage) / 1000;
             } else {
+                // 3 ფაზა: (დენი * ძაბვა * ფესვი 3-დან) / 1000
                 maxPowerkW = (maxAmperage * voltage * Math.sqrt(3)) / 1000;
             }
 
-            // 2. ძაბვის ვარდნა რეალური ხვედრითი წინაღობით (სპილენძი: 0.0175, ალუმინი: 0.028)
+            // ------------------------------------------
+            // ⚡ [კოეფიციენტები]: ხვედრითი წინაღობა (Ohm*mm²/m)
+            // სპილენძი = 0.0175 | ალუმინი = 0.028
+            // ------------------------------------------
             const rho = (currentMaterial === 'copper') ? 0.0175 : 0.028;
             let voltageDrop = 0;
 
+            // ------------------------------------------
+            // 📉 [ფორმულა 2]: ძაბვის ვარდნის გამოთვლა (V)
+            // ------------------------------------------
             if (voltage === 220) {
-                voltageDrop = (2 * rho * length * maxAmperage) / size;
+                // 1 ფაზა: (2 * რო * სიგრძე * დენი) / კვეთა
+                voltageDrop = (2 * rho * length * maxAmperage) / sizeValue;
             } else {
-                voltageDrop = (Math.sqrt(3) * rho * length * maxAmperage) / size;
+                // 3 ფაზა: (ფესვი 3-დან * რო * სიგრძე * დენი) / კვეთა
+                voltageDrop = (Math.sqrt(3) * rho * length * maxAmperage) / sizeValue;
             }
 
+            // პროცენტული ვარდნის შეფარდება საწყის ძაბვასთან
             const dropPercent = (voltageDrop / voltage) * 100;
 
-            // 3. შედეგების გამოტანა
+            // შედეგების ასახვა ეკრანზე
             document.getElementById('res-amperage').innerText = maxAmperage + " A";
             document.getElementById('res-power').innerText = maxPowerkW.toFixed(2) + " kW";
             document.getElementById('res-price').innerText = price.toFixed(2) + " ₾ / მეტრი";
@@ -315,18 +335,21 @@
             document.getElementById('res-drop-volt').innerText = voltageDrop.toFixed(2) + " V";
             document.getElementById('res-drop-percent').innerText = `(${dropPercent.toFixed(2)}%)`;
 
-            // 4. სტატუსის ვიზუალური კონტროლი
+            // ------------------------------------------
+            // 🟢🟡🔴 [ზღვრები]: ძაბვის ვარდნის ვიზუალური კონტროლი
+            // იდეალური <= 3% | დასაშვები <= 5% | კრიტიკული > 5%
+            // ------------------------------------------
             const statusEl = document.getElementById('res-drop-status');
             const voltEl = document.getElementById('res-drop-volt');
 
             if (dropPercent <= 3) {
                 statusEl.innerText = "✓ ვარდნა იდეალურ ნორმაშია (≤ 3%)";
                 statusEl.className = "text-xs mt-1 font-medium text-emerald-400";
-                voltEl.className = "text-3xl font-extrabold text-emerald-400";
+                voltEl.className = currentMaterial === 'copper' ? "text-3xl font-extrabold text-amber-400" : "text-3xl font-extrabold text-slate-300";
             } else if (dropPercent <= 5) {
                 statusEl.innerText = "⚠ ვარდნა დასაშვებ ზღვარზეა (3% - 5%)";
                 statusEl.className = "text-xs mt-1 font-medium text-amber-400";
-                voltEl.className = "text-3xl font-extrabold text-amber-400";
+                voltEl.className = "text-3xl font-extrabold text-amber-500";
             } else {
                 statusEl.innerText = "❌ კრიტიკული ვარდნა (> 5%)! გაზარდეთ კვეთა!";
                 statusEl.className = "text-xs mt-1 font-medium text-rose-400 animate-pulse";
@@ -334,7 +357,6 @@
             }
         }
 
-        // ბიბლიოთეკის მენიუს ჩატვირთვა
         async function loadBooksIndex() {
             try {
                 const response = await fetch('data/books/books-list.json');
