@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ელექტრო ასისტენტი</title>
-    <!-- Tailwind CSS პირდაპირი ბმულით -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col">
@@ -33,14 +33,11 @@
     <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6">
         
         <!-- 📐 ჩანართი 1: კალკულატორი -->
-        <section id="calc-tab" class="tab-content block animate-fadeIn">
+        <section id="calc-tab" class="tab-content block">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
                 <!-- ინპუტების ბლოკი -->
                 <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
                     <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-gray-300">პარამეტრები</h2>
-                    
-                    <!-- კვეთის შერჩევა -->
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ²)</label>
                         <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
@@ -50,8 +47,6 @@
                             <option value="6.0">6.0 მმ²</option>
                         </select>
                     </div>
-
-                    <!-- მონტაჟის პირობები -->
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მონტაჟის ტიპი</label>
                         <select id="install-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
@@ -60,8 +55,6 @@
                             <option value="ground">მიწაში</option>
                         </select>
                     </div>
-
-                    <!-- ძაბვა -->
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სამუშაო ძაბვა (V)</label>
                         <div class="flex space-x-4 mt-1">
@@ -79,8 +72,6 @@
 
                 <!-- შედეგების ბლოკი -->
                 <div class="flex flex-col justify-between space-y-4">
-                    
-                    <!-- დენი (ამპერაჟი) -->
                     <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold uppercase text-gray-400">მაქსიმალური დენი</p>
@@ -88,8 +79,6 @@
                         </div>
                         <span class="text-3xl bg-gray-900 p-3 rounded-lg">⚡</span>
                     </div>
-
-                    <!-- სიმძლავრე (კილოვატი) -->
                     <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold uppercase text-gray-400">მაქსიმალური სიმძლავრე</p>
@@ -97,8 +86,6 @@
                         </div>
                         <span class="text-3xl bg-gray-900 p-3 rounded-lg">🔌</span>
                     </div>
-
-                    <!-- ფასი მეტრზე -->
                     <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md flex items-center justify-between">
                         <div>
                             <p class="text-xs font-semibold uppercase text-gray-400">ორიენტირებული ფასი</p>
@@ -106,8 +93,6 @@
                         </div>
                         <span class="text-2xl bg-gray-900 p-3 rounded-lg">🏷️</span>
                     </div>
-
-                    <!-- რეკომენდაცია -->
                     <div class="bg-amber-950/40 border border-amber-800/60 p-4 rounded-xl text-sm text-amber-200">
                         <strong>📌 მინიშნება:</strong> დაცვის მიზნით, ხაზზე დააყენეთ შესაბამისი ავტომატური ამომრთველი, რომლის ნომინალიც ნაკლებია ან ტოლია მაქსიმალურ დენზე.
                     </div>
@@ -115,10 +100,35 @@
             </div>
         </section>
 
-        <!-- 📚 ჩანართი 2: ბიბლიოთეკა (საწყისი შაბლონი) -->
-        <section id="books-tab" class="tab-content hidden animate-fadeIn bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
-            <h2 class="text-xl font-bold text-amber-400 mb-2">ელექტრო ბიბლიოთეკა</h2>
-            <p class="text-gray-400 text-sm">აქ განთავსდება შენი წიგნების საქაღალდეები ტექსტებითა და ფოტოებით. მომდევნო ნაბიჯზე ამ განყოფილებასაც სრულად ავამუშავებთ.</p>
+        <!-- 📚 ჩანართი 2: ბიბლიოთეკა -->
+        <section id="books-tab" class="tab-content hidden">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- მარცხენა პანელი: წიგნების სია -->
+                <div class="md:col-span-1 bg-gray-800 p-4 rounded-xl border border-gray-700 h-[calc(100vh-12rem)] overflow-y-auto space-y-2">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3 px-2">წიგნების კატალოგი</h2>
+                    <div id="books-menu-list" class="space-y-1">
+                        <!-- აქ ჩაიყრება წიგნების სათაურები დინამიკურად -->
+                        <p class="text-gray-500 text-sm p-2">იტვირთება...</p>
+                    </div>
+                </div>
+
+                <!-- მარჯვენა პანელი: წიგნის შინაარსის საკითხავი ზონა -->
+                <div class="md:col-span-2 bg-gray-800 p-6 rounded-xl border border-gray-700 h-[calc(100vh-12rem)] overflow-y-auto">
+                    <div id="book-viewer-default" class="h-full flex flex-col items-center justify-center text-center text-gray-500">
+                        <span class="text-5xl mb-3">📖</span>
+                        <p class="text-lg font-medium">ასარჩევად დააწკაპუნეთ რომელიმე წიგნს მარცხენა მენიუში</p>
+                    </div>
+                    
+                    <div id="book-viewer-content" class="hidden space-y-6">
+                        <h2 id="view-book-title" class="text-2xl font-extrabold text-amber-400 border-b border-gray-700 pb-3"></h2>
+                        <div id="view-book-chapters" class="space-y-6">
+                            <!-- აქ ჩაიყრება თავები ტექსტებით და ფოტოებით -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
     </main>
@@ -127,11 +137,11 @@
         ElectroCalc App &copy; 2026 • დამზადებულია GitHub-ზე
     </footer>
 
-    <!-- 🧠 საიტის ლოგიკა (JavaScript) -->
     <script>
         let cableData = null;
+        let booksIndex = null;
 
-        // 1. ტაბების გადართვის ფუნქცია
+        // 1. ტაბების გადართვა
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             document.getElementById(tabId).classList.remove('hidden');
@@ -144,33 +154,34 @@
             const activeBtn = document.getElementById('btn-' + tabId);
             activeBtn.classList.remove('text-gray-400', 'hover:text-gray-200');
             activeBtn.classList.add('bg-amber-500', 'text-gray-900', 'font-semibold');
+
+            // თუ ბიბლიოთეკაში გადავდივართ და სია ჯერ არ ჩატვირთულა
+            if (tabId === 'books-tab' && !booksIndex) {
+                loadBooksIndex();
+            }
         }
 
-        // 2. JSON ბაზის დინამიკურად წამოღება (Fetch)
+        // 2. კაბელების ბაზის ჩატვირთვა და გამოთვლა
         async function loadDatabase() {
             try {
                 const response = await fetch('data/cables.json');
                 cableData = await response.json();
-                calculateLoad(); // ბაზის ჩატვირთვისთანავე პირველი გამოთვლა
+                calculateLoad();
             } catch (error) {
-                console.error("ბაზის ჩატვირთვისას მოხდა შეცდომა:", error);
+                console.error("კაბელების ბაზის შეცდომა:", error);
             }
         }
 
-        // 3. ელექტრო გამოთვლების ფორმულა
         function calculateLoad() {
             if (!cableData) return;
-
             const size = document.getElementById('wire-size').value;
             const install = document.getElementById('install-type').value;
             const voltage = parseInt(document.querySelector('input[name="voltage"]:checked').value);
 
-            // ინფორმაციის ამოღება ლოკალური ბაზიდან
             const cableSpecs = cableData.copper[size];
             const maxAmperage = cableSpecs.amperage[install];
             const price = cableSpecs.price_per_meter;
 
-            // სიმძლავრის გამოთვლა: P = I * U (1 ფაზა) ან P = I * U * √3 (3 ფაზა)
             let maxPowerkW = 0;
             if (voltage === 220) {
                 maxPowerkW = (maxAmperage * voltage) / 1000;
@@ -178,13 +189,76 @@
                 maxPowerkW = (maxAmperage * voltage * Math.sqrt(3)) / 1000;
             }
 
-            // შედეგების გამოტანა ეკრანზე
             document.getElementById('res-amperage').innerText = maxAmperage + " A";
             document.getElementById('res-power').innerText = maxPowerkW.toFixed(2) + " kW";
             document.getElementById('res-price').innerText = price.toFixed(2) + " ₾ / მეტრი";
         }
 
-        // საიტის გახსნისთანავე ირთვება ბაზის ჩატვირთვის ფუნქცია
+        // 3. ბიბლიოთეკის მენიუს ჩატვირთვა (Index)
+        async function loadBooksIndex() {
+            try {
+                const response = await fetch('data/books/books-list.json');
+                booksIndex = await response.json();
+                
+                const menuContainer = document.getElementById('books-menu-list');
+                menuContainer.innerHTML = ''; // გასუფთავება
+                
+                booksIndex.forEach(book => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left p-3 rounded-lg hover:bg-gray-700/50 transition border border-transparent hover:border-gray-700 text-sm group block focus:outline-none";
+                    btn.onclick = () => loadSpecificBook(book.id);
+                    btn.innerHTML = `
+                        <div class="font-semibold text-gray-200 group-hover:text-amber-400 transition">${book.title}</div>
+                        <div class="text-xs text-gray-400 mt-1 line-clamp-2">${book.description}</div>
+                    `;
+                    menuContainer.appendChild(btn);
+                });
+            } catch (error) {
+                document.getElementById('books-menu-list').innerHTML = `<p class="text-red-400 text-xs p-2">შეცდომა ჩატვირთვისას</p>`;
+            }
+        }
+
+        // 4. კონკრეტული წიგნის Lazy ჩატვირთვა საქაღალდიდან კლიკზე
+        async function loadSpecificBook(bookId) {
+            try {
+                // დეფოლტ შეტყობინების დამალვა და კონტენტის პანელის ჩვენება
+                document.getElementById('book-viewer-default').classList.add('hidden');
+                const contentPanel = document.getElementById('book-viewer-content');
+                contentPanel.classList.remove('hidden');
+                
+                const chaptersContainer = document.getElementById('view-book-chapters');
+                chaptersContainer.innerHTML = '<p class="text-gray-400 text-sm animate-pulse">წიგნი იხსნება...</p>';
+
+                // მოთხოვნის გაგზავნა მხოლოდ არჩეული წიგნის საქაღალდეში
+                const response = await fetch(`data/books/${bookId}/book.json`);
+                const bookData = await response.json();
+
+                document.getElementById('view-book-title').innerText = bookData.book_title;
+                chaptersContainer.innerHTML = ''; // გასუფთავება
+
+                bookData.chapters.forEach(ch => {
+                    const chDiv = document.createElement('div');
+                    chDiv.className = "bg-gray-900/40 p-5 rounded-lg border border-gray-700/60 space-y-3";
+                    
+                    let imgHtml = '';
+                    // თუ სურათის ლინკი არსებობს, ჩავსვამთ თეგს
+                    if (ch.image && ch.image.trim() !== '') {
+                        imgHtml = `<div class="mt-3"><img src="${ch.image}" alt="${ch.title}" class="rounded-lg max-h-64 object-contain bg-gray-800 p-2 border border-gray-700"></div>`;
+                    }
+
+                    chDiv.innerHTML = `
+                        <h3 class="text-md font-bold text-gray-200">${ch.title}</h3>
+                        <p class="text-sm text-gray-300 leading-relaxed">${ch.content}</p>
+                        ${imgHtml}
+                    `;
+                    chaptersContainer.appendChild(chDiv);
+                });
+
+            } catch (error) {
+                console.error("წიგნის გახსნის შეცდომა:", error);
+            }
+        }
+
         window.onload = loadDatabase;
     </script>
 </body>
