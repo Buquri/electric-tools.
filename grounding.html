@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>დამიწება და მეხამრიდე</title>
+    <title>დამიწება და მეხამრიდე - სრული გაიდი</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .theory-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+        }
+        .theory-content.open {
+            max-height: 2000px; /* საკმარისი სიმაღლე მოზრდილი ტექსტისთვის */
+            padding-top: 1.25rem;
+            padding-bottom: 1.25rem;
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col">
 
@@ -25,7 +37,7 @@
     <!-- მთავარი კონტენტი -->
     <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 space-y-8">
         
-        <!-- 🧭 სექცია 1: დამიწების კონტური -->
+        <!-- 🌍 სექცია 1: დამიწების კონტური -->
         <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
             <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-amber-400 flex items-center gap-2">
                 <span>🌍</span> 1. დამიწების კონტურის გაანგარიშება (ვერტიკალური ელექტროდები)
@@ -68,9 +80,44 @@
                 <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">✓ გაანგარიშების შედეგი:</h4>
                 <p id="g-res-text" class="text-sm text-gray-300 leading-relaxed font-mono"></p>
             </div>
+
+            <!-- თეორიული მასალის ღილაკი -->
+            <div class="pt-2 border-t border-gray-700/50">
+                <button onclick="toggleTheory('grounding-theory')" class="w-full md:w-auto px-4 py-2 bg-gray-700/60 hover:bg-gray-700 border border-gray-600 rounded-lg text-sm text-amber-400 font-medium transition flex items-center justify-center gap-2 cursor-pointer">
+                    <span>📖</span> თეორიული მასალა & პრაქტიკული გაიდი
+                </button>
+                
+                <!-- დასამალი თეორიული ბლოკი -->
+                <div id="grounding-theory" class="theory-content space-y-4 text-sm text-gray-300 border-t border-gray-750 mt-2">
+                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700/60 space-y-3">
+                        <p class="font-bold text-amber-400 text-base">📘 დამიწების სისტემის არსი და მოწყობის პრინციპი</p>
+                        <p>დამიწების მთავარი დანიშნულებაა ელექტროდანადგარების კორპუსზე იზოლაციის დაზიანებისას გაჟონილი დენის უსაფრთხო დრენირება მიწაში, რათა დავიცვათ ადამიანი ელექტროტრავმისაგან და უზრუნველვყოთ დამცავი ავტომატების (ან RCD-ის) მყისიერი გათიშვა.</p>
+                        
+                        <p class="font-semibold text-gray-200 mt-2">🛠️ საჭირო მასალების ჩამონათვალი:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                            <li><strong class="text-amber-500/90">ვერტიკალური ელექტროდები:</strong> მრგვალი ფოლადის ღეროები (დიამეტრით $\ge 16$ მმ) ან კუთხოვანა ფოლადი ($50\times50\times5$ მმ). სასურველია იყოს მოთუთიებული (გალვანიზებული) კოროზიისგან დასაცავად.</li>
+                            <li><strong class="text-amber-500/90">ჰორიზონტალური გამტარი (კონტური):</strong> ფოლადის ზოლოვანი (მინიმუმ $40\times4$ მმ) ვერტიკალური ღეროების ერთმანეთთან დასაკავშირებლად.</li>
+                            <li><strong class="text-amber-500/90">კავშირები:</strong> შედუღება (სავალდებულოა მიწისქვეშა გადაბმებისთვის) ან სპეციალური ბრინჯაოს/ფოლადის მომჭერები (ხამუტები) ჭიშკარში.</li>
+                            <li><strong class="text-amber-500/90">ანტიკოროზიული მასალა:</strong> ჰიდროიზოლაციური ლენტი ან ბიტუმის მასტიკა (მხოლოდ მიწიდან ამოსვლისა და შედუღების ადგილებში, ელექტროდებს კოროზიის საწინააღმდეგო საღებავი არ უნდა წაესვას, რადგან ის ზრდის წინაღობას!).</li>
+                        </ul>
+
+                        <p class="font-semibold text-gray-200 mt-2">⚡ ალტერნატიული შემოწმება - ვოლტაჟის მეთოდი (ფაზა-მიწა):</p>
+                        <p>თუ არ გაქვთ სპეციალური საზომი ხელსაწყო, დამიწების ხარისხის მიახლოებითი შემოწმება მულტიმეტრითაც შეგიძლიათ. გაზომეთ ცვლადი ძაბვა (AC Voltage) შემდეგ წერტილებს შორის:</p>
+                        <div class="bg-gray-950 p-3 rounded border border-gray-800 font-mono text-xs text-gray-400 space-y-1">
+                            <div>1. ფაზა (L) და ნულოვანი გამტარი (N) ➔ უნდა იყოს <span class="text-white">~220V - 230V</span></div>
+                            <div>2. ფაზა (L) და დამონტაჟებული დამიწება (PE) ➔ უნდა იყოს <span class="text-white">ზუსტად იგივე ან მაქსიმუმ 1-2 ვოლტით ნაკლები/მეტი</span>.</div>
+                            <div>3. ნულოვანი გამტარი (N) და დამიწება (PE) ➔ იდეალურ შემთხვევაში უნდა იყოს <span class="text-emerald-400 font-bold">0 ვოლტი</span>. თუ ძაბვა <span class="text-amber-500 font-bold">> 2V-3V</span>, ეს მიუთითებს ნულზე არათანაბარ დატვირთვაზე ან დამიწების კონტურის არასაკმარის ეფექტურობაზე (მაღალ წინაღობაზე).</div>
+                        </div>
+
+                        <p class="font-semibold text-gray-200 mt-2">📊 საზომი ხელსაწყოები და პროფესიონალური მეთოდოლოგია:</p>
+                        <p>ზუსტი საინჟინრო შემოწმებისთვის გამოიყენება სპეციალური დამიწების წინაღობის საზომი ხელსაწყო — <strong>მეგომმეტრი / ტელურომეტრი</strong> (მაგალითად: <em>Fluke 1625</em> ან <em>MRU-102</em>).</p>
+                        <p class="italic text-gray-400">მეთოდი (3-პოლუსიანი ტესტი): კონტურიდან 20 მეტრში იესობა დამხმარე დენის ელექტროდი, ხოლო 10 მეტრში პოტენციალის ელექტროდი. ხელსაწყო უშვებს დენს და ზუსტად ითვლის ძაბვის ვარდნას, რის შედეგადაც გვაძლევს კონტურის რეალურ წინაღობას ომებში (საყოფაცხოვრებოდ მიზანია $\le 4\text{ ომი}$, გაზის ქვაბებისთვის ზოგჯერ $\le 2\text{ ომი}$).</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- 🧭 სექცია 2: მეხამრიდე -->
+        <!-- 🛡️ სექცია 2: მეხამრიდე -->
         <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
             <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-cyan-400 flex items-center gap-2">
                 <span>🛡️</span> 2. მეხამრიდის დამცავი ზონის გაანგარიშება (კონუსური მეთოდი)
@@ -100,18 +147,56 @@
                 <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-2">✓ გაანგარიშების შედეგი:</h4>
                 <p id="l-res-text" class="text-sm text-gray-300 leading-relaxed font-mono"></p>
             </div>
+
+            <!-- თეორიული მასალის ღილაკი -->
+            <div class="pt-2 border-t border-gray-700/50">
+                <button onclick="toggleTheory('lightning-theory')" class="w-full md:w-auto px-4 py-2 bg-gray-700/60 hover:bg-gray-700 border border-gray-600 rounded-lg text-sm text-cyan-400 font-medium transition flex items-center justify-center gap-2 cursor-pointer">
+                    <span>📖</span> თეორიული მასალა & პრაქტიკული გაიდი
+                </button>
+                
+                <!-- დასამალი თეორიული ბლოკი -->
+                <div id="lightning-theory" class="theory-content space-y-4 text-sm text-gray-300 border-t border-gray-750 mt-2">
+                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700/60 space-y-3">
+                        <p class="font-bold text-cyan-400 text-base">📘 მეხთამრიდობის სისტემების თეორია (IEC 62305)</p>
+                        <p>მეხამრიდის მიზანია დაასწროს მეხის განმუხტვას ობიექტზე დაცემა, მიიზიდოს იგი და უზარმაზარი ენერგია (ათეულობით კილოამპერი) უსაფრთხოდ გაატაროს დამიწების კონტურში შენობის გვერდის ავლით.</p>
+                        
+                        <p class="font-semibold text-gray-200 mt-2">🧱 სისტემის 3 ძირითადი კომპონენტი:</p>
+                        <ol class="list-decimal list-inside space-y-1 pl-2 text-gray-300">
+                            <li><strong class="text-cyan-400/90">მეხმიმღები (Lightning Rod):</strong> ვერტიკალური ლითონის წვეტიანი ღერო სახურავზე, ან სპეციალური ბადე.</li>
+                            <li><strong class="text-cyan-400/90">დამშვები გამტარები (Down Conductors):</strong> სქელი ლითონის მავთულები (მინიმუმ 8 მმ კვეთის კატანკა ან სპილენძის ტროსი), რომლებიც კედლებზე გარედან ეშვება. მათ არ უნდა ჰქონდეთ მკვეთრი კუთხეები (მოსახვევის რადიუსი $\ge 20$ სმ), რათა დენმა არ გადმოხტეს კედელზე.</li>
+                            <li><strong class="text-cyan-400/90">მეხამრიდის დამიწება:</strong> სპეციალური კონტური. მნიშვნელოვანია: შენობის ელექტრო დამიწება და მეხამრიდის დამიწება მიწისქვეშ <span class="text-amber-400 font-bold">აუცილებლად უნდა გაერთიანდეს</span> (პოტენციალთა გათანაბრებისთვის), რათა თავიდან ავიცილოთ საპირისპირო ნაპერწკლის გაჩენა!</li>
+                        </ol>
+
+                        <p class="font-semibold text-gray-200 mt-2">📈 ალტერნატიული და პროფესიონალური დაპროექტების გზები:</p>
+                        <p>მარტივი კონუსური მეთოდის (რომელიც კალკულატორშია) გარდა, თანამედროვე საინჟინრო პრაქტიკაში რთული კონფიგურაციის სახურავებისთვის გამოიყენება <strong>„მგორავი სფეროს მეთოდი“ (Rolling Sphere Method)</strong>.</p>
+                        <p class="italic text-gray-400">ვიზუალიზაცია: წარმოიდგინეთ გარკვეული რადიუსის გიგანტური ვირტუალური სფერო (მაგალითად, 20, 30 ან 45 მეტრი რადიუსით - დაცვის კლასის მიხედვით). ამ სფეროს აგორებენ შენობაზე. ყველა ის წერტილი, რომელსაც ეს სფერო ფიზიკურად ეხება, არის მეხის პირდაპირი დარტყმის საფრთხის ქვეშ, ხოლო სივრცე, სადაც სფერო ვერ აღწევს (მაგალითად, ორ მეხამრიდს შორის ჩაზნექილი არე), სრულად დაცულია.</p>
+
+                        <p class="font-semibold text-gray-200 mt-2">🛠️ მასალები და ხელსაწყოები მონტაჟისთვის:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                            <li><strong class="text-cyan-400/90">მასალები:</strong> მოთუთიებული ფოლადი, ალუმინის ღეროები, სპეციალური პლასტმასის ან კერამიკული დამჭერები სახურავზე დასამაგრებლად, ბიმეტალური მომჭერები (თუ ხდება სპილენძისა და ფოლადის ერთმანეთთან დაკავშირება - პირდაპირი კონტაქტი იწვევს გალვანურ კოროზიას).</li>
+                            <li><strong class="text-cyan-400/90">ტესტირება და ხელსაწყოები:</strong> მონტაჟის შემდეგ ყოველწლიურად უნდა შემოწმდეს გადაბმის წერტილების გადაცემის წინაღობა (უნდა იყოს $\le 0.2\text{ ომი}$) სპეციალური დაბალომიანი ომმეტრით, რათა დავრწმუნდეთ, რომ დარტყმის დროს გამტარი არ გაწყდება.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
 
     <script>
+        // ჩაშენებული ანიმაციური ტოგლი თეორიული მასალისთვის
+        function toggleTheory(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('open');
+        }
+
         function updateSoilResistivity() {
             const select = document.getElementById('soil-type');
             document.getElementById('soil-rho').value = select.value;
             calculateGrounding();
         }
 
-        // 🌍 [ფორმულა]: დამიწების კონტურის მათემატიკური მოდელი
+        // დამიწების მათემატიკური მოდელი
         function calculateGrounding() {
             const rho = parseFloat(document.getElementById('soil-rho').value);
             const L = parseFloat(document.getElementById('electrode-l').value);
@@ -126,11 +211,9 @@
                 return;
             }
 
-            const d = dMm / 1000; // მილიმეტრი მეტრებში
-            
-            // ომის კანონი ვერტიკალური ღეროსთვის მიწაში: R0 = (rho / (2*pi*L)) * ln(4L/d)
+            const d = dMm / 1000; 
             const R0 = (rho / (2 * Math.PI * L)) * Math.log((4 * L) / d);
-            const eta = 0.85; // ეკრანირების საშუალო კოეფიციენტი
+            const eta = 0.85; 
             const finalCount = Math.ceil(R0 / (targetR * eta));
 
             resultBox.classList.remove('hidden');
@@ -141,7 +224,7 @@
             `;
         }
 
-        // 🛡️ [ფორმულა]: მეხამრიდის დამცავი კონუსი
+        // მეხამრიდის მათემატიკური მოდელი
         function calculateLightning() {
             const h = parseFloat(document.getElementById('lightning-h').value);
             const hx = parseFloat(document.getElementById('building-hx').value);
@@ -155,7 +238,6 @@
                 return;
             }
 
-            // რადიანებში გადაყვანა: rx = (h - hx) * tan(alpha)
             const angleRad = (angleDeg * Math.PI) / 180;
             const rx = (h - hx) * Math.tan(angleRad);
 
@@ -166,7 +248,6 @@
             `;
         }
 
-        // პირველადი გაშვება გვერდის ჩატვირთვისას
         window.onload = function() {
             calculateGrounding();
             calculateLightning();
