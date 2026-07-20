@@ -317,36 +317,33 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                        <!-- 1. IP დაცვა -->
+                        <!-- 1. ავტომატების ტიპები -->
                         <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
-                            <h4 class="font-bold text-emerald-400 border-b border-gray-800 pb-1">🛡️ IP დაცვის კლასები</h4>
+                            <h4 class="font-bold text-amber-400 border-b border-gray-800 pb-1">⚡ ავტომატების ტიპები (B, C, D)</h4>
                             <ul class="space-y-1 text-gray-300">
-                                <li><strong class="text-white">IP20:</strong> მშრალი ოთახი, საცხოვრებელი</li>
-                                <li><strong class="text-white">IP44:</strong> აბაზანა (ზონა 2), სამზარეულო</li>
-                                <li><strong class="text-white">IP65/66:</strong> ეზო, ღია განათება, წვიმა</li>
-                                <li><strong class="text-white">IP68:</strong> წყალქვეშა (აუზი, შადრევანი)</li>
+                                <li><strong class="text-white">B (3-5 I_n):</strong> განათება, გრძელი ხაზები</li>
+                                <li><strong class="text-white">C (5-10 I_n):</strong> სტანდარტული როზეტები</li>
+                                <li><strong class="text-white">D (10-20 I_n):</strong> ძრავები, ტუმბოები, საველდინგო</li>
                             </ul>
                         </div>
 
-                        <!-- 2. ფერთა მარკირება -->
+                        <!-- 2. RCD / დიფ-ავტომატები -->
                         <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
-                            <h4 class="font-bold text-cyan-400 border-b border-gray-800 pb-1">🎨 სადენების ფერები (IEC)</h4>
+                            <h4 class="font-bold text-rose-400 border-b border-gray-800 pb-1">🛡️ დიფ. დაცვა (RCD)</h4>
                             <ul class="space-y-1 text-gray-300">
-                                <li><span class="text-amber-600 font-bold">● L (ფაზა):</span> ყავისფერი / შავი</li>
-                                <li><span class="text-blue-400 font-bold">● N (ნული):</span> ცისფერი / ლურჯი</li>
-                                <li><span class="text-lime-400 font-bold">● PE (დამიწება):</span> ყვითელ-მწვანე</li>
-                                <li><span class="text-slate-400 font-bold">● L1/L2/L3:</span> ყავისფერი, შავი, ნაცრისფერი</li>
+                                <li><strong class="text-white">AC / A / B:</strong> ცვლადი, ფულსირებადი, DC</li>
+                                <li><strong class="text-white">10 mA:</strong> აბაზანა, სველი ზონები</li>
+                                <li><strong class="text-white">30 mA:</strong> სტანდარტული დაცვა</li>
                             </ul>
                         </div>
 
-                        <!-- 3. დაშორების ნორმები -->
+                        <!-- 3. კაბელის მარკირება -->
                         <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
-                            <h4 class="font-bold text-violet-400 border-b border-gray-800 pb-1">📏 დაშორების ნორმები</h4>
+                            <h4 class="font-bold text-cyan-400 border-b border-gray-800 pb-1">🏷️ კაბელების მარკირება</h4>
                             <ul class="space-y-1 text-gray-300">
-                                <li><strong class="text-white">გაზის მილი:</strong> მინ. 50 სმ (როზეტამდე)</li>
-                                <li><strong class="text-white">სანტექნიკა / ნიჟარა:</strong> მინ. 60 სმ</li>
-                                <li><strong class="text-white">იატაკიდან:</strong> როზეტი ≥ 30სმ, ჩამრთველი 90სმ</li>
-                                <li><strong class="text-white">კარის ჩარჩო:</strong> მინ. 10-15 სმ</li>
+                                <li><strong class="text-white">VVG (ВВГ):</strong> სპილენძი, PVC იზოლაცია</li>
+                                <li><strong class="text-white">ng / ng-LS:</strong> უწვი, დაბალი კვამლი</li>
+                                <li><strong class="text-white">A (А):</strong> ალუმინი (მაგ: AVVG)</li>
                             </ul>
                         </div>
                     </div>
@@ -355,7 +352,7 @@
             </div>
         </section>
 
-        <!-- 📑 ჩანართი 3: 🎛️ ფარი, გოფრეები და 3-ფაზიანი ძრავები -->
+        <!-- 📑 ჩანართი 3: 🎛️ ფარის ამწყობი, გოფრეები და 3-ფაზიანი ძრავები -->
         <section id="panel-tab" class="tab-content hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
@@ -492,12 +489,12 @@
 
     <!-- 📜 მოდალური ფანჯარა: სრული IEC / GOST თეორია -->
     <div id="standards-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
-        <div class="bg-gray-800 border border-gray-700 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+        <div class="bg-gray-800 border border-gray-700 w-full max-w-4xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
             
             <!-- ჰედერი -->
             <div class="p-4 border-b border-gray-700 flex justify-between items-center bg-gray-900">
                 <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
-                    <span>📑</span> IEC / GOST ელექტრომონტაჟის სტანდარტები და ნორმები
+                    <span>📑</span> IEC / GOST / PUE ელექტრომონტაჟის სტანდარტები
                 </h3>
                 <button onclick="closeStandardsModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer px-2">&times;</button>
             </div>
@@ -505,48 +502,88 @@
             <!-- სრული თეორიული კონტენტი -->
             <div class="p-6 overflow-y-auto space-y-6 text-sm text-gray-300">
                 
-                <!-- სექცია 1 -->
+                <!-- 1. B, C, D მახასიათებლები -->
                 <div>
-                    <h4 class="text-md font-bold text-emerald-400 border-b border-gray-700 pb-1 mb-2">1. IP (Ingress Protection) დაცვის კლასების სრული ცნობარი</h4>
-                    <p class="text-xs text-gray-400 mb-2">IPXX ინდექსში პირველი ციფრი აღნიშნავს დაცვას მყარი ნაწილაკებისგან, ხოლო მეორე — სითხისგან.</p>
+                    <h4 class="text-md font-bold text-amber-400 border-b border-gray-700 pb-1 mb-2">1. ავტომატური ამომრთველების B, C, D მახასიათებლები (IEC 60898)</h4>
+                    <p class="text-xs text-gray-400 mb-2">განსაზღვრავს ავტომატის ელექტრომაგნიტური გამომრთველის მყისიერი ამოქმედების დენის ზღვარს ნომინალურ დენთან ($I_n$) მიმართებით.</p>
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
-                        <p><strong class="text-white">• IP20:</strong> გამოიყენება მხოლოდ მშრალ საცხოვრებელ ოთახებში (მისაღები, საძინებელი).</p>
-                        <p><strong class="text-white">• IP44:</strong> დაცულია 1მმ-ზე მეტი სხეულებისგან და წყლის შხეფებისგან. აუცილებელია აბაზანის მე-2 ზონაში და სამზარეულოს სამუშაო ზედაპირთან.</p>
-                        <p><strong class="text-white">• IP65 / IP66:</strong> სრული მტვერგაუმტარი და დაცული წყლის ჭავლისგან. გამოიყენება ეზოს განათებისთვის, ფასადებზე და ღია ფანჩატურებში.</p>
-                        <p><strong class="text-white">• IP68:</strong> ჰერმეტული, უძლებს წყალში ხანგრძლივ ჩაძირვას. გამოიყენება აუზის განათებისა და წყალქვეშა ტუმბოებისთვის.</p>
+                        <p><strong class="text-amber-400">• B ტიპი ($3-5 \cdot I_n$):</strong> გამოიყენება მგრძნობიარე ელექტრონიკისთვის, განათების ხაზებისთვის და გრძელი ქსელებისთვის, სადაც მოკლე შერთვის დენი დაბალია.</p>
+                        <p><strong class="text-emerald-400">• C ტიპი ($5-10 \cdot I_n$):</strong> სტანდარტული საყოფაცხოვრებო არჩევანი (როზეტების ჯგუფები, საყოფაცხოვრებო ტექნიკა).</p>
+                        <p><strong class="text-rose-400">• D ტიპი ($10-20 \cdot I_n$):</strong> მაღალი საწყისი (пуск) დენის მქონე მოწყობილობებისთვის (ელექტროძრავები, ტუმბოები, ტრანსფორმატორები, საველდინგო აპარატები).</p>
                     </div>
                 </div>
 
-                <!-- სექცია 2 -->
+                <!-- 2. RCD ტიპები -->
                 <div>
-                    <h4 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-1 mb-2">2. სადენების მარკირება და ფერთა სტანდარტი (IEC 60446)</h4>
-                    <p class="text-xs text-gray-400 mb-2">ფერთა სტანდარტის დაცვა აუცილებელია უსაფრთხოებისთვის და შემდგომი სერვისისთვის.</p>
-                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
-                        <p><strong class="text-amber-500">• L (ფაზა - Phase):</strong> ყავისფერი (ძირითადი), შავი ან ნაცრისფერი.</p>
-                        <p><strong class="text-blue-400">• N (ნეიტრალი / ნული):</strong> მკაცრად ცისფერი ან ლურჯი. აკრძალულია მისი სხვა მიზნით გამოყენება!</p>
-                        <p><strong class="text-lime-400">• PE (დამცავი დამიწება):</strong> მკაცრად ყვითელ-მწვანე ზოლიანი. არასოდეს არ უნდა გაიაროს ჩამრთველში ან ავტომატში!</p>
-                        <p><strong class="text-gray-300">• 3-ფაზა (L1, L2, L3):</strong> L1 - ყავისფერი, L2 - შავი, L3 - ნაცრისფერი.</p>
-                    </div>
-                </div>
-
-                <!-- სექცია 3 -->
-                <div>
-                    <h4 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-1 mb-2">3. სამონტაჟო მანძილები და უსაფრთხოების ზონები</h4>
+                    <h4 class="text-md font-bold text-rose-400 border-b border-gray-700 pb-1 mb-2">2. დიფერენციალური დაცვის (RCD / RCCB) ტიპები (IEC 60755)</h4>
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
-                        <p><strong class="text-white">• გაზის გაყვანილობა:</strong> ელექტრო როზეტი, ჩამრთველი ან კაბელი გაზის მილიდან და მრიცხველიდან დაშორებული უნდა იყოს მინიმუმ <strong>50 სმ</strong>-ით.</p>
-                        <p><strong class="text-white">• სანტექნიკა და ნიჟარები:</strong> როზეტები წყლის წერტილებიდან (ნიჟარა, აბაზანა, შხაპი) უნდა დამონტაჟდეს მინიმუმ <strong>60 სმ</strong>-ის დაშორებით (IP44 დაცვით).</p>
-                        <p><strong class="text-white">• იატაკი და ჭერი:</strong> როზეტების სტანდარტული სიმაღლე იატაკიდან არის <strong>30 სმ</strong> (ევროსტანდარტი), ჩამრთველების — <strong>90 სმ</strong>. ჭერიდან შტრაბის მანძილი: 15-20 სმ.</p>
-                        <p><strong class="text-white">• კარის და ფანჯრის ჩარჩოები:</strong> კუთხეებიდან და ღიობებიდან მინიმალური დაშორება — <strong>10-15 სმ</strong>.</p>
+                        <div>
+                            <p class="font-bold text-white mb-1">დენის ტიპის მიხედვით:</p>
+                            <p><strong class="text-slate-300">• AC ტიპი:</strong> რეაგირებს მხოლოდ ცვლად ($AC$) სინუსოიდურ გაჟონვაზე (მარტივი დატვირთვა, ინკანდესენტური განათება).</p>
+                            <p><strong class="text-cyan-400">• A ტიპი:</strong> რეაგირებს ცვლად და პულსირებად მუდმივ ($DC$) გაჟონვაზე (აუცილებელია თანამედროვე ტექნიკისთვის — სარეცხი მანქანა, ინვერტორი, PC).</p>
+                            <p><strong class="text-amber-400">• B ტიპი:</strong> რეაგირებს სუფთა მუდმივ ($DC$) გაჟონვაზეც (მზის პანელები, ელექტრომობილის დამტენები).</p>
+                        </div>
+                        <div class="border-t border-gray-800 pt-2">
+                            <p class="font-bold text-white mb-1">მგრძნობელობის მიხედვით:</p>
+                            <p><strong class="text-emerald-400">• 10 mA:</strong> სველი ზონები (აბაზანა, ჯაკუზი, საბავშვო ოთახი).</p>
+                            <p><strong class="text-amber-400">• 30 mA:</strong> სტანდარტული ადამიანის დაცვა (საერთო ჯგუფები).</p>
+                            <p><strong class="text-rose-400">• 100 - 300 mA:</strong> ხანძარსაწინააღმდეგო RCD (მონტაჟდება შესასვლელ ფარში).</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- სექცია 4 -->
+                <!-- 3. კაბელის მარკირება (ასოების განმარტება) -->
                 <div>
-                    <h4 class="text-md font-bold text-rose-400 border-b border-gray-700 pb-1 mb-2">4. აბაზანის უსაფრთხოების ზონები (IEC 60364-7-701)</h4>
+                    <h4 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-1 mb-2">3. კაბელების მარკირება და ასოების მნიშვნელობა (GOST)</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
+                        <p><strong class="text-amber-400">• А (პირველი ასო):</strong> ალუმინის ძარღვი (მაგ: AVVG/АВВГ). თუ ასო "А" წინ არ წერია — კაბელი <strong>სპილენძისაა</strong>!</p>
+                        <p><strong class="text-white">• В (Вინილი):</strong> ძარღვის PVC იზოლაცია.</p>
+                        <p><strong class="text-white">• В (მეორე В):</strong> კაბელის გარეთა PVC გარსი.</p>
+                        <p><strong class="text-white">• Г (Голый):</strong> შიშველი, დაუჯავშნავი კაბელი (არ აქვს ლითონის ჯავშანი).</p>
+                        <p><strong class="text-emerald-400">• ng (нг):</strong> Негорючий — არ ავრცელებს წვას ჯგუფური გაყვანისას.</p>
+                        <p><strong class="text-emerald-400">• LS (Low Smoke):</strong> წვისას გამოყოფს მინიმალურ კვამლს და ტოქსიკურ გაზებს.</p>
+                        <p><strong class="text-violet-400">• NYM / PVS (ПВС):</strong> NYM — გერმანული სტანდარტის მონოლითური კაბელი; PVS — დეკორატიული/მოქნილი მრავალძარღვიანი სადენი.</p>
+                    </div>
+                </div>
+
+                <!-- 4. ხანძარსაწინააღმდეგო და მონტაჟი -->
+                <div>
+                    <h4 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-1 mb-2">4. კაბელების გაყვანის ხანძარსაწინააღმდეგო ნორმები (PUE)</h4>
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
-                        <p><strong class="text-rose-400">• ზონა 0 (შხაპის/აბაზანის შიგნით):</strong> მხოლოდ 12V (SELV) მოწყობილობები, მინ. IPX7.</p>
-                        <p><strong class="text-amber-400">• ზონა 1 (აბაზანის თავზე 2.25მ-მდე):</strong> მხოლოდ წყლის გამაცხელებელი (ბოილერი), მინ. IPX4/IPX5.</p>
-                        <p><strong class="text-emerald-400">• ზონა 2 (ზონა 1-დან 60სმ-ის რადიუსში):</strong> დასაშვებია IPX4 როზეტები მხოლოდ 30mA RCD (დიფ-ავტომატის) დაცვის ქვეშ.</p>
+                        <p><strong class="text-rose-400">• ხის / წვებადი ზედაპირები:</strong> მონტაჟი მხოლოდ ლითონის (ფოლადის/სპილენძის) მილში ან თვითქრობად გოფრეში (ng ინდექსით) უწვი სადენით.</p>
+                        <p><strong class="text-emerald-400">• ბეტონის / აგურის კედელი:</strong> პირდაპირი მონტაჟი შტრაბაში VVGng / NYM კაბელით.</p>
+                        <p><strong class="text-amber-400">• კომუნიკაციების გადაკვეთა:</strong> გაზის/წყლის მილებთან გადაკვეთისას მინიმუმ <strong>5-10 სმ</strong> დაშორება და დამატებითი დამცავი მილი/გოფრე.</p>
+                    </div>
+                </div>
+
+                <!-- 5. ჭარბი ძაბვისგან დაცვა — SPD / УЗИП -->
+                <div>
+                    <h4 class="text-md font-bold text-emerald-400 border-b border-gray-700 pb-1 mb-2">5. ჭარბი ძაბვისგან დაცვა — SPD / УЗИП (IEC 61643)</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-rose-400">• Class I (Type 1):</strong> იცავს პირდაპირი მეხის დაცემისგან. მონტაჟდება ობიექტის მთავარ შესასვლელში (განსაკუთრებით საჰაერო შეყვანისას).</p>
+                        <p><strong class="text-amber-400">• Class II (Type 2):</strong> იცავს არაპირდაპირი მეხის დარტყმისა და ქსელური გადართვებისგან. მონტაჟდება გამანაწილებელ ფარში.</p>
+                        <p><strong class="text-emerald-400">• Class III (Type 3):</strong> იცავს მგრძნობიარე ელექტრონიკას. მონტაჟდება უშუალოდ მომხმარებელთან/როზეტთან ახლოს.</p>
+                    </div>
+                </div>
+
+                <!-- 6. დამიწების სისტემები -->
+                <div>
+                    <h4 class="text-md font-bold text-blue-400 border-b border-gray-700 pb-1 mb-2">6. დამიწების სისტემების ტიპები (IEC 60364)</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-emerald-400">• TN-S:</strong> ნული ($N$) და დამიწება ($PE$) გაყოფილია ქვესადგურიდანვე (ყველაზე უსაფრთხო 5-სადენიანი/3-სადენიანი სისტემა).</p>
+                        <p><strong class="text-amber-400">• TN-C-S:</strong> ნული და დამიწება გაერთიანებულია ($PEN$) ხაზზე და იყოფა შენობის შესასვლელ მთავარ ფარში.</p>
+                        <p><strong class="text-rose-400">• TT:</strong> შენობას აქვს თავისი სრულად დამოუკიდებელი დამიწების კონტური (აუცილებელია RCD დაცვა! გამოიყენება კერძო სახლებში).</p>
+                    </div>
+                </div>
+
+                <!-- 7. IP დაცვა და მანძილები -->
+                <div>
+                    <h4 class="text-md font-bold text-slate-300 border-b border-gray-700 pb-1 mb-2">7. IP დაცვა და სამონტაჟო მანძილები</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-white">• IP20 / IP44 / IP65 / IP68:</strong> მშრალი ოთახი / აბაზანა / ეზო-წვიმა / წყალქვეშა.</p>
+                        <p><strong class="text-white">• გაზის მილიდან:</strong> როზეტი/ჩამრთველი მინ. <strong>50 სმ</strong>-ით დაშორებული.</p>
+                        <p><strong class="text-white">• სანტექნიკიდან / ნიჟარიდან:</strong> მინიმუმ <strong>60 სმ</strong> დაშორება.</p>
+                        <p><strong class="text-white">• იატაკიდან / ჭერიდან:</strong> როზეტი ≥ 30სმ, ჩამრთველი 90სმ; ჭერიდან შტრაბა: 15-20სმ.</p>
                     </div>
                 </div>
 
