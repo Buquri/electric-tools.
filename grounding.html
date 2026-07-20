@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>დამიწება და მეხამრიდე - სრული გაიდი</title>
+    <title>დამიწება, მეხამრიდე და მზის სისტემები - ინჟინრული გაიდი</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
@@ -13,7 +13,7 @@
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
         }
         .theory-content.open {
-            max-height: 2000px; /* საკმარისი სიმაღლე მოზრდილი ტექსტისთვის */
+            max-height: 3500px;
             padding-top: 1.25rem;
             padding-bottom: 1.25rem;
         }
@@ -26,7 +26,7 @@
         <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
             <div class="flex items-center space-x-2">
                 <span class="text-2xl">⚡</span>
-                <h1 class="text-xl font-bold tracking-wide text-amber-400">ElectroCalc Sp.</h1>
+                <h1 class="text-xl font-bold tracking-wide text-amber-400">ElectroCalc Pro</h1>
             </div>
             <a href="index.html" class="px-4 py-2 rounded-md text-sm font-medium bg-gray-900 text-amber-400 border border-amber-500/30 hover:bg-gray-700 transition">
                 ← მთავარზე დაბრუნება
@@ -40,10 +40,10 @@
         <!-- 🌍 სექცია 1: დამიწების კონტური -->
         <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
             <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-amber-400 flex items-center gap-2">
-                <span>🌍</span> 1. დამიწების კონტურის გაანგარიშება (ვერტიკალური ელექტროდები)
+                <span>🌍</span> 1. პროფესიონალური დამიწების კონტურის გაანგარიშება
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ნიადაგის ტიპი</label>
                     <select id="soil-type" onchange="updateSoilResistivity()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-amber-500 outline-none">
@@ -55,127 +55,263 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ზუსტი წინაღობა, ρ (ომი·მ)</label>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კუთრი წინაღობა, ρ (ომი·მ)</label>
                     <input type="number" id="soil-rho" value="30" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სასურველი წინაღობა (ომი)</label>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სეზონური კოეფიციენტი (Ψ)</label>
+                    <select id="soil-climate" onchange="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-amber-500 outline-none">
+                        <option value="1.2">ნოტიო ნიადაგი (1.2)</option>
+                        <option value="1.5" selected>საშუალო ზონა / თხელი ყინვა (1.5)</option>
+                        <option value="1.8">მშრალი / ძლიერი ყინვა (1.8)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მიზნობრივი წინაღობა (ომი)</label>
                     <input type="number" id="target-r" value="4" step="0.1" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            <!-- ვერტიკალური და ჰორიზონტალური ელექტროდები -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2 border-t border-gray-700/50">
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ელექტროდის სიგრძე, L (მეტრი)</label>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ღეროს სიგრძე, L (მ)</label>
                     <input type="number" id="electrode-l" value="2.5" step="0.1" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ღეროს დიამეტრი, d (მმ)</label>
                     <input type="number" id="electrode-d" value="16" step="1" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
                 </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">დაფლვის სიღრმე, t₀ (მ)</label>
+                    <input type="number" id="depth-t" value="0.7" step="0.1" oninput="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კონტურის ფორმა</label>
+                    <select id="contour-shape" onchange="calculateGrounding()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-amber-500 outline-none">
+                        <option value="triangle" selected>სამკუთხედი</option>
+                        <option value="line">ერთ მწკრივად (ხაზოვანი)</option>
+                        <option value="closed">დახურული ოთხკუთხედი</option>
+                    </select>
+                </div>
             </div>
 
             <!-- დამიწების შედეგი -->
             <div id="grounding-result" class="bg-gray-900 p-4 rounded-lg border border-gray-700 hidden">
-                <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">✓ გაანგარიშების შედეგი:</h4>
-                <p id="g-res-text" class="text-sm text-gray-300 leading-relaxed font-mono"></p>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">✓ გაანგარიშების დეტალური შედეგი:</h4>
+                <div id="g-res-text" class="text-sm text-gray-300 leading-relaxed font-mono grid grid-cols-1 md:grid-cols-2 gap-2"></div>
             </div>
 
             <!-- თეორიული მასალის ღილაკი -->
             <div class="pt-2 border-t border-gray-700/50">
                 <button onclick="toggleTheory('grounding-theory')" class="w-full md:w-auto px-4 py-2 bg-gray-700/60 hover:bg-gray-700 border border-gray-600 rounded-lg text-sm text-amber-400 font-medium transition flex items-center justify-center gap-2 cursor-pointer">
-                    <span>📖</span> თეორიული მასალა & პრაქტიკული გაიდი
+                    <span>📖</span> ვრცელი თეორიული გაიდი & სამონტაჟო სტანდარტები
                 </button>
                 
                 <!-- დასამალი თეორიული ბლოკი -->
                 <div id="grounding-theory" class="theory-content space-y-4 text-sm text-gray-300 border-t border-gray-750 mt-2">
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700/60 space-y-3">
-                        <p class="font-bold text-amber-400 text-base">📘 დამიწების სისტემის არსი და მოწყობის პრინციპი</p>
-                        <p>დამიწების მთავარი დანიშნულებაა ელექტროდანადგარების კორპუსზე იზოლაციის დაზიანებისას გაჟონილი დენის უსაფრთხო დრენირება მიწაში, რათა დავიცვათ ადამიანი ელექტროტრავმისაგან და უზრუნველვყოთ დამცავი ავტომატების (ან RCD-ის) მყისიერი გათიშვა.</p>
-                        
-                        <p class="font-semibold text-gray-200 mt-2">🛠️ საჭირო მასალების ჩამონათვალი:</p>
-                        <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
-                            <li><strong class="text-amber-500/90">ვერტიკალური ელექტროდები:</strong> მრგვალი ფოლადის ღეროები (დიამეტრით $\ge 16$ მმ) ან კუთხოვანა ფოლადი ($50\times50\times5$ მმ). სასურველია იყოს მოთუთიებული (გალვანიზებული) კოროზიისგან დასაცავად.</li>
-                            <li><strong class="text-amber-500/90">ჰორიზონტალური გამტარი (კონტური):</strong> ფოლადის ზოლოვანი (მინიმუმ $40\times4$ მმ) ვერტიკალური ღეროების ერთმანეთთან დასაკავშირებლად.</li>
-                            <li><strong class="text-amber-500/90">კავშირები:</strong> შედუღება (სავალდებულოა მიწისქვეშა გადაბმებისთვის) ან სპეციალური ბრინჯაოს/ფოლადის მომჭერები (ხამუტები) ჭიშკარში.</li>
-                            <li><strong class="text-amber-500/90">ანტიკოროზიული მასალა:</strong> ჰიდროიზოლაციური ლენტი ან ბიტუმის მასტიკა (მხოლოდ მიწიდან ამოსვლისა და შედუღების ადგილებში, ელექტროდებს კოროზიის საწინააღმდეგო საღებავი არ უნდა წაესვას, რადგან ის ზრდის წინაღობას!).</li>
-                        </ul>
-
-                        <p class="font-semibold text-gray-200 mt-2">⚡ ალტერნატიული შემოწმება - ვოლტაჟის მეთოდი (ფაზა-მიწა):</p>
-                        <p>თუ არ გაქვთ სპეციალური საზომი ხელსაწყო, დამიწების ხარისხის მიახლოებითი შემოწმება მულტიმეტრითაც შეგიძლიათ. გაზომეთ ცვლადი ძაბვა (AC Voltage) შემდეგ წერტილებს შორის:</p>
-                        <div class="bg-gray-950 p-3 rounded border border-gray-800 font-mono text-xs text-gray-400 space-y-1">
-                            <div>1. ფაზა (L) და ნულოვანი გამტარი (N) ➔ უნდა იყოს <span class="text-white">~220V - 230V</span></div>
-                            <div>2. ფაზა (L) და დამონტაჟებული დამიწება (PE) ➔ უნდა იყოს <span class="text-white">ზუსტად იგივე ან მაქსიმუმ 1-2 ვოლტით ნაკლები/მეტი</span>.</div>
-                            <div>3. ნულოვანი გამტარი (N) და დამიწება (PE) ➔ იდეალურ შემთხვევაში უნდა იყოს <span class="text-emerald-400 font-bold">0 ვოლტი</span>. თუ ძაბვა <span class="text-amber-500 font-bold">> 2V-3V</span>, ეს მიუთითებს ნულზე არათანაბარ დატვირთვაზე ან დამიწების კონტურის არასაკმარის ეფექტურობაზე (მაღალ წინაღობაზე).</div>
+                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700/60 space-y-4">
+                        <div>
+                            <p class="font-bold text-amber-400 text-base mb-1">📘 დამიწების სისტემები: TN-S, TN-C-S და TT</p>
+                            <p>ელექტროუსაფრთხოების მთავარი პრინციპია ფაზური სადენის კორპუსზე შეხებისას მოკლე შერთვის დენის წარმოქმნა, რაც მყისიერად თიშავს ავტომატურ ამომრთველს ან დიფერენციალურ რელეს (RCD).</p>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300 mt-2">
+                                <li><strong class="text-emerald-400">TN-C-S:</strong> PEN სადენი იყოფა PE (დამიწება) და N (ნული) გამტარებად შენობის მთავარ შესასვლელ ფარში. აუცილებელია განმეორებითი დამიწების კონტური ($\le 10\ \Omega$).</li>
+                                <li><strong class="text-rose-400">TT სისტემა:</strong> შენობის დამიწება სრულად დამოუკიდებელია ქვესადგურის ნულისგან. <strong>სავალდებულოა RCD დაცვა!</strong> გამოიყენება სოფლის დასახლებებში, სადაც საჰაერო ხაზის დაზიანების რისკია.</li>
+                            </ul>
                         </div>
 
-                        <p class="font-semibold text-gray-200 mt-2">📊 საზომი ხელსაწყოები და პროფესიონალური მეთოდოლოგია:</p>
-                        <p>ზუსტი საინჟინრო შემოწმებისთვის გამოიყენება სპეციალური დამიწების წინაღობის საზომი ხელსაწყო — <strong>მეგომმეტრი / ტელურომეტრი</strong> (მაგალითად: <em>Fluke 1625</em> ან <em>MRU-102</em>).</p>
-                        <p class="italic text-gray-400">მეთოდი (3-პოლუსიანი ტესტი): კონტურიდან 20 მეტრში იესობა დამხმარე დენის ელექტროდი, ხოლო 10 მეტრში პოტენციალის ელექტროდი. ხელსაწყო უშვებს დენს და ზუსტად ითვლის ძაბვის ვარდნას, რის შედეგადაც გვაძლევს კონტურის რეალურ წინაღობას ომებში (საყოფაცხოვრებოდ მიზანია $\le 4\text{ ომი}$, გაზის ქვაბებისთვის ზოგჯერ $\le 2\text{ ომი}$).</p>
+                        <div>
+                            <p class="font-bold text-amber-400 text-base mb-1">🛠️ პოტენციალთა გათანაბრების მთავარი შინა (GSH / GSU)</p>
+                            <p>შენობის შიგნით ყველა მეტალის კონსტრუქცია (წყლის მილები, გაზის მილები, არმატურა, ლიფტის შახტა, მეხამრიდი) უნდა შეერთდეს ერთიან სპილენძის ან ფოლადის სალტეზე (GSH). ეს გამორიცხავს ორ სხვადასხვა საგანს შორის საშიში ძაბვათა სხვაობის წარმოქმნას.</p>
+                        </div>
+
+                        <div>
+                            <p class="font-semibold text-gray-200">📐 მასალების მინიმალური კვეთები (GOST / PUE):</p>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                                <li>ვერტიკალური ფოლადი: Ø $\ge 16$ მმ (მოთუთიებული) ან $50\times50\times5$ მმ კუთხოვანა.</li>
+                                <li>ჰორიზონტალური ზოლი (შლეიფი): ფოლადის ზოლი $40\times4$ მმ ან Ø $12$ მმ კატანკა.</li>
+                                <li>მთავარი დამიწების გამტარი ფარიდან კონტურამდე: სპილენძი $\ge 10\text{ მმ}^2$, ალუმინი $\ge 16\text{ მმ}^2$, ფოლადი $\ge 75\text{ მმ}^2$.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <p class="font-semibold text-gray-200">🔥 შედუღება და ანტიკოროზიული დამუშავება:</p>
+                            <p>მიწისქვეშა ყველა გადაბმა უნდა შესრულდეს მხოლოდ <strong>ნაკეროვანი შედუღებით</strong> (შედუღების სიგრძე $\ge 2 \times \text{ზოლის სიგანე}$). შედუღების ადგილი უნდა დაიფაროს ბიტუმით. <strong>ყურადღება:</strong> თავად ღეროებს საღებავი არ უნდა წაესვას!</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 🛡️ სექცია 2: მეხამრიდე -->
+        <!-- 🛡️ სექცია 2: მეხამრიდი -->
         <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
             <h2 class="text-lg font-bold border-b border-gray-700 pb-2 text-cyan-400 flex items-center gap-2">
-                <span>🛡️</span> 2. მეხამრიდის დამცავი ზონის გაანგარიშება (კონუსური მეთოდი)
+                <span>🛡️</span> 2. მეხამრიდის & იმპულსური გადაძაბვის დაცვა (IEC 62305 / IEC 61643)
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მეხამრიდის სიმაღლე, h (მ)</label>
-                    <input type="number" id="lightning-h" value="10" step="0.5" oninput="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">დაცვის კლასი (LPS Class)</label>
+                    <select id="lps-class" onchange="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-cyan-500 outline-none">
+                        <option value="20">Class I (R=20მ - ფეთქებადი / მონაცემთა ცენტრი)</option>
+                        <option value="30">Class II (R=30მ - მაღალი რისკი)</option>
+                        <option value="45" selected>Class III (R=45მ - სტანდარტული საცხოვრებელი)</option>
+                        <option value="60">Class IV (R=60მ - დამხმარე ნაგებობა)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ანძების რაოდენობა</label>
+                    <select id="masts-count" onchange="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-cyan-500 outline-none">
+                        <option value="1" selected>1 ცალი ცალკე მდგომი ანძა</option>
+                        <option value="2">2 ცალი ანძა (წყვილი)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ანძის სიმაღლე, h (მ)</label>
+                    <input type="number" id="lightning-h" value="12" step="0.5" oninput="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ობიექტის სიმაღლე, hx (მ)</label>
-                    <input type="number" id="building-hx" value="6" step="0.5" oninput="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
+                    <input type="number" id="building-hx" value="7" step="0.5" oninput="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
                 </div>
+            </div>
+
+            <div id="two-masts-block" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-gray-700/50">
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">დაცვის კუთხე, α</label>
-                    <select id="protection-angle" onchange="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-cyan-500 outline-none">
-                        <option value="45" selected>45° (სტანდარტული დაცვა)</option>
-                        <option value="60">60° (გაფართოებული ზონა)</option>
-                        <option value="30">30° (მაღალი საიმედოობა)</option>
-                    </select>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ანძებს შორის მანძილი, L (მ)</label>
+                    <input type="number" id="mast-distance" value="15" step="1" oninput="calculateLightning()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
                 </div>
             </div>
 
             <!-- მეხამრიდის შედეგი -->
             <div id="lightning-result" class="bg-gray-900 p-4 rounded-lg border border-gray-700 hidden">
                 <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-2">✓ გაანგარიშების შედეგი:</h4>
-                <p id="l-res-text" class="text-sm text-gray-300 leading-relaxed font-mono"></p>
+                <div id="l-res-text" class="text-sm text-gray-300 leading-relaxed font-mono space-y-1"></div>
             </div>
 
             <!-- თეორიული მასალის ღილაკი -->
             <div class="pt-2 border-t border-gray-700/50">
                 <button onclick="toggleTheory('lightning-theory')" class="w-full md:w-auto px-4 py-2 bg-gray-700/60 hover:bg-gray-700 border border-gray-600 rounded-lg text-sm text-cyan-400 font-medium transition flex items-center justify-center gap-2 cursor-pointer">
-                    <span>📖</span> თეორიული მასალა & პრაქტიკული გაიდი
+                    <span>📖</span> მეხთამრიდობისა და SPD (УЗИП) სრული სტანდარტი
                 </button>
                 
                 <!-- დასამალი თეორიული ბლოკი -->
                 <div id="lightning-theory" class="theory-content space-y-4 text-sm text-gray-300 border-t border-gray-750 mt-2">
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700/60 space-y-3">
-                        <p class="font-bold text-cyan-400 text-base">📘 მეხთამრიდობის სისტემების თეორია (IEC 62305)</p>
-                        <p>მეხამრიდის მიზანია დაასწროს მეხის განმუხტვას ობიექტზე დაცემა, მიიზიდოს იგი და უზარმაზარი ენერგია (ათეულობით კილოამპერი) უსაფრთხოდ გაატაროს დამიწების კონტურში შენობის გვერდის ავლით.</p>
-                        
-                        <p class="font-semibold text-gray-200 mt-2">🧱 სისტემის 3 ძირითადი კომპონენტი:</p>
-                        <ol class="list-decimal list-inside space-y-1 pl-2 text-gray-300">
-                            <li><strong class="text-cyan-400/90">მეხმიმღები (Lightning Rod):</strong> ვერტიკალური ლითონის წვეტიანი ღერო სახურავზე, ან სპეციალური ბადე.</li>
-                            <li><strong class="text-cyan-400/90">დამშვები გამტარები (Down Conductors):</strong> სქელი ლითონის მავთულები (მინიმუმ 8 მმ კვეთის კატანკა ან სპილენძის ტროსი), რომლებიც კედლებზე გარედან ეშვება. მათ არ უნდა ჰქონდეთ მკვეთრი კუთხეები (მოსახვევის რადიუსი $\ge 20$ სმ), რათა დენმა არ გადმოხტეს კედელზე.</li>
-                            <li><strong class="text-cyan-400/90">მეხამრიდის დამიწება:</strong> სპეციალური კონტური. მნიშვნელოვანია: შენობის ელექტრო დამიწება და მეხამრიდის დამიწება მიწისქვეშ <span class="text-amber-400 font-bold">აუცილებლად უნდა გაერთიანდეს</span> (პოტენციალთა გათანაბრებისთვის), რათა თავიდან ავიცილოთ საპირისპირო ნაპერწკლის გაჩენა!</li>
-                        </ol>
+                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700/60 space-y-4">
+                        <div>
+                            <p class="font-bold text-cyan-400 text-base mb-1">⚡ 1. გარე მეხთამრიდობა (LPS) და ჩამოშვიდი გამტარები</p>
+                            <p>ჩამომშვიდი გამტარები (Down Conductors) პასუხისმგებელია მეხის დენის ($I_{imp} \ge 100\text{ kA}$) უსაფრთხო გატარებაზე სახურავიდან მიწამდე.</p>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300 mt-1">
+                                <li>მანძილი ჩამომშვებებს შორის: Class I: 10მ, Class II: 15მ, Class III: 20მ.</li>
+                                <li>გამტარის მასალა: მოთუთიებული ფოლადი Ø $8$ მმ, ალუმინი Ø $8$ მმ, ან სპილენძი $\ge 50\text{ მმ}^2$.</li>
+                                <li>მოსახვევის რადიუსი: მინიმუმ $20$ სმ, არ შეიძლება მახვილი ($90^\circ$) კუთხეები!</li>
+                            </ul>
+                        </div>
 
-                        <p class="font-semibold text-gray-200 mt-2">📈 ალტერნატიული და პროფესიონალური დაპროექტების გზები:</p>
-                        <p>მარტივი კონუსური მეთოდის (რომელიც კალკულატორშია) გარდა, თანამედროვე საინჟინრო პრაქტიკაში რთული კონფიგურაციის სახურავებისთვის გამოიყენება <strong>„მგორავი სფეროს მეთოდი“ (Rolling Sphere Method)</strong>.</p>
-                        <p class="italic text-gray-400">ვიზუალიზაცია: წარმოიდგინეთ გარკვეული რადიუსის გიგანტური ვირტუალური სფერო (მაგალითად, 20, 30 ან 45 მეტრი რადიუსით - დაცვის კლასის მიხედვით). ამ სფეროს აგორებენ შენობაზე. ყველა ის წერტილი, რომელსაც ეს სფერო ფიზიკურად ეხება, არის მეხის პირდაპირი დარტყმის საფრთხის ქვეშ, ხოლო სივრცე, სადაც სფერო ვერ აღწევს (მაგალითად, ორ მეხამრიდს შორის ჩაზნექილი არე), სრულად დაცულია.</p>
+                        <div>
+                            <p class="font-bold text-amber-400 text-base mb-1">🛡️ 2. შიდა დაცვა — SPD / УЗИП აპარატები (IEC 61643)</p>
+                            <p>პირდაპირი მეხის დარტყმა იწვევს ქსელში ათასობით ვოლტის იმპულსს. ამისგან ტექნიკის გადასარჩენად გამოიყენება 3-საფეხურიანი დაცვა:</p>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300 mt-2">
+                                <li><strong class="text-rose-400">Type 1 (Class I):</strong> დგება მთავარ შესასვლელ ფარში. უძლებს პირდაპირ მეხის დარტყმას ($10/350\ \mu s$ ტალღა).</li>
+                                <li><strong class="text-amber-400">Type 2 (Class II):</strong> დგება სართულებრივ/განამაწილებელ ფარებში. იცავს ინდუქციური და ქსელური გადართვებისგან ($8/20\ \mu s$ ტალღა).</li>
+                                <li><strong class="text-emerald-400">Type 3 (Class III):</strong> დგება უშუალოდ მგრძნობიარე ტექნიკასთან (ქვაბი, კომპიუტერი, სამედიცინო აპარატურა).</li>
+                            </ul>
+                        </div>
 
-                        <p class="font-semibold text-gray-200 mt-2">🛠️ მასალები და ხელსაწყოები მონტაჟისთვის:</p>
-                        <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
-                            <li><strong class="text-cyan-400/90">მასალები:</strong> მოთუთიებული ფოლადი, ალუმინის ღეროები, სპეციალური პლასტმასის ან კერამიკული დამჭერები სახურავზე დასამაგრებლად, ბიმეტალური მომჭერები (თუ ხდება სპილენძისა და ფოლადის ერთმანეთთან დაკავშირება - პირდაპირი კონტაქტი იწვევს გალვანურ კოროზიას).</li>
-                            <li><strong class="text-cyan-400/90">ტესტირება და ხელსაწყოები:</strong> მონტაჟის შემდეგ ყოველწლიურად უნდა შემოწმდეს გადაბმის წერტილების გადაცემის წინაღობა (უნდა იყოს $\le 0.2\text{ ომი}$) სპეციალური დაბალომიანი ომმეტრით, რათა დავრწმუნდეთ, რომ დარტყმის დროს გამტარი არ გაწყდება.</li>
-                        </ul>
+                        <div>
+                            <p class="font-semibold text-gray-200">🌐 3. მგორავი სფეროს მეთოდი (Rolling Sphere Method):</p>
+                            <p class="italic text-gray-400">წარმოიდგინეთ $R$ რადიუსის მქონე სფერო (Class III-სთვის $R=45$მ), რომელსაც დავაგორებთ შენობაზე. ყველა წერტილი, რომელსაც სფერო ფიზიკურად შეეხება, საჭიროებს მეხმიმღებს. სივრცე სფეროს ქვეშ ითვლება აბსოლუტურად დაცულად.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ☀️ სექცია 3: მზის პანელები & ავტონომიური სისტემები -->
+        <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-5">
+            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                <h2 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                    <span>☀️</span> 3. მზის პანელები და ავტონომიური სისტემები
+                </h2>
+                <button onclick="openSolarModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-3.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer">
+                    მეტი ➔
+                </button>
+            </div>
+
+            <!-- მოკლე თეორიული ბარათები -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 space-y-2">
+                    <h3 class="font-bold text-emerald-400 border-b border-gray-800 pb-1">🧩 პანელების ტიპები</h3>
+                    <p><strong class="text-white">• მონოკრისტალური (Mono):</strong> მაღალი მარგი ქმედების კოეფიციენტი (20-23%), საუკეთესო ეფექტურობა.</p>
+                    <p><strong class="text-white">• პოლიკრისტალური (Poly):</strong> ბიუჯეტური, შედარებით დაბალი მარგი ქმედებით (15-17%).</p>
+                </div>
+
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 space-y-2">
+                    <h3 class="font-bold text-cyan-400 border-b border-gray-800 pb-1">⚙️ სისტემის კომპონენტები</h3>
+                    <p><strong class="text-white">• ინვერტორი (Hybrid/Off-Grid):</strong> DC დენის გადაყვანა 220V AC-ში.</p>
+                    <p><strong class="text-white">• MPPT კონტროლერი:</strong> მზის ენერგიის მაქსიმალური ათვისება და აკუმულატორის დატენვა.</p>
+                </div>
+
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 space-y-2">
+                    <h3 class="font-bold text-rose-400 border-b border-gray-800 pb-1">🛡️ დაცვის საშუალებები</h3>
+                    <p><strong class="text-white">• DC SPD (УЗИП):</strong> მეხისგან და იმპულსური გადაძაბვისგან დაცვა პანელების ხაზზე.</p>
+                    <p><strong class="text-white">• DC ავტომატები & მცველები:</strong> სპეციალური მუდმივი დენის ავტომატები.</p>
+                </div>
+            </div>
+
+            <!-- 🧮 მზის სისტემის კომპლექტაციის კალკულატორი -->
+            <div class="bg-gray-900 p-5 rounded-xl border border-gray-700 space-y-4">
+                <h3 class="text-md font-bold text-amber-400 border-b border-gray-800 pb-2 flex items-center gap-2">
+                    <span>🧮</span> მზის ელექტროსადგურის ჭკვიანი კალკულატორი
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">პანელის სიმძლავრე (W):</label>
+                        <input type="number" id="sol-panel-watt" value="450" step="10" oninput="calculateSolarSystem()" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">პანელების რაოდენობა:</label>
+                        <input type="number" id="sol-panel-count" value="6" min="1" oninput="calculateSolarSystem()" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">სისტემის ძაბვა (DC):</label>
+                        <select id="sol-sys-volt" onchange="calculateSolarSystem()" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-amber-500 outline-none">
+                            <option value="12">12 Volts</option>
+                            <option value="24" selected>24 Volts</option>
+                            <option value="48">48 Volts</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">დღიური მოხმარება (kWh):</label>
+                        <input type="number" id="sol-daily-kwh" value="8" step="0.5" oninput="calculateSolarSystem()" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white font-mono text-sm focus:border-amber-500 outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-gray-800 font-mono text-xs">
+                    <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <span class="text-gray-400 block mb-1">☀️ ჯამური პანელები:</span>
+                        <span id="sol-res-total-w" class="text-amber-400 font-bold text-sm">2700 W (2.7 kW)</span>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <span class="text-gray-400 block mb-1">⚡ რეკომენდებული ინვერტორი:</span>
+                        <span id="sol-res-inverter" class="text-emerald-400 font-bold text-sm">≥ 3.5 kW (Pure Sine)</span>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <span class="text-gray-400 block mb-1">🎛️ MPPT კონტროლერი:</span>
+                        <span id="sol-res-mppt" class="text-cyan-400 font-bold text-sm">≥ 100 A</span>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <span class="text-gray-400 block mb-1">🔋 აკუმულატორის ბანკი:</span>
+                        <span id="sol-res-battery" class="text-violet-400 font-bold text-sm">~ 330 Ah (24V-ზე)</span>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <span class="text-gray-400 block mb-1">🛡️ DC დაცვა & ავტომატი:</span>
+                        <span id="sol-res-dc-breaker" class="text-rose-400 font-bold text-sm">125A DC + SPD Type 2</span>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <span class="text-gray-400 block mb-1">🔌 AC გამომავალი ავტომატი:</span>
+                        <span id="sol-res-ac-breaker" class="text-yellow-400 font-bold text-sm">20A C-ტიპი (220V)</span>
                     </div>
                 </div>
             </div>
@@ -183,8 +319,39 @@
 
     </main>
 
+    <!-- 📜 მოდალური ფანჯარა: სრული მზის სისტემების თეორია -->
+    <div id="solar-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
+        <div class="bg-gray-800 border border-gray-700 w-full max-w-4xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+            <div class="p-4 border-b border-gray-700 flex justify-between items-center bg-gray-900">
+                <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                    <span>☀️</span> მზის ელექტროსისტემების სრული სახელმძღვანელო
+                </h3>
+                <button onclick="closeSolarModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer px-2">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 text-sm text-gray-300">
+                <div>
+                    <h4 class="text-md font-bold text-emerald-400 border-b border-gray-700 pb-1 mb-2">1. მზის პანელების ტიპები და შერჩევა</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
+                        <p><strong class="text-emerald-400">• მონოკრისტალური (Monocrystalline / PERC / N-Type):</strong> დამზადებულია ერთგვაროვანი სილიციუმისგან. აქვს ყველაზე მაღალი მარგი ქმედების კოეფიციენტი (20-23%) და კარგად მუშაობს მოღრუბლულ ამინდშიც.</p>
+                        <p><strong class="text-amber-400">• პოლიკრისტალური (Polycrystalline):</strong> შედარებით იაფია, ეფექტურობა 15-17%.</p>
+                        <p><strong class="text-cyan-400">• ორმხრივი (Bifacial):</strong> ითვისებს სინათლეს ორივე მხრიდან, რაც ეფექტურობას 10-25%-ით ზრდის.</p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-1 mb-2">2. ინვერტორები და MPPT კონტროლერები</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
+                        <p><strong class="text-white">• Pure Sine Wave (სუფთა სინუსოიდა):</strong> აუცილებელია ყველა ტიპის ძრავისა და გაზის ქვაბისთვის!</p>
+                        <p><strong class="text-white">• MPPT კონტროლერი:</strong> 30%-ით უფრო ეფექტურია PWM ტიპზე.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-700 bg-gray-900 flex justify-end">
+                <button onclick="closeSolarModal()" class="bg-gray-700 hover:bg-gray-600 text-white px-5 py-2 rounded-lg text-xs font-bold transition cursor-pointer">დახურვა</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // ჩაშენებული ანიმაციური ტოგლი თეორიული მასალისთვის
         function toggleTheory(id) {
             const content = document.getElementById(id);
             content.classList.toggle('open');
@@ -196,61 +363,137 @@
             calculateGrounding();
         }
 
-        // დამიწების მათემატიკური მოდელი
+        // 🌍 პროფესიონალური დამიწების გაანგარიშება
         function calculateGrounding() {
-            const rho = parseFloat(document.getElementById('soil-rho').value);
-            const L = parseFloat(document.getElementById('electrode-l').value);
-            const dMm = parseFloat(document.getElementById('electrode-d').value);
-            const targetR = parseFloat(document.getElementById('target-r').value);
-            
+            const rhoBase = parseFloat(document.getElementById('soil-rho').value) || 30;
+            const psi = parseFloat(document.getElementById('soil-climate').value) || 1.5;
+            const L = parseFloat(document.getElementById('electrode-l').value) || 2.5;
+            const dMm = parseFloat(document.getElementById('electrode-d').value) || 16;
+            const t0 = parseFloat(document.getElementById('depth-t').value) || 0.7;
+            const targetR = parseFloat(document.getElementById('target-r').value) || 4;
+            const shape = document.getElementById('contour-shape').value;
+
             const resultBox = document.getElementById('grounding-result');
             const resText = document.getElementById('g-res-text');
 
-            if (!rho || !L || !dMm || !targetR || L <= 0 || dMm <= 0 || targetR <= 0) {
-                resultBox.classList.add('hidden');
-                return;
-            }
+            const rho = rhoBase * psi; 
+            const d = dMm / 1000;
+            const T = t0 + (L / 2); 
 
-            const d = dMm / 1000; 
-            const R0 = (rho / (2 * Math.PI * L)) * Math.log((4 * L) / d);
-            const eta = 0.85; 
-            const finalCount = Math.ceil(R0 / (targetR * eta));
+            // 1. ერთი ვერტიკალური ღეროს წინაღობა
+            const R_vert = (rho / (2 * Math.PI * L)) * (Math.log((2 * L) / d) + 0.5 * Math.log((4 * T + L) / (4 * T - L)));
+
+            // 2. ჰორიზონტალური ზოლის წინაღობა (40x4 მმ ზოლი)
+            const b = 0.04; 
+            const a = L * 2; 
+            const R_horiz = (rho / (2 * Math.PI * a)) * Math.log((2 * Math.pow(a, 2)) / (b * t0));
+
+            // 3. გამოყენების კოეფიციენტი (η)
+            let eta = 0.85;
+            if (shape === 'triangle') eta = 0.75;
+            if (shape === 'line') eta = 0.82;
+
+            // 4. საჭირო ღეროების რაოდენობა
+            let n = Math.ceil((R_vert * R_horiz) / (targetR * eta * R_horiz - targetR * R_vert));
+            if (n < 1 || isNaN(n)) n = Math.ceil(R_vert / (targetR * eta));
+            if (n < 1) n = 1;
+
+            // 5. ჯამური რეალური წინაღობა
+            const R_total = (R_vert * R_horiz) / (n * R_horiz * eta + R_vert);
 
             resultBox.classList.remove('hidden');
             resText.innerHTML = `
-                ერთი ელექტროდის წინაღობა (R₀): <span class="text-emerald-400 font-bold">${R0.toFixed(2)} ომი</span><br>
-                საჭირო ელექტროდების რაოდენობა: <span class="text-emerald-400 font-bold">${finalCount} ცალი</span><br>
-                რეკომენდებული მანძილი ღეროებს შორის: <span class="text-amber-400">${(L * 2).toFixed(1)} მეტრი</span>
+                <div>• ანგარიშობრივი კუთრი წინაღობა (ρ_расჩ): <span class="text-amber-400 font-bold">${rho.toFixed(1)} ომი·მ</span></div>
+                <div>• 1 ვერტიკალური ღეროს წინაღობა: <span class="text-emerald-400 font-bold">${R_vert.toFixed(2)} ომი</span></div>
+                <div>• საჭირო ღეროების რაოდენობა: <span class="text-amber-400 font-bold">${n} ცალი</span></div>
+                <div>• ჰორიზონტალური ზოლის სიგრძე ($40x4$ მმ): <span class="text-white font-bold">${(n * L * 1.5).toFixed(1)} მეტრი</span></div>
+                <div class="col-span-1 md:col-span-2 border-t border-gray-800 pt-1 text-xs text-emerald-400 font-bold">
+                    ✓ ჯამური მოსალოდნელი წინაღობა: ${R_total.toFixed(2)} ომი (მიზანი: ≤ ${targetR} ომი)
+                </div>
             `;
         }
 
-        // მეხამრიდის მათემატიკური მოდელი
+        // 🛡️ მეხამრიდის გაანგარიშება
         function calculateLightning() {
-            const h = parseFloat(document.getElementById('lightning-h').value);
-            const hx = parseFloat(document.getElementById('building-hx').value);
-            const angleDeg = parseFloat(document.getElementById('protection-angle').value);
+            const R_sphere = parseFloat(document.getElementById('lps-class').value) || 45;
+            const count = document.getElementById('masts-count').value;
+            const h = parseFloat(document.getElementById('lightning-h').value) || 10;
+            const hx = parseFloat(document.getElementById('building-hx').value) || 6;
+            const twoBlock = document.getElementById('two-masts-block');
 
             const resultBox = document.getElementById('lightning-result');
             const resText = document.getElementById('l-res-text');
 
-            if (!h || !hx || h <= 0 || hx < 0 || hx >= h) {
+            if (count === "2") {
+                twoBlock.classList.remove('hidden');
+            } else {
+                twoBlock.classList.add('hidden');
+            }
+
+            if (h <= hx) {
                 resultBox.classList.add('hidden');
                 return;
             }
 
-            const angleRad = (angleDeg * Math.PI) / 180;
-            const rx = (h - hx) * Math.tan(angleRad);
+            // 1-ანძიანი დაცვის რადიუსი
+            const rx = Math.sqrt(Math.max(0, h * (2 * R_sphere - h))) - Math.sqrt(Math.max(0, hx * (2 * R_sphere - hx)));
+            const r0 = Math.sqrt(Math.max(0, h * (2 * R_sphere - h)));
 
             resultBox.classList.remove('hidden');
-            resText.innerHTML = `
-                დაცვის რადიუსი ობიექტის სიმაღლეზე (rx): <span class="text-cyan-400 font-bold">${rx.toFixed(2)} მეტრი</span><br>
-                <em>ამ რადიუსის შიგნით მოქცეული ფართობი სრულად დაცულია მეხის პირდაპირი დარტყმისგან.</em>
-            `;
+
+            if (count === "1") {
+                resText.innerHTML = `
+                    <div>• დაცვის რადიუსი ობიექტის სიმაღლეზე ($h_x=${hx}$მ): <span class="text-cyan-400 font-bold">${rx.toFixed(2)} მეტრი</span></div>
+                    <div>• დაცვის რადიუსი მიწის ზედაპირზე ($h_0=0$მ): <span class="text-white font-bold">${r0.toFixed(2)} მეტრი</span></div>
+                    <div>• გამოყენებული მგორავი სფეროს რადიუსი ($R$): <span class="text-amber-400">${R_sphere} მეტრი</span></div>
+                `;
+            } else {
+                const L = parseFloat(document.getElementById('mast-distance').value) || 15;
+                // 2-ანძიანი ჩაღრმავება
+                const h0 = R_sphere - Math.sqrt(Math.max(0, Math.pow(R_sphere, 2) - Math.pow(L / 2, 2)));
+                const effectiveH = h - h0;
+                const rxMid = Math.sqrt(Math.max(0, effectiveH * (2 * R_sphere - effectiveH))) - Math.sqrt(Math.max(0, hx * (2 * R_sphere - hx)));
+
+                resText.innerHTML = `
+                    <div>• 1 ანძის დაცვის რადიუსი ობიექტზე: <span class="text-cyan-400 font-bold">${rx.toFixed(2)} მეტრი</span></div>
+                    <div>• ჩაღრმავება ანძებს შორის ($h_o$): <span class="text-amber-400 font-bold">${h0.toFixed(2)} მეტრი</span></div>
+                    <div>• დაცვის რადიუსი ანძების შუა წერტილში: <span class="text-emerald-400 font-bold">${Math.max(0, rxMid).toFixed(2)} მეტრი</span></div>
+                `;
+            }
         }
+
+        function calculateSolarSystem() {
+            const watt = parseFloat(document.getElementById('sol-panel-watt').value) || 0;
+            const count = parseInt(document.getElementById('sol-panel-count').value) || 0;
+            const sysVolt = parseFloat(document.getElementById('sol-sys-volt').value) || 24;
+            const dailyKwh = parseFloat(document.getElementById('sol-daily-kwh').value) || 0;
+
+            const totalWatt = watt * count;
+            const totalKw = totalWatt / 1000;
+            let inverterKw = totalKw * 1.25;
+            if (inverterKw < 1.5) inverterKw = 1.5;
+
+            const mpptAmp = Math.ceil(totalWatt / sysVolt);
+            const batteryWh = dailyKwh * 1000;
+            const batteryAh = Math.round((batteryWh / sysVolt) * 1.25);
+            const dcBreakerAmp = Math.ceil(mpptAmp * 1.25);
+            const acAmp = Math.ceil((inverterKw * 1000) / 220);
+
+            document.getElementById('sol-res-total-w').innerText = `${totalWatt} W (${totalKw.toFixed(2)} kW)`;
+            document.getElementById('sol-res-inverter').innerText = `≥ ${inverterKw.toFixed(1)} kW (Pure Sine)`;
+            document.getElementById('sol-res-mppt').innerText = `≥ ${mpptAmp} A`;
+            document.getElementById('sol-res-battery').innerText = `~ ${batteryAh} Ah (${sysVolt}V-ზე)`;
+            document.getElementById('sol-res-dc-breaker').innerText = `${dcBreakerAmp}A DC + SPD Type 2`;
+            document.getElementById('sol-res-ac-breaker').innerText = `${acAmp}A C-ტიპი (220V)`;
+        }
+
+        function openSolarModal() { document.getElementById('solar-modal').classList.remove('hidden'); }
+        function closeSolarModal() { document.getElementById('solar-modal').classList.add('hidden'); }
 
         window.onload = function() {
             calculateGrounding();
             calculateLightning();
+            calculateSolarSystem();
         }
     </script>
 </body>
