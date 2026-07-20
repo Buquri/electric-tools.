@@ -305,6 +305,53 @@
                     </div>
                 </div>
 
+                <!-- 📑 ბლოკი: IEC / GOST სტანდარტების სწრაფი შპარგალკა -->
+                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4 md:col-span-2">
+                    <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                        <h3 class="text-md font-bold text-amber-400 flex items-center gap-2">
+                            <span>📑</span> IEC / GOST სტანდარტების სწრაფი შპარგალკა
+                        </h3>
+                        <button onclick="openStandardsModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer">
+                            მეტი ➔
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <!-- 1. IP დაცვა -->
+                        <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
+                            <h4 class="font-bold text-emerald-400 border-b border-gray-800 pb-1">🛡️ IP დაცვის კლასები</h4>
+                            <ul class="space-y-1 text-gray-300">
+                                <li><strong class="text-white">IP20:</strong> მშრალი ოთახი, საცხოვრებელი</li>
+                                <li><strong class="text-white">IP44:</strong> აბაზანა (ზონა 2), სამზარეულო</li>
+                                <li><strong class="text-white">IP65/66:</strong> ეზო, ღია განათება, წვიმა</li>
+                                <li><strong class="text-white">IP68:</strong> წყალქვეშა (აუზი, შადრევანი)</li>
+                            </ul>
+                        </div>
+
+                        <!-- 2. ფერთა მარკირება -->
+                        <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
+                            <h4 class="font-bold text-cyan-400 border-b border-gray-800 pb-1">🎨 სადენების ფერები (IEC)</h4>
+                            <ul class="space-y-1 text-gray-300">
+                                <li><span class="text-amber-600 font-bold">● L (ფაზა):</span> ყავისფერი / შავი</li>
+                                <li><span class="text-blue-400 font-bold">● N (ნული):</span> ცისფერი / ლურჯი</li>
+                                <li><span class="text-lime-400 font-bold">● PE (დამიწება):</span> ყვითელ-მწვანე</li>
+                                <li><span class="text-slate-400 font-bold">● L1/L2/L3:</span> ყავისფერი, შავი, ნაცრისფერი</li>
+                            </ul>
+                        </div>
+
+                        <!-- 3. დაშორების ნორმები -->
+                        <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
+                            <h4 class="font-bold text-violet-400 border-b border-gray-800 pb-1">📏 დაშორების ნორმები</h4>
+                            <ul class="space-y-1 text-gray-300">
+                                <li><strong class="text-white">გაზის მილი:</strong> მინ. 50 სმ (როზეტამდე)</li>
+                                <li><strong class="text-white">სანტექნიკა / ნიჟარა:</strong> მინ. 60 სმ</li>
+                                <li><strong class="text-white">იატაკიდან:</strong> როზეტი ≥ 30სმ, ჩამრთველი 90სმ</li>
+                                <li><strong class="text-white">კარის ჩარჩო:</strong> მინ. 10-15 სმ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -442,6 +489,77 @@
         </section>
 
     </main>
+
+    <!-- 📜 მოდალური ფანჯარა: სრული IEC / GOST თეორია -->
+    <div id="standards-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
+        <div class="bg-gray-800 border border-gray-700 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+            
+            <!-- ჰედერი -->
+            <div class="p-4 border-b border-gray-700 flex justify-between items-center bg-gray-900">
+                <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                    <span>📑</span> IEC / GOST ელექტრომონტაჟის სტანდარტები და ნორმები
+                </h3>
+                <button onclick="closeStandardsModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer px-2">&times;</button>
+            </div>
+
+            <!-- სრული თეორიული კონტენტი -->
+            <div class="p-6 overflow-y-auto space-y-6 text-sm text-gray-300">
+                
+                <!-- სექცია 1 -->
+                <div>
+                    <h4 class="text-md font-bold text-emerald-400 border-b border-gray-700 pb-1 mb-2">1. IP (Ingress Protection) დაცვის კლასების სრული ცნობარი</h4>
+                    <p class="text-xs text-gray-400 mb-2">IPXX ინდექსში პირველი ციფრი აღნიშნავს დაცვას მყარი ნაწილაკებისგან, ხოლო მეორე — სითხისგან.</p>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-white">• IP20:</strong> გამოიყენება მხოლოდ მშრალ საცხოვრებელ ოთახებში (მისაღები, საძინებელი).</p>
+                        <p><strong class="text-white">• IP44:</strong> დაცულია 1მმ-ზე მეტი სხეულებისგან და წყლის შხეფებისგან. აუცილებელია აბაზანის მე-2 ზონაში და სამზარეულოს სამუშაო ზედაპირთან.</p>
+                        <p><strong class="text-white">• IP65 / IP66:</strong> სრული მტვერგაუმტარი და დაცული წყლის ჭავლისგან. გამოიყენება ეზოს განათებისთვის, ფასადებზე და ღია ფანჩატურებში.</p>
+                        <p><strong class="text-white">• IP68:</strong> ჰერმეტული, უძლებს წყალში ხანგრძლივ ჩაძირვას. გამოიყენება აუზის განათებისა და წყალქვეშა ტუმბოებისთვის.</p>
+                    </div>
+                </div>
+
+                <!-- სექცია 2 -->
+                <div>
+                    <h4 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-1 mb-2">2. სადენების მარკირება და ფერთა სტანდარტი (IEC 60446)</h4>
+                    <p class="text-xs text-gray-400 mb-2">ფერთა სტანდარტის დაცვა აუცილებელია უსაფრთხოებისთვის და შემდგომი სერვისისთვის.</p>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-amber-500">• L (ფაზა - Phase):</strong> ყავისფერი (ძირითადი), შავი ან ნაცრისფერი.</p>
+                        <p><strong class="text-blue-400">• N (ნეიტრალი / ნული):</strong> მკაცრად ცისფერი ან ლურჯი. აკრძალულია მისი სხვა მიზნით გამოყენება!</p>
+                        <p><strong class="text-lime-400">• PE (დამცავი დამიწება):</strong> მკაცრად ყვითელ-მწვანე ზოლიანი. არასოდეს არ უნდა გაიაროს ჩამრთველში ან ავტომატში!</p>
+                        <p><strong class="text-gray-300">• 3-ფაზა (L1, L2, L3):</strong> L1 - ყავისფერი, L2 - შავი, L3 - ნაცრისფერი.</p>
+                    </div>
+                </div>
+
+                <!-- სექცია 3 -->
+                <div>
+                    <h4 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-1 mb-2">3. სამონტაჟო მანძილები და უსაფრთხოების ზონები</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
+                        <p><strong class="text-white">• გაზის გაყვანილობა:</strong> ელექტრო როზეტი, ჩამრთველი ან კაბელი გაზის მილიდან და მრიცხველიდან დაშორებული უნდა იყოს მინიმუმ <strong>50 სმ</strong>-ით.</p>
+                        <p><strong class="text-white">• სანტექნიკა და ნიჟარები:</strong> როზეტები წყლის წერტილებიდან (ნიჟარა, აბაზანა, შხაპი) უნდა დამონტაჟდეს მინიმუმ <strong>60 სმ</strong>-ის დაშორებით (IP44 დაცვით).</p>
+                        <p><strong class="text-white">• იატაკი და ჭერი:</strong> როზეტების სტანდარტული სიმაღლე იატაკიდან არის <strong>30 სმ</strong> (ევროსტანდარტი), ჩამრთველების — <strong>90 სმ</strong>. ჭერიდან შტრაბის მანძილი: 15-20 სმ.</p>
+                        <p><strong class="text-white">• კარის და ფანჯრის ჩარჩოები:</strong> კუთხეებიდან და ღიობებიდან მინიმალური დაშორება — <strong>10-15 სმ</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- სექცია 4 -->
+                <div>
+                    <h4 class="text-md font-bold text-rose-400 border-b border-gray-700 pb-1 mb-2">4. აბაზანის უსაფრთხოების ზონები (IEC 60364-7-701)</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-rose-400">• ზონა 0 (შხაპის/აბაზანის შიგნით):</strong> მხოლოდ 12V (SELV) მოწყობილობები, მინ. IPX7.</p>
+                        <p><strong class="text-amber-400">• ზონა 1 (აბაზანის თავზე 2.25მ-მდე):</strong> მხოლოდ წყლის გამაცხელებელი (ბოილერი), მინ. IPX4/IPX5.</p>
+                        <p><strong class="text-emerald-400">• ზონა 2 (ზონა 1-დან 60სმ-ის რადიუსში):</strong> დასაშვებია IPX4 როზეტები მხოლოდ 30mA RCD (დიფ-ავტომატის) დაცვის ქვეშ.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ფუტერი -->
+            <div class="p-4 border-t border-gray-700 bg-gray-900 flex justify-end">
+                <button onclick="closeStandardsModal()" class="bg-gray-700 hover:bg-gray-600 text-white px-5 py-2 rounded-lg text-xs font-bold transition cursor-pointer">
+                    დახურვა
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- 🧮 მცურავი მათემატიკური კალკულატორი -->
     <button onclick="toggleMathCalc()" class="fixed bottom-6 right-6 z-50 bg-amber-500 hover:bg-amber-600 text-gray-900 p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 text-2xl focus:outline-none cursor-pointer">
@@ -812,6 +930,14 @@
                 isEquationFinished = true;
             } catch (e) { calcCurrentInput = 'Error'; calcStoredExpression = ''; isEquationFinished = true; }
             updateCalcDisplay();
+        }
+
+        function openStandardsModal() {
+            document.getElementById('standards-modal').classList.remove('hidden');
+        }
+
+        function closeStandardsModal() {
+            document.getElementById('standards-modal').classList.add('hidden');
         }
 
         window.onload = loadDatabase;
