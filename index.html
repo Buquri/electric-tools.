@@ -730,21 +730,22 @@
         }
 
         function calculateLoad() {
-            const sizeStr = document.getElementById('wire-size').value;
-            const sizeValue = parseFloat(sizeStr) || 2.5;
-            const length = parseFloat(document.getElementById('wire-length').value) || 0;
-            const voltage = parseFloat(document.getElementById('wire-voltage').value) || 220;
-            const phase = document.getElementById('phase-type').value;
-            const install = document.getElementById('install-type').value;
+          // ✅ ახალი სწორი კოდი:
+const sizeStr = document.getElementById('wire-size').value; // პირდაპირ იღებს "0.35"-ს
+const sizeValue = parseFloat(sizeStr) || 2.5;
+const length = parseFloat(document.getElementById('wire-length').value) || 0;
+const voltage = parseFloat(document.getElementById('wire-voltage').value) || 220;
+const phase = document.getElementById('phase-type').value;
+const install = document.getElementById('install-type').value;
 
-            let maxAmperage = 0;
-            let price = 0;
+let maxAmperage = 0;
+let price = 0;
 
-            const db = database || cableSpecs;
-            if (db && db[currentMaterial] && db[currentMaterial][sizeStr]) {
-                maxAmperage = db[currentMaterial][sizeStr].amperage[install];
-                price = db[currentMaterial][sizeStr].price_per_meter;
-            }
+const db = database || cableSpecs;
+if (db && db[currentMaterial] && db[currentMaterial][sizeStr]) {
+    maxAmperage = db[currentMaterial][sizeStr].amperage[install];
+    price = db[currentMaterial][sizeStr].price_per_meter;
+}
 
             maxAmperage = parseFloat(maxAmperage.toFixed(1));
 
