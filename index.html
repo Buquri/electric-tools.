@@ -613,14 +613,13 @@
     </footer>
 
     <script>
-        let database = null;
         let currentMaterial = 'copper'; 
 
         let calcCurrentInput = '0';
         let calcStoredExpression = '';
         let isEquationFinished = false;
 
-        // 📊 ოფიციალური GOST / IEC 60228 სტანდარტის მონაცემთა ბაზა
+        // 📊 ოფიციალური GOST / IEC 60228 სტანდარტის მონაცემთა ბაზა (სპილენძი და ალუმინი)
         const cableSpecs = {
             copper: {
                 "0.12": { amperage: { conduit: 1.5, air: 2.0, ground: 2.5 }, price_per_meter: 0.3 },
@@ -648,12 +647,12 @@
                 "400.0":{ amperage: { conduit: 800.0, air: 700.0, ground: 750.0 }, price_per_meter: 280.0 }
             },
             aluminum: {
-                "0.12": { amperage: { conduit: 0, air: 0, ground: 0 }, price_per_meter: 0 },
-                "0.2":  { amperage: { conduit: 0, air: 0, ground: 0 }, price_per_meter: 0 },
-                "0.35": { amperage: { conduit: 0, air: 0, ground: 0 }, price_per_meter: 0 },
-                "0.5":  { amperage: { conduit: 0, air: 0, ground: 0 }, price_per_meter: 0 },
-                "0.75": { amperage: { conduit: 0, air: 0, ground: 0 }, price_per_meter: 0 },
-                "1.0":  { amperage: { conduit: 0, air: 0, ground: 0 }, price_per_meter: 0 },
+                "0.12": { amperage: { conduit: 1.0, air: 1.5, ground: 2.0 }, price_per_meter: 0.15 },
+                "0.2":  { amperage: { conduit: 1.8, air: 2.5, ground: 3.0 }, price_per_meter: 0.2 },
+                "0.35": { amperage: { conduit: 3.0, air: 4.2, ground: 5.0 }, price_per_meter: 0.25 },
+                "0.5":  { amperage: { conduit: 4.2, air: 6.3, ground: 7.5 }, price_per_meter: 0.35 },
+                "0.75": { amperage: { conduit: 7.0, air: 8.5, ground: 10.5 }, price_per_meter: 0.5 },
+                "1.0":  { amperage: { conduit: 9.8, air: 11.2, ground: 13.3 }, price_per_meter: 0.65 },
                 "1.5":  { amperage: { conduit: 10.0, air: 14.0, ground: 16.0 }, price_per_meter: 0.8 },
                 "2.5":  { amperage: { conduit: 16.0, air: 21.0, ground: 23.0 }, price_per_meter: 1.1 },
                 "4.0":  { amperage: { conduit: 21.0, air: 28.0, ground: 30.0 }, price_per_meter: 1.6 },
@@ -670,7 +669,7 @@
                 "185.0":{ amperage: { conduit: 350.0, air: 320.0, ground: 350.0 }, price_per_meter: 50.0 },
                 "240.0":{ amperage: { conduit: 450.0, air: 380.0, ground: 415.0 }, price_per_meter: 65.0 },
                 "300.0":{ amperage: { conduit: 500.0, air: 440.0, ground: 475.0 }, price_per_meter: 82.0 },
-                "400.0":{ amperage: { conduit: 600.0, air: 520.0, ground: 550.0 }, price_per_meter: 110.0 }
+                "400.0":{ amperage: { conduit: 800.0, air: 700.0, ground: 750.0 }, price_per_meter: 110.0 }
             }
         };
 
@@ -697,16 +696,6 @@
                 calculateGofSize();
                 calculateMotorSpecs();
             }
-        }
-
-        async function loadDatabase() {
-            try {
-                const response = await fetch('data/cables.json');
-                database = await response.json();
-            } catch (error) {
-                database = cableSpecs;
-            }
-            calculateLoad();
         }
 
         function setMaterial(material) {
@@ -740,10 +729,9 @@
             let maxAmperage = 0;
             let price = 0;
 
-            const db = database || cableSpecs;
-            if (db && db[currentMaterial] && db[currentMaterial][sizeStr]) {
-                maxAmperage = db[currentMaterial][sizeStr].amperage[install];
-                price = db[currentMaterial][sizeStr].price_per_meter;
+            if (cableSpecs && cableSpecs[currentMaterial] && cableSpecs[currentMaterial][sizeStr]) {
+                maxAmperage = cableSpecs[currentMaterial][sizeStr].amperage[install];
+                price = cableSpecs[currentMaterial][sizeStr].price_per_meter;
             }
 
             maxAmperage = parseFloat(maxAmperage.toFixed(1));
@@ -766,8 +754,8 @@
 
             const dropPercent = voltage > 0 ? (voltageDrop / voltage) * 100 : 0;
 
-            document.getElementById('res-amperage').innerText = (maxAmperage === 0 ? "არ გამოიყენება" : maxAmperage + " A");
-            document.getElementById('res-power').innerText = (maxAmperage === 0 ? "0 kW" : maxPowerkW.toFixed(2) + " kW");
+            document.getElementById('res-amperage').innerText = maxAmperage + " A";
+            document.getElementById('res-power').innerText = maxPowerkW.toFixed(2) + " kW";
             document.getElementById('res-price').innerText = price.toFixed(2) + " ₾ / მეტრი";
             document.getElementById('res-drop-volt').innerText = voltageDrop.toFixed(2) + " V";
             document.getElementById('res-drop-percent').innerText = `(${dropPercent.toFixed(2)}%)`;
@@ -992,7 +980,7 @@
             document.getElementById('standards-modal').classList.add('hidden');
         }
 
-        window.onload = loadDatabase;
+        window.onload = calculateLoad;
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
