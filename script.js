@@ -12,25 +12,25 @@ const cableSpecs = {
         "0.35": { amperage: { conduit: 4.5, air: 6.0, ground: 7.0 }, price_per_meter: 0.5 },
         "0.5":  { amperage: { conduit: 6,   air: 9,   ground: 11 },  price_per_meter: 0.7 },
         "0.75": { amperage: { conduit: 10,  air: 12,  ground: 15 },  price_per_meter: 1.0 },
-        "1.0":  { amperage: { conduit: 14,  air: 16,  ground: 19 },  price_per_meter: 1.3 },
+        "1":    { amperage: { conduit: 14,  air: 16,  ground: 19 },  price_per_meter: 1.3 },
         "1.5":  { amperage: { conduit: 15,  air: 19,  ground: 22 },  price_per_meter: 1.8 },
-        "2.0":  { amperage: { conduit: 19,  air: 23,  ground: 26 },  price_per_meter: 2.1 },
+        "2":    { amperage: { conduit: 19,  air: 23,  ground: 26 },  price_per_meter: 2.1 },
         "2.5":  { amperage: { conduit: 21,  air: 27,  ground: 30 },  price_per_meter: 2.5 },
-        "4.0":  { amperage: { conduit: 27,  air: 36,  ground: 40 },  price_per_meter: 3.8 },
-        "6.0":  { amperage: { conduit: 34,  air: 46,  ground: 50 },  price_per_meter: 5.5 },
-        "10.0": { amperage: { conduit: 50,  air: 63,  ground: 70 },  price_per_meter: 8.5 },
-        "16.0": { amperage: { conduit: 80,  air: 85,  ground: 90 },  price_per_meter: 13.0 },
-        "25.0": { amperage: { conduit: 100, air: 115, ground: 125 }, price_per_meter: 19.0 },
-        "35.0": { amperage: { conduit: 135, air: 145, ground: 155 }, price_per_meter: 26.0 },
-        "50.0": { amperage: { conduit: 175, air: 185, ground: 205 }, price_per_meter: 35.0 },
-        "70.0": { amperage: { conduit: 215, air: 235, ground: 260 }, price_per_meter: 50.0 },
-        "95.0": { amperage: { conduit: 260, air: 290, ground: 320 }, price_per_meter: 68.0 },
-        "120.0":{ amperage: { conduit: 300, air: 335, ground: 370 }, price_per_meter: 85.0 },
-        "150.0":{ amperage: { conduit: 330, air: 380, ground: 415 }, price_per_meter: 105.0 },
-        "185.0":{ amperage: { conduit: 500, air: 435, ground: 475 }, price_per_meter: 130.0 },
-        "240.0":{ amperage: { conduit: 600, air: 520, ground: 560 }, price_per_meter: 170.0 },
-        "300.0":{ amperage: { conduit: 680, air: 600, ground: 645 }, price_per_meter: 210.0 },
-        "400.0":{ amperage: { conduit: 800, air: 700, ground: 750 }, price_per_meter: 280.0 }
+        "4":    { amperage: { conduit: 27,  air: 36,  ground: 40 },  price_per_meter: 3.8 },
+        "6":    { amperage: { conduit: 34,  air: 46,  ground: 50 },  price_per_meter: 5.5 },
+        "10":   { amperage: { conduit: 50,  air: 63,  ground: 70 },  price_per_meter: 8.5 },
+        "16":   { amperage: { conduit: 80,  air: 85,  ground: 90 },  price_per_meter: 13.0 },
+        "25":   { amperage: { conduit: 100, air: 115, ground: 125 }, price_per_meter: 19.0 },
+        "35":   { amperage: { conduit: 135, air: 145, ground: 155 }, price_per_meter: 26.0 },
+        "50":   { amperage: { conduit: 175, air: 185, ground: 205 }, price_per_meter: 35.0 },
+        "70":   { amperage: { conduit: 215, air: 235, ground: 260 }, price_per_meter: 50.0 },
+        "95":   { amperage: { conduit: 260, air: 290, ground: 320 }, price_per_meter: 68.0 },
+        "120":  { amperage: { conduit: 300, air: 335, ground: 370 }, price_per_meter: 85.0 },
+        "150":  { amperage: { conduit: 330, air: 380, ground: 415 }, price_per_meter: 105.0 },
+        "185":  { amperage: { conduit: 500, air: 435, ground: 475 }, price_per_meter: 130.0 },
+        "240":  { amperage: { conduit: 600, air: 520, ground: 560 }, price_per_meter: 170.0 },
+        "300":  { amperage: { conduit: 680, air: 600, ground: 645 }, price_per_meter: 210.0 },
+        "400":  { amperage: { conduit: 800, air: 700, ground: 750 }, price_per_meter: 280.0 }
     },
     aluminum: {
         "0.12": { amperage: { conduit: 1.0, air: 1.5, ground: 2.0 }, price_per_meter: 0.15 },
@@ -38,25 +38,25 @@ const cableSpecs = {
         "0.35": { amperage: { conduit: 3.0, air: 4.2, ground: 5.0 }, price_per_meter: 0.25 },
         "0.5":  { amperage: { conduit: 4.5, air: 6.5, ground: 7.5 }, price_per_meter: 0.35 },
         "0.75": { amperage: { conduit: 7.0, air: 9.0, ground: 10.5 }, price_per_meter: 0.50 },
-        "1.0":  { amperage: { conduit: 10.0, air: 12.0, ground: 14.0 }, price_per_meter: 0.65 },
+        "1":    { amperage: { conduit: 10.0, air: 12.0, ground: 14.0 }, price_per_meter: 0.65 },
         "1.5":  { amperage: { conduit: 10.0, air: 14.0, ground: 16.0 }, price_per_meter: 0.80 },
-        "2.0":  { amperage: { conduit: 14.0, air: 18.0, ground: 20.0 }, price_per_meter: 0.95 },
+        "2":    { amperage: { conduit: 14.0, air: 18.0, ground: 20.0 }, price_per_meter: 0.95 },
         "2.5":  { amperage: { conduit: 16.0, air: 21.0, ground: 23.0 }, price_per_meter: 1.10 },
-        "4.0":  { amperage: { conduit: 21.0, air: 28.0, ground: 30.0 }, price_per_meter: 1.60 },
-        "6.0":  { amperage: { conduit: 26.0, air: 36.0, ground: 38.0 }, price_per_meter: 2.20 },
-        "10.0": { amperage: { conduit: 38.0, air: 50.0, ground: 55.0 }, price_per_meter: 3.50 },
-        "16.0": { amperage: { conduit: 55.0, air: 60.0, ground: 65.0 }, price_per_meter: 5.00 },
-        "25.0": { amperage: { conduit: 65.0, air: 85.0, ground: 95.0 }, price_per_meter: 7.50 },
-        "35.0": { amperage: { conduit: 75.0, air: 105.0, ground: 115.0 }, price_per_meter: 10.00 },
-        "50.0": { amperage: { conduit: 105.0, air: 135.0, ground: 150.0 }, price_per_meter: 14.00 },
-        "70.0": { amperage: { conduit: 135.0, air: 170.0, ground: 205.0 }, price_per_meter: 19.00 },
-        "95.0": { amperage: { conduit: 200.0, air: 210.0, ground: 230.0 }, price_per_meter: 26.00 },
-        "120.0":{ amperage: { conduit: 230.0, air: 245.0, ground: 270.0 }, price_per_meter: 33.00 },
-        "150.0":{ amperage: { conduit: 255.0, air: 280.0, ground: 305.0 }, price_per_meter: 40.00 },
-        "185.0":{ amperage: { conduit: 350.0, air: 320.0, ground: 350.0 }, price_per_meter: 50.00 },
-        "240.0":{ amperage: { conduit: 450.0, air: 380.0, ground: 415.0 }, price_per_meter: 65.00 },
-        "300.0":{ amperage: { conduit: 500.0, air: 440.0, ground: 475.0 }, price_per_meter: 82.00 },
-        "400.0":{ amperage: { conduit: 600.0, air: 700.0, ground: 750.0 }, price_per_meter: 110.00 }
+        "4":    { amperage: { conduit: 21.0, air: 28.0, ground: 30.0 }, price_per_meter: 1.60 },
+        "6":    { amperage: { conduit: 26.0, air: 36.0, ground: 38.0 }, price_per_meter: 2.20 },
+        "10":   { amperage: { conduit: 38.0, air: 50.0, ground: 55.0 }, price_per_meter: 3.50 },
+        "16":   { amperage: { conduit: 55.0, air: 60.0, ground: 65.0 }, price_per_meter: 5.00 },
+        "25":   { amperage: { conduit: 65.0, air: 85.0, ground: 95.0 }, price_per_meter: 7.50 },
+        "35":   { amperage: { conduit: 75.0, air: 105.0, ground: 115.0 }, price_per_meter: 10.00 },
+        "50":   { amperage: { conduit: 105.0, air: 135.0, ground: 150.0 }, price_per_meter: 14.00 },
+        "70":   { amperage: { conduit: 135.0, air: 170.0, ground: 205.0 }, price_per_meter: 19.00 },
+        "95":   { amperage: { conduit: 200.0, air: 210.0, ground: 230.0 }, price_per_meter: 26.00 },
+        "120":  { amperage: { conduit: 230.0, air: 245.0, ground: 270.0 }, price_per_meter: 33.00 },
+        "150":  { amperage: { conduit: 255.0, air: 280.0, ground: 305.0 }, price_per_meter: 40.00 },
+        "185":  { amperage: { conduit: 350.0, air: 320.0, ground: 350.0 }, price_per_meter: 50.00 },
+        "240":  { amperage: { conduit: 450.0, air: 380.0, ground: 415.0 }, price_per_meter: 65.00 },
+        "300":  { amperage: { conduit: 500.0, air: 440.0, ground: 475.0 }, price_per_meter: 82.00 },
+        "400":  { amperage: { conduit: 600.0, air: 700.0, ground: 750.0 }, price_per_meter: 110.00 }
     }
 };
 
@@ -116,9 +116,12 @@ function calculateLoad() {
     let maxAmperage = 0;
     let price = 0;
 
-    if (cableSpecs && cableSpecs[currentMaterial] && cableSpecs[currentMaterial][sizeStr]) {
-        maxAmperage = cableSpecs[currentMaterial][sizeStr].amperage[install];
-        price = cableSpecs[currentMaterial][sizeStr].price_per_meter;
+    // გასაღების უსაფრთხო ძებნა (მაგ: 2.5 ან 2)
+    const specKey = (cableSpecs[currentMaterial] && cableSpecs[currentMaterial][sizeStr]) ? sizeStr : sizeValue.toString();
+
+    if (cableSpecs && cableSpecs[currentMaterial] && cableSpecs[currentMaterial][specKey]) {
+        maxAmperage = cableSpecs[currentMaterial][specKey].amperage[install];
+        price = cableSpecs[currentMaterial][specKey].price_per_meter;
     }
 
     maxAmperage = parseFloat(maxAmperage.toFixed(1));
@@ -160,18 +163,11 @@ function calculateLoad() {
         statusEl.className = "text-xs mt-1 font-medium text-rose-400 animate-pulse";
     }
 
-    // 🔴 წითელი გაფრთხილება 10%-იან რეზერვზე კალკულატორის ქვემოთ
-    let maxLimitNote = document.getElementById('max-limit-note');
-    if (!maxLimitNote) {
-        maxLimitNote = document.createElement('div');
-        maxLimitNote.id = 'max-limit-note';
-        maxLimitNote.className = 'col-span-2 bg-rose-950/40 border border-rose-800/60 text-rose-400 text-xs p-3 rounded-xl mt-3 flex items-center gap-2 shadow-inner';
-        const resContainer = document.getElementById('res-amperage').closest('.grid');
-        if (resContainer && resContainer.parentNode) {
-            resContainer.parentNode.appendChild(maxLimitNote);
-        }
+    // 🔴 წითელი შენიშვნის ტექსტის განახლება
+    const noteTextEl = document.getElementById('max-limit-note-text');
+    if (noteTextEl) {
+        noteTextEl.innerHTML = `<strong>ყურადღება:</strong> მითითებული დენი (<strong>${maxAmperage} A</strong>) წარმოადგენს კაბელის მაქსიმალურ დასაშვებ ზღვარს. ხანგრძლივი უსაფრთხოებისათვის რეკომენდებულია 10%-ით ნაკლები დატვირთვა (მაქს. <strong>${recommendedAmperage} A</strong>).`;
     }
-    maxLimitNote.innerHTML = `<span>⚠️</span> <span><strong>ყურადღება:</strong> მითითებული დენი (<strong>${maxAmperage} A</strong>) წარმოადგენს კაბელის მაქსიმალურ დასაშვებ ზღვარს. ხანგრძლივი უსაფრთხოებისათვის რეკომენდებულია 10%-ით ნაკლები დატვირთვა (მაქს. <strong>${recommendedAmperage} A</strong>).</span>`;
 }
 
 function calcFormulaAmperage() {
