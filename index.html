@@ -69,32 +69,8 @@
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ² / AWG)</label>
-                            <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono text-xs md:text-sm">
-                                <option value="0.12">0.12 მმ² (~26 AWG)</option>
-                                <option value="0.2">0.20 მმ² (~24 AWG)</option>
-                                <option value="0.35">0.35 მმ² (~22 AWG)</option>
-                                <option value="0.5">0.50 მმ² (~20 AWG)</option>
-                                <option value="0.75">0.75 მმ² (~18 AWG)</option>
-                                <option value="1.0">1.00 მმ² (~17 AWG)</option>
-                                <option value="1.5">1.50 მმ² (~15 AWG)</option>
-                                <option value="2.5" selected>2.50 მმ² (~13/14 AWG)</option>
-                                <option value="4.0">4.00 მმ² (~11/12 AWG)</option>
-                                <option value="6.0">6.00 მმ² (~9/10 AWG)</option>
-                                <option value="10.0">10.00 მმ² (~7/8 AWG)</option>
-                                <option value="16.0">16.00 მმ² (~5/6 AWG)</option>
-                                <option value="25.0">25.00 მმ² (~3/4 AWG)</option>
-                                <option value="35.0">35.00 მმ² (~2 AWG)</option>
-                                <option value="50.0">50.00 მმ² (~1/0 AWG)</option>
-                                <option value="70.0">70.00 მმ² (~2/0 AWG)</option>
-                                <option value="95.0">95.00 მმ² (~3/0 AWG)</option>
-                                <option value="120.0">120.00 მმ² (~4/0 AWG)</option>
-                                <option value="150.0">150.00 მმ² (250 kcmil)</option>
-                                <option value="185.0">185.00 მმ² (350 kcmil)</option>
-                                <option value="240.0">240.00 მმ² (500 kcmil)</option>
-                                <option value="300.0">300.00 მმ² (600 kcmil)</option>
-                                <option value="400.0">400.00 მმ² (800 kcmil)</option>
-                            </select>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კვეთა (მმ²)</label>
+                            <input type="number" id="wire-size" value="2.5" min="0.01" max="1000" step="0.01" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ხაზის სიგრძე (მეტრი)</label>
@@ -120,9 +96,9 @@
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მონტაჟის ტიპი</label>
                         <select id="install-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
-                            <option value="conduit" selected>მილში / კედელში (დახურული)</option>
+                            <option value="conduit" selected>მილში (კედელში)</option>
                             <option value="air">ღიად ჰაერზე</option>
-                            <option value="ground">მიწაში (ტრანშეაში)</option>
+                            <option value="ground">მიწაში</option>
                         </select>
                     </div>
                 </div>
@@ -341,6 +317,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <!-- 1. ავტომატების ტიპები -->
                         <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
                             <h4 class="font-bold text-amber-400 border-b border-gray-800 pb-1">⚡ ავტომატების ტიპები (B, C, D)</h4>
                             <ul class="space-y-1 text-gray-300">
@@ -350,6 +327,7 @@
                             </ul>
                         </div>
 
+                        <!-- 2. RCD / დიფ-ავტომატები -->
                         <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
                             <h4 class="font-bold text-rose-400 border-b border-gray-800 pb-1">🛡️ დიფ. დაცვა (RCD)</h4>
                             <ul class="space-y-1 text-gray-300">
@@ -359,8 +337,9 @@
                             </ul>
                         </div>
 
+                        <!-- 3. კაბელის მარკირება -->
                         <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">
-                            <h4 class="font-bold text-cyan-400 border-b border-gray-800 pb-1">🏷️ კაბელის მარკირება</h4>
+                            <h4 class="font-bold text-cyan-400 border-b border-gray-800 pb-1">🏷️ კაბელების მარკირება</h4>
                             <ul class="space-y-1 text-gray-300">
                                 <li><strong class="text-white">VVG (ВВГ):</strong> სპილენძი, PVC იზოლაცია</li>
                                 <li><strong class="text-white">ng / ng-LS:</strong> უწვი, დაბალი კვამლი</li>
@@ -377,6 +356,7 @@
         <section id="panel-tab" class="tab-content hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
+                <!-- ფარის ამწყობი ბლოკი -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-xl space-y-4">
                     <h3 class="text-md font-bold text-amber-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>🎛️</span> ელექტრო ფარის ასისტენტი</h3>
                     <div>
@@ -408,6 +388,7 @@
                     </div>
                 </div>
 
+                <!-- გოფრეს შევსების ბლოკი -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-xl space-y-4">
                     <h3 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📦</span> გოფრირებული მილის შევსება</h3>
                     <div class="grid grid-cols-2 gap-2">
@@ -426,6 +407,7 @@
                     </div>
                 </div>
 
+                <!-- 3-ფაზიანი ძრავების ბლოკი -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-xl space-y-4 md:col-span-2">
                     <h3 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>🏭</span> 3-ფაზიანი ძრავების სრული გაანგარიშება</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -509,6 +491,7 @@
     <div id="standards-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
         <div class="bg-gray-800 border border-gray-700 w-full max-w-4xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
             
+            <!-- ჰედერი -->
             <div class="p-4 border-b border-gray-700 flex justify-between items-center bg-gray-900">
                 <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
                     <span>📑</span> IEC / GOST / PUE ელექტრომონტაჟის სტანდარტები
@@ -516,47 +499,97 @@
                 <button onclick="closeStandardsModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer px-2">&times;</button>
             </div>
 
+            <!-- სრული თეორიული კონტენტი -->
             <div class="p-6 overflow-y-auto space-y-6 text-sm text-gray-300">
+                
+                <!-- 1. B, C, D მახასიათებლები -->
                 <div>
                     <h4 class="text-md font-bold text-amber-400 border-b border-gray-700 pb-1 mb-2">1. ავტომატური ამომრთველების B, C, D მახასიათებლები (IEC 60898)</h4>
                     <p class="text-xs text-gray-400 mb-2">განსაზღვრავს ავტომატის ელექტრომაგნიტური გამომრთველის მყისიერი ამოქმედების დენის ზღვარს ნომინალურ დენთან ($I_n$) მიმართებით.</p>
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
-                        <p><strong class="text-amber-400">• B ტიპი ($3-5 \cdot I_n$):</strong> გამოიყენება მგრძნობიარე ელექტრონიკისთვის, განათების ხაზებისთვის და გრძელი ქსელებისთვის.</p>
-                        <p><strong class="text-emerald-400">• C ტიპი ($5-10 \cdot I_n$):</strong> სტანდარტული საყოფაცხოვრებო არჩევანი (როზეტები, ტექნიკა).</p>
-                        <p><strong class="text-rose-400">• D ტიპი ($10-20 \cdot I_n$):</strong> მაღალი საწყისი დენის მქონე მოწყობილობებისთვის (ძრავები, ტუმბოები, საველდინგო აპარატები).</p>
+                        <p><strong class="text-amber-400">• B ტიპი ($3-5 \cdot I_n$):</strong> გამოიყენება მგრძნობიარე ელექტრონიკისთვის, განათების ხაზებისთვის და გრძელი ქსელებისთვის, სადაც მოკლე შერთვის დენი დაბალია.</p>
+                        <p><strong class="text-emerald-400">• C ტიპი ($5-10 \cdot I_n$):</strong> სტანდარტული საყოფაცხოვრებო არჩევანი (როზეტების ჯგუფები, საყოფაცხოვრებო ტექნიკა).</p>
+                        <p><strong class="text-rose-400">• D ტიპი ($10-20 \cdot I_n$):</strong> მაღალი საწყისი (пуск) დენის მქონე მოწყობილობებისთვის (ელექტროძრავები, ტუმბოები, ტრანსფორმატორები, საველდინგო აპარატები).</p>
                     </div>
                 </div>
 
+                <!-- 2. RCD ტიპები -->
                 <div>
                     <h4 class="text-md font-bold text-rose-400 border-b border-gray-700 pb-1 mb-2">2. დიფერენციალური დაცვის (RCD / RCCB) ტიპები (IEC 60755)</h4>
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
                         <div>
                             <p class="font-bold text-white mb-1">დენის ტიპის მიხედვით:</p>
-                            <p><strong class="text-slate-300">• AC ტიპი:</strong> რეაგირებს მხოლოდ ცვლად ($AC$) სინუსოიდურ გაჟონვაზე.</p>
-                            <p><strong class="text-cyan-400">• A ტიპი:</strong> რეაგირებს ცვლად და პულსირებად მუდმივ ($DC$) გაჟონვაზე (სარეცხი მანქანა, ინვერტორი, PC).</p>
-                            <p><strong class="text-amber-400">• B ტიპი:</strong> რეაგირებს სუფთა მუდმივ ($DC$) გაჟონვაზეც (მზის პანელები, EV დამტენები).</p>
+                            <p><strong class="text-slate-300">• AC ტიპი:</strong> რეაგირებს მხოლოდ ცვლად ($AC$) სინუსოიდურ გაჟონვაზე (მარტივი დატვირთვა, ინკანდესენტური განათება).</p>
+                            <p><strong class="text-cyan-400">• A ტიპი:</strong> რეაგირებს ცვლად და პულსირებად მუდმივ ($DC$) გაჟონვაზე (აუცილებელია თანამედროვე ტექნიკისთვის — სარეცხი მანქანა, ინვერტორი, PC).</p>
+                            <p><strong class="text-amber-400">• B ტიპი:</strong> რეაგირებს სუფთა მუდმივ ($DC$) გაჟონვაზეც (მზის პანელები, ელექტრომობილის დამტენები).</p>
                         </div>
                         <div class="border-t border-gray-800 pt-2">
                             <p class="font-bold text-white mb-1">მგრძნობელობის მიხედვით:</p>
-                            <p><strong class="text-emerald-400">• 10 mA:</strong> სველი ზონები (აბაზანა, ჯაკუზი).</p>
-                            <p><strong class="text-amber-400">• 30 mA:</strong> სტანდარტული ადამიანის დაცვა.</p>
-                            <p><strong class="text-rose-400">• 100 - 300 mA:</strong> ხანძარსაწინააღმდეგო RCD (შესასვლელ ფარში).</p>
+                            <p><strong class="text-emerald-400">• 10 mA:</strong> სველი ზონები (აბაზანა, ჯაკუზი, საბავშვო ოთახი).</p>
+                            <p><strong class="text-amber-400">• 30 mA:</strong> სტანდარტული ადამიანის დაცვა (საერთო ჯგუფები).</p>
+                            <p><strong class="text-rose-400">• 100 - 300 mA:</strong> ხანძარსაწინააღმდეგო RCD (მონტაჟდება შესასვლელ ფარში).</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- 3. კაბელის მარკირება (ასოების განმარტება) -->
                 <div>
-                    <h4 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-1 mb-2">3. კაბელების მარკირება (GOST)</h4>
+                    <h4 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-1 mb-2">3. კაბელების მარკირება და ასოების მნიშვნელობა (GOST)</h4>
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
-                        <p><strong class="text-amber-400">• А (პირველი ასო):</strong> ალუმინის ძარღვი (მაგ: AVVG). თუ "А" წინ არ წერია — სპილენძია!</p>
-                        <p><strong class="text-white">• В (Винили):</strong> ძარღვის PVC იზოლაცია.</p>
+                        <p><strong class="text-amber-400">• А (პირველი ასო):</strong> ალუმინის ძარღვი (მაგ: AVVG/АВВГ). თუ ასო "А" წინ არ წერია — კაბელი <strong>სპილენძისაა</strong>!</p>
+                        <p><strong class="text-white">• В (Вინილი):</strong> ძარღვის PVC იზოლაცია.</p>
                         <p><strong class="text-white">• В (მეორე В):</strong> კაბელის გარეთა PVC გარსი.</p>
-                        <p><strong class="text-white">• Г (Голый):</strong> დაუჯავშნავი კაბელი.</p>
-                        <p><strong class="text-emerald-400">• ng (нг) / LS:</strong> Негорючий / Low Smoke (არ ავრცელებს წვას, დაბალი კვამლი).</p>
+                        <p><strong class="text-white">• Г (Голый):</strong> შიშველი, დაუჯავშნავი კაბელი (არ აქვს ლითონის ჯავშანი).</p>
+                        <p><strong class="text-emerald-400">• ng (нг):</strong> Негорючий — არ ავრცელებს წვას ჯგუფური გაყვანისას.</p>
+                        <p><strong class="text-emerald-400">• LS (Low Smoke):</strong> წვისას გამოყოფს მინიმალურ კვამლს და ტოქსიკურ გაზებს.</p>
+                        <p><strong class="text-violet-400">• NYM / PVS (ПВС):</strong> NYM — გერმანული სტანდარტის მონოლითური კაბელი; PVS — დეკორატიული/მოქნილი მრავალძარღვიანი სადენი.</p>
                     </div>
                 </div>
+
+                <!-- 4. ხანძარსაწინააღმდეგო და მონტაჟი -->
+                <div>
+                    <h4 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-1 mb-2">4. კაბელების გაყვანის ხანძარსაწინააღმდეგო ნორმები (PUE)</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-rose-400">• ხის / წვებადი ზედაპირები:</strong> მონტაჟი მხოლოდ ლითონის (ფოლადის/სპილენძის) მილში ან თვითქრობად გოფრეში (ng ინდექსით) უწვი სადენით.</p>
+                        <p><strong class="text-emerald-400">• ბეტონის / აგურის კედელი:</strong> პირდაპირი მონტაჟი შტრაბაში VVGng / NYM კაბელით.</p>
+                        <p><strong class="text-amber-400">• კომუნიკაციების გადაკვეთა:</strong> გაზის/წყლის მილებთან გადაკვეთისას მინიმუმ <strong>5-10 სმ</strong> დაშორება და დამატებითი დამცავი მილი/გოფრე.</p>
+                    </div>
+                </div>
+
+                <!-- 5. ჭარბი ძაბვისგან დაცვა — SPD / УЗИП -->
+                <div>
+                    <h4 class="text-md font-bold text-emerald-400 border-b border-gray-700 pb-1 mb-2">5. ჭარბი ძაბვისგან დაცვა — SPD / УЗИП (IEC 61643)</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-rose-400">• Class I (Type 1):</strong> იცავს პირდაპირი მეხის დაცემისგან. მონტაჟდება ობიექტის მთავარ შესასვლელში (განსაკუთრებით საჰაერო შეყვანისას).</p>
+                        <p><strong class="text-amber-400">• Class II (Type 2):</strong> იცავს არაპირდაპირი მეხის დარტყმისა და ქსელური გადართვებისგან. მონტაჟდება გამანაწილებელ ფარში.</p>
+                        <p><strong class="text-emerald-400">• Class III (Type 3):</strong> იცავს მგრძნობიარე ელექტრონიკას. მონტაჟდება უშუალოდ მომხმარებელთან/როზეტთან ახლოს.</p>
+                    </div>
+                </div>
+
+                <!-- 6. დამიწების სისტემები -->
+                <div>
+                    <h4 class="text-md font-bold text-blue-400 border-b border-gray-700 pb-1 mb-2">6. დამიწების სისტემების ტიპები (IEC 60364)</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-emerald-400">• TN-S:</strong> ნული ($N$) და დამიწება ($PE$) გაყოფილია ქვესადგურიდანვე (ყველაზე უსაფრთხო 5-სადენიანი/3-სადენიანი სისტემა).</p>
+                        <p><strong class="text-amber-400">• TN-C-S:</strong> ნული და დამიწება გაერთიანებულია ($PEN$) ხაზზე და იყოფა შენობის შესასვლელ მთავარ ფარში.</p>
+                        <p><strong class="text-rose-400">• TT:</strong> შენობას აქვს თავისი სრულად დამოუკიდებელი დამიწების კონტური (აუცილებელია RCD დაცვა! გამოიყენება კერძო სახლებში).</p>
+                    </div>
+                </div>
+
+                <!-- 7. IP დაცვა და მანძილები -->
+                <div>
+                    <h4 class="text-md font-bold text-slate-300 border-b border-gray-700 pb-1 mb-2">7. IP დაცვა და სამონტაჟო მანძილები</h4>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
+                        <p><strong class="text-white">• IP20 / IP44 / IP65 / IP68:</strong> მშრალი ოთახი / აბაზანა / ეზო-წვიმა / წყალქვეშა.</p>
+                        <p><strong class="text-white">• გაზის მილიდან:</strong> როზეტი/ჩამრთველი მინ. <strong>50 სმ</strong>-ით დაშორებული.</p>
+                        <p><strong class="text-white">• სანტექნიკიდან / ნიჟარიდან:</strong> მინიმუმ <strong>60 სმ</strong> დაშორება.</p>
+                        <p><strong class="text-white">• იატაკიდან / ჭერიდან:</strong> როზეტი ≥ 30სმ, ჩამრთველი 90სმ; ჭერიდან შტრაბა: 15-20სმ.</p>
+                    </div>
+                </div>
+
             </div>
 
+            <!-- ფუტერი -->
             <div class="p-4 border-t border-gray-700 bg-gray-900 flex justify-end">
                 <button onclick="closeStandardsModal()" class="bg-gray-700 hover:bg-gray-600 text-white px-5 py-2 rounded-lg text-xs font-bold transition cursor-pointer">
                     დახურვა
@@ -565,7 +598,7 @@
         </div>
     </div>
 
-    <!-- 🧮 მათემატიკური კალკულატორი -->
+    <!-- 🧮 მცურავი მათემატიკური კალკულატორი -->
     <button onclick="toggleMathCalc()" class="fixed bottom-6 right-6 z-50 bg-amber-500 hover:bg-amber-600 text-gray-900 p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 text-2xl focus:outline-none cursor-pointer">
         🧮
     </button>
@@ -613,68 +646,12 @@
     </footer>
 
     <script>
+        let database = null;
         let currentMaterial = 'copper'; 
 
         let calcCurrentInput = '0';
         let calcStoredExpression = '';
         let isEquationFinished = false;
-
-        // 📊 ოფიციალური GOST / IEC 60228 სტანდარტის მონაცემთა ბაზა (სპილენძი და ალუმინი)
-        const cableSpecs = {
-            copper: {
-    "0.12": { amperage: { conduit: 1.5, air: 2.0, ground: 2.5 }, price_per_meter: 0.3 },
-    "0.2":  { amperage: { conduit: 2.5, air: 3.5, ground: 4.0 }, price_per_meter: 0.4 },
-    "0.35": { amperage: { conduit: 4.5, air: 6.0, ground: 7.0 }, price_per_meter: 0.5 },
-    "0.5":  { amperage: { conduit: 6.0, air: 9.0, ground: 11.0 }, price_per_meter: 0.7 },
-    "0.5":  { amperage: { conduit: 6,   air: 9,   ground: 11 },  price_per_meter: 0.7 },
-    "0.75": { amperage: { conduit: 10,  air: 12,  ground: 15 },  price_per_meter: 1.0 },
-    "1.0":  { amperage: { conduit: 14,  air: 16,  ground: 19 },  price_per_meter: 1.3 },
-    "1.5":  { amperage: { conduit: 18,  air: 21,  ground: 24 },  price_per_meter: 1.8 },
-    "2.5":  { amperage: { conduit: 24,  air: 29,  ground: 33 },  price_per_meter: 2.5 },
-    "4":    { amperage: { conduit: 32,  air: 38,  ground: 43 },  price_per_meter: 3.8 },
-    "6":    { amperage: { conduit: 41,  air: 49,  ground: 55 },  price_per_meter: 5.5 },
-    "10":   { amperage: { conduit: 57,  air: 68,  ground: 75 },  price_per_meter: 8.5 },
-    "16":   { amperage: { conduit: 76,  air: 91,  ground: 100 }, price_per_meter: 13.0 },
-    "25":   { amperage: { conduit: 101, air: 119, ground: 130 }, price_per_meter: 19.0 },
-    "35":   { amperage: { conduit: 125, air: 148, ground: 160 }, price_per_meter: 26.0 },
-    "50":   { amperage: { conduit: 151, air: 179, ground: 195 }, price_per_meter: 35.0 },
-    "70":   { amperage: { conduit: 192, air: 230, ground: 245 }, price_per_meter: 50.0 },
-    "95":   { amperage: { conduit: 232, air: 278, ground: 295 }, price_per_meter: 68.0 },
-    "120":  { amperage: { conduit: 269, air: 322, ground: 340 }, price_per_meter: 85.0 },
-    "150":  { amperage: { conduit: 309, air: 370, ground: 390 }, price_per_meter: 105.0 },
-    "185":  { amperage: { conduit: 353, air: 422, ground: 445 }, price_per_meter: 130.0 },
-    "240":  { amperage: { conduit: 415, air: 496, ground: 520 }, price_per_meter: 170.0 },
-    "300":  { amperage: { conduit: 477, air: 570, ground: 600 }, price_per_meter: 210.0 },
-    "400":  { amperage: { conduit: 545, air: 650, ground: 685 }, price_per_meter: 280.0 }
-  }
-};
-            },
-            aluminum: {
-    "0.12": { amperage: { conduit: 1.0, air: 1.5, ground: 2.0 }, price_per_meter: 0.15 },
-    "0.2":  { amperage: { conduit: 1.8, air: 2.5, ground: 3.0 }, price_per_meter: 0.20 },
-    "0.35": { amperage: { conduit: 3.0, air: 4.2, ground: 5.0 }, price_per_meter: 0.25 },
-    "0.5":  { amperage: { conduit: 4.5, air: 6.5, ground: 7.5 }, price_per_meter: 0.35 },
-    "0.75": { amperage: { conduit: 7.0, air: 9.0, ground: 10.5 }, price_per_meter: 0.50 },
-    "1.0":  { amperage: { conduit: 10.0, air: 12.0, ground: 14.0 }, price_per_meter: 0.65 },
-    "1.5":  { amperage: { conduit: 14.0, air: 16.0, ground: 18.0 }, price_per_meter: 0.80 },
-    "2.5":  { amperage: { conduit: 19.0, air: 23.0, ground: 26.0 }, price_per_meter: 1.10 },
-    "4.0":  { amperage: { conduit: 25.0, air: 30.0, ground: 34.0 }, price_per_meter: 1.60 },
-    "6.0":  { amperage: { conduit: 32.0, air: 38.0, ground: 43.0 }, price_per_meter: 2.20 },
-    "10.0": { amperage: { conduit: 45.0, air: 54.0, ground: 60.0 }, price_per_meter: 3.50 },
-    "16.0": { amperage: { conduit: 60.0, air: 72.0, ground: 80.0 }, price_per_meter: 5.00 },
-    "25.0": { amperage: { conduit: 80.0, air: 96.0, ground: 105.0 }, price_per_meter: 7.50 },
-    "35.0": { amperage: { conduit: 99.0, air: 118.0, ground: 130.0 }, price_per_meter: 10.00 },
-    "50.0": { amperage: { conduit: 120.0, air: 145.0, ground: 160.0 }, price_per_meter: 14.00 },
-    "70.0": { amperage: { conduit: 155.0, air: 185.0, ground: 205.0 }, price_per_meter: 19.00 },
-    "95.0": { amperage: { conduit: 190.0, air: 225.0, ground: 245.0 }, price_per_meter: 26.00 },
-    "120.0":{ amperage: { conduit: 220.0, air: 260.0, ground: 285.0 }, price_per_meter: 33.00 },
-    "150.0":{ amperage: { conduit: 255.0, air: 300.0, ground: 325.0 }, price_per_meter: 40.00 },
-    "185.0":{ amperage: { conduit: 295.0, air: 350.0, ground: 375.0 }, price_per_meter: 50.00 },
-    "240.0":{ amperage: { conduit: 345.0, air: 410.0, ground: 435.0 }, price_per_meter: 65.00 },
-    "300.0":{ amperage: { conduit: 395.0, air: 470.0, ground: 500.0 }, price_per_meter: 82.00 },
-    "400.0":{ amperage: { conduit: 455.0, air: 540.0, ground: 575.0 }, price_per_meter: 110.00 }
-            }
-        };
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
@@ -701,6 +678,17 @@
             }
         }
 
+        async function loadDatabase() {
+            try {
+                const response = await fetch('data/cables.json');
+                database = await response.json();
+                calculateLoad();
+            } catch (error) {
+                console.error("ბაზის ჩატვირთვის შეცდომა:", error);
+                calculateLoad();
+            }
+        }
+
         function setMaterial(material) {
             currentMaterial = material;
             const btnCu = document.getElementById('btn-cu');
@@ -722,8 +710,7 @@
         }
 
         function calculateLoad() {
-            const sizeStr = document.getElementById('wire-size').value;
-            const sizeValue = parseFloat(sizeStr) || 2.5;
+            const sizeValue = parseFloat(document.getElementById('wire-size').value) || 0.01;
             const length = parseFloat(document.getElementById('wire-length').value) || 0;
             const voltage = parseFloat(document.getElementById('wire-voltage').value) || 220;
             const phase = document.getElementById('phase-type').value;
@@ -732,9 +719,16 @@
             let maxAmperage = 0;
             let price = 0;
 
-            if (cableSpecs && cableSpecs[currentMaterial] && cableSpecs[currentMaterial][sizeStr]) {
-                maxAmperage = cableSpecs[currentMaterial][sizeStr].amperage[install];
-                price = cableSpecs[currentMaterial][sizeStr].price_per_meter;
+            const sizeKey = sizeValue.toFixed(1);
+            if (database && database[currentMaterial] && database[currentMaterial][sizeKey]) {
+                maxAmperage = database[currentMaterial][sizeKey].amperage[install];
+                price = database[currentMaterial][sizeKey].price_per_meter;
+            } else {
+                const currentDensity = (currentMaterial === 'copper') ? 7 : 5;
+                maxAmperage = sizeValue * currentDensity;
+                if (install === 'air') maxAmperage *= 1.15;
+                if (install === 'ground') maxAmperage *= 1.25;
+                price = sizeValue * (currentMaterial === 'copper' ? 1.8 : 0.9);
             }
 
             maxAmperage = parseFloat(maxAmperage.toFixed(1));
@@ -983,7 +977,7 @@
             document.getElementById('standards-modal').classList.add('hidden');
         }
 
-        window.onload = calculateLoad;
+        window.onload = loadDatabase;
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
