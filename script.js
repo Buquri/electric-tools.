@@ -116,7 +116,6 @@ function calculateLoad() {
     let maxAmperage = 0;
     let price = 0;
 
-    // გასაღების უსაფრთხო ძებნა (მაგ: 2.5 ან 2)
     const specKey = (cableSpecs[currentMaterial] && cableSpecs[currentMaterial][sizeStr]) ? sizeStr : sizeValue.toString();
 
     if (cableSpecs && cableSpecs[currentMaterial] && cableSpecs[currentMaterial][specKey]) {
@@ -163,7 +162,6 @@ function calculateLoad() {
         statusEl.className = "text-xs mt-1 font-medium text-rose-400 animate-pulse";
     }
 
-    // 🔴 წითელი შენიშვნის ტექსტის განახლება
     const noteTextEl = document.getElementById('max-limit-note-text');
     if (noteTextEl) {
         noteTextEl.innerHTML = `<strong>ყურადღება:</strong> მითითებული დენი (<strong>${maxAmperage} A</strong>) წარმოადგენს კაბელის მაქსიმალურ დასაშვებ ზღვარს. ხანგრძლივი უსაფრთხოებისათვის რეკომენდებულია 10%-ით ნაკლები დატვირთვა (მაქს. <strong>${recommendedAmperage} A</strong>).`;
@@ -384,25 +382,39 @@ function closeStandardsModal() {
     document.getElementById('standards-modal').classList.add('hidden');
 }
 
-// 📲 PWA აპლიკაციის დაყენების/ინსტალაციის ლოგიკა
+// 📲 PWA ინსტალაციის და პირდაპირი APK გადმოწერის ლოგიკა
 let deferredPrompt;
 const installBtn = document.getElementById('pwa-install-btn');
+
+// 1. შემოწმება: თუ მომხმარებელი უკვე აპლიკაციაშია (Standalone რეჟიმში), ღილაკი სრულად გაქრეს!
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+if (isStandalone && installBtn) {
+    installBtn.style.display = 'none';
+}
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
 });
 
-if (installBtn) {
+if (installBtn && !isStandalone) {
     installBtn.addEventListener('click', async () => {
         if (deferredPrompt) {
+            // თუ ბრაუზერს აქვს PWA-ს სწრაფი ინსტალაციის ფანჯარა
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
             if (outcome === 'accepted') {
                 deferredPrompt = null;
             }
         } else {
-            alert('📲 აპლიკაციის დაყენება:\n\n1. დააჭირეთ ბრაუზერის ზედა მენიუს (3 წერტილს ⋮)\n2. აირჩიეთ "Add to Home screen" ან "Install app".\n\n(თუ აპლიკაცია უკვე დაყენებული გაქვთ ეკრანზე, ხელმეორედ აღარ დაყენდება).');
+            // 🚀 თუ PWA ფანჯარა არ არის, 1 კლიკით იწყებს APK ფაილის პირდაპირ გადმოწერას!
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'ElectroCalc.apk'; // შენი APK ფაილის სახელი
+            downloadLink.download = 'ElectroCalc.apk';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         }
     });
 }
