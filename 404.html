@@ -3,12 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ელექტრო ასისტენტი</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>ElectroCalc • ელექტროობის კალკულატორი და ელექტრიკოსის ასისტენტი</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="ElectroCalc - ელექტროობის პროფესიონალური კალკულატორები, კაბელის კვეთის გამოთვლა, ძაბვის ვარდნა, ელექტრო ფარის შერჩევა, IEC სტანდარტები და ელექტრიკოსის ინსტრუმენტები.">
+    <meta name="keywords" content="ელექტროობა, ელექტრიკოსი, კაბელი, კვეთა, ამპერი, ვატი, ძაბვის ვარდნა, ElectroCalc">
+    <meta name="author" content="ElectroCalc">
+    
+    <!-- Canonical URL (შეცვალე შენი რეალური დომენით) -->
+    <link rel="canonical" href="https://შენისაიტი.com">
+
+    <!-- Favicon & Web App icons -->
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#0f172a">
-    <link rel="apple-touch-icon" href="/icon-192.png">
+
+    <!-- Open Graph / Facebook / Messenger -->
+    <meta property="og:title" content="ElectroCalc • ელექტროობის კალკულატორი">
+    <meta property="og:description" content="ელექტროობის პროფესიონალური კალკულატორები და ელექტრიკოსის ასისტენტი">
+    <meta property="og:image" content="preview.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://შენისაიტი.com">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ElectroCalc">
+    <meta name="twitter:description" content="ელექტროობის პროფესიონალური კალკულატორები">
+    <meta name="twitter:image" content="preview.png">
+
+    <!-- JSON-LD (Structured Data Google-სთვის) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ElectroCalc",
+      "url": "https://შენისაიტი.com"
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col relative overflow-x-hidden">
 
@@ -21,16 +56,16 @@
             </div>
             
             <nav class="flex space-x-1 bg-gray-900 p-1 rounded-lg text-xs md:text-sm overflow-x-auto">
-                <button onclick="switchTab('calc-tab')" id="btn-calc-tab" class="tab-btn px-3 py-2 rounded-md font-medium transition bg-amber-500 text-gray-900 font-semibold cursor-pointer">
+                <button onclick="switchTab('calc-tab')" id="btn-calc-tab" aria-label="კალკულატორი" class="tab-btn px-3 py-2 rounded-md font-medium transition bg-amber-500 text-gray-900 font-semibold cursor-pointer">
                     კალკულატორი
                 </button>
-                <button onclick="switchTab('formulas-tab')" id="btn-formulas-tab" class="tab-btn px-3 py-2 rounded-md font-medium text-gray-400 hover:text-gray-200 transition cursor-pointer">
+                <button onclick="switchTab('formulas-tab')" id="btn-formulas-tab" aria-label="ფორმულები" class="tab-btn px-3 py-2 rounded-md font-medium text-gray-400 hover:text-gray-200 transition cursor-pointer">
                     ფორმულები
                 </button>
-                <button onclick="switchTab('panel-tab')" id="btn-panel-tab" class="tab-btn px-3 py-2 rounded-md font-medium text-gray-400 hover:text-gray-200 transition cursor-pointer">
+                <button onclick="switchTab('panel-tab')" id="btn-panel-tab" aria-label="ფარი და ძრავები" class="tab-btn px-3 py-2 rounded-md font-medium text-gray-400 hover:text-gray-200 transition cursor-pointer">
                     ფარი & ძრავები
                 </button>
-                <button onclick="switchTab('books-tab')" id="btn-books-tab" class="tab-btn px-3 py-2 rounded-md font-medium text-gray-400 hover:text-gray-200 transition cursor-pointer">
+                <button onclick="switchTab('books-tab')" id="btn-books-tab" aria-label="ბიბლიოთეკა" class="tab-btn px-3 py-2 rounded-md font-medium text-gray-400 hover:text-gray-200 transition cursor-pointer">
                     ბიბლიოთეკა
                 </button>
                 <a href="grounding.html" class="px-3 py-2 rounded-md font-medium text-amber-400 hover:text-amber-300 transition flex items-center gap-1 whitespace-nowrap">
@@ -50,10 +85,10 @@
         <section id="calc-tab" class="tab-content block">
             <div class="flex justify-center mb-6">
                 <div class="bg-gray-800 p-1.5 rounded-xl border border-gray-700 flex space-x-2 shadow-lg">
-                    <button onclick="setMaterial('copper')" id="btn-cu" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-amber-500 text-gray-900 shadow-md cursor-pointer">
+                    <button onclick="setMaterial('copper')" id="btn-cu" aria-label="სპილენძის მასალა" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-amber-500 text-gray-900 shadow-md cursor-pointer">
                         <span>🔴</span> <span>სპილენძი (Cu)</span>
                     </button>
-                    <button onclick="setMaterial('aluminum')" id="btn-al" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 text-gray-400 hover:text-gray-200 cursor-pointer">
+                    <button onclick="setMaterial('aluminum')" id="btn-al" aria-label="ალუმინის მასალა" class="px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 text-gray-400 hover:text-gray-200 cursor-pointer">
                         <span>⚪</span> <span>ალუმინი (Al)</span>
                     </button>
                 </div>
@@ -69,7 +104,7 @@
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ² / AWG)</label>
+                            <label for="wire-size" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ² / AWG)</label>
                             <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono text-xs md:text-sm">
                                 <option value="0.12">0.12 მმ² (~26 AWG)</option>
                                 <option value="0.2">0.20 მმ² (~24 AWG)</option>
@@ -97,18 +132,18 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ხაზის სიგრძე (მეტრი)</label>
+                            <label for="wire-length" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">ხაზის სიგრძე (მეტრი)</label>
                             <input type="number" id="wire-length" value="20" min="1" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სამუშაო ძაბვა (V)</label>
+                            <label for="wire-voltage" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">სამუშაო ძაბვა (V)</label>
                             <input type="number" id="wire-voltage" value="220" min="1" oninput="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">დენის ტიპი და ფაზა</label>
+                            <label for="phase-type" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">დენის ტიპი და ფაზა</label>
                             <select id="phase-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
                                 <option value="1" selected>1 ფაზა (AC 220V)</option>
                                 <option value="3">3 ფაზა (AC 380V)</option>
@@ -118,7 +153,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მონტაჟის ტიპი</label>
+                        <label for="install-type" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">მონტაჟის ტიპი</label>
                         <select id="install-type" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-amber-500 transition">
                             <option value="conduit" selected>მილში / კედელში (დახურული)</option>
                             <option value="air">ღიად ჰაერზე</option>
@@ -169,25 +204,24 @@
             </div>
         </section>
 
-        <!-- 📑 ჩანართი 2: ფორმულები და დამატებითი კალკულატორები -->
+        <!-- 📑 ჩანართი 2: ფორმულები -->
         <section id="formulas-tab" class="tab-content hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- კალკულატორი 1: დენის გამოთვლა (Amperage) -->
+                <!-- კალკულატორი 1: დენის გამოთვლა -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-amber-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>⚡</span> დენის ძალის გამოთვლა (Amperage)</h3>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">სიმძლავრე (ვატი - W)</label>
+                            <label for="f-amp-power" class="block text-xs text-gray-400 mb-1">სიმძლავრე (ვატი - W)</label>
                             <input type="number" id="f-amp-power" value="2200" oninput="calcFormulaAmperage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-amber-500 transition font-mono text-sm">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">ძაბვა (ვოლტი - V)</label>
+                            <label for="f-amp-volt" class="block text-xs text-gray-400 mb-1">ძაბვა (ვოლტი - V)</label>
                             <input type="number" id="f-amp-volt" value="220" oninput="calcFormulaAmperage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-amber-500 transition font-mono text-sm">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
+                        <label for="f-amp-phase" class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
                         <select id="f-amp-phase" onchange="calcFormulaAmperage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm">
                             <option value="1">1 ფაზა (AC)</option>
                             <option value="3">3 ფაზა (AC)</option>
@@ -200,21 +234,21 @@
                     </div>
                 </div>
 
-                <!-- კალკულატორი 2: სიმძლავრის გამოთვლა (Watts) -->
+                <!-- კალკულატორი 2: სიმძლავრის გამოთვლა -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-emerald-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>🔌</span> სიმძლავრის გამოთვლა (Watts)</h3>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">დენი (ამპერი - A)</label>
+                            <label for="f-watt-amp" class="block text-xs text-gray-400 mb-1">დენი (ამპერი - A)</label>
                             <input type="number" id="f-watt-amp" value="10" oninput="calcFormulaWatts()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-emerald-500 transition font-mono text-sm">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">ძაბვა (ვოლტი - V)</label>
+                            <label for="f-watt-volt" class="block text-xs text-gray-400 mb-1">ძაბვა (ვოლტი - V)</label>
                             <input type="number" id="f-watt-volt" value="220" oninput="calcFormulaWatts()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-emerald-500 transition font-mono text-sm">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
+                        <label for="f-watt-phase" class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
                         <select id="f-watt-phase" onchange="calcFormulaWatts()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm">
                             <option value="1">1 ფაზა (AC)</option>
                             <option value="3">3 ფაზა (AC)</option>
@@ -227,21 +261,21 @@
                     </div>
                 </div>
 
-                <!-- კალკულატორი 3: ძაბვის გამოთვლა (Voltage) -->
+                <!-- კალკულატორი 3: ძაბვის გამოთვლა -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-rose-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📉</span> ძაბვის გამოთვლა (Voltage)</h3>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">სიმძლავრე (ვატი - W)</label>
+                            <label for="f-volt-power" class="block text-xs text-gray-400 mb-1">სიმძლავრე (ვატი - W)</label>
                             <input type="number" id="f-volt-power" value="2200" oninput="calcFormulaVoltage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-rose-500 transition font-mono text-sm">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">დენი (ამპერი - A)</label>
+                            <label for="f-volt-amp" class="block text-xs text-gray-400 mb-1">დენი (ამპერი - A)</label>
                             <input type="number" id="f-volt-amp" value="10" oninput="calcFormulaVoltage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-rose-500 transition font-mono text-sm">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
+                        <label for="f-volt-phase" class="block text-xs text-gray-400 mb-1">დენის სისტემა</label>
                         <select id="f-volt-phase" onchange="calcFormulaVoltage()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm">
                             <option value="1">1 ფაზა / DC მუდმივი</option>
                             <option value="3">3 ფაზა (AC)</option>
@@ -253,33 +287,33 @@
                     </div>
                 </div>
 
-                <!-- კალკულატორი 4: დამოუკიდებელი ხაზის დანაკარგი -->
+                <!-- კალკულატორი 4: ხაზის დანაკარგი -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📏</span> ხაზის სიგრძის დანაკარგი (ზუსტი)</h3>
                     <div class="grid grid-cols-3 gap-2">
                         <div>
-                            <label class="block text-[11px] text-gray-400 mb-1">კვეთა (მმ²)</label>
+                            <label for="vdrop-size" class="block text-[11px] text-gray-400 mb-1">კვეთა (მმ²)</label>
                             <input type="number" id="vdrop-size" value="4" oninput="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs font-mono">
                         </div>
                         <div>
-                            <label class="block text-[11px] text-gray-400 mb-1">მანძილი (მ)</label>
+                            <label for="vdrop-len" class="block text-[11px] text-gray-400 mb-1">მანძილი (მ)</label>
                             <input type="number" id="vdrop-len" value="50" oninput="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs font-mono">
                         </div>
                         <div>
-                            <label class="block text-[11px] text-gray-400 mb-1">დენი (A)</label>
+                            <label for="vdrop-amp" class="block text-[11px] text-gray-400 mb-1">დენი (A)</label>
                             <input type="number" id="vdrop-amp" value="16" oninput="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs font-mono">
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">მასალა</label>
+                            <label for="vdrop-mat" class="block text-xs text-gray-400 mb-1">მასალა</label>
                             <select id="vdrop-mat" onchange="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs">
                                 <option value="cu">სპილენძი</option>
                                 <option value="al">ალუმინი</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">სისტემა</label>
+                            <label for="vdrop-sys" class="block text-xs text-gray-400 mb-1">სისტემა</label>
                             <select id="vdrop-sys" onchange="calcAdvancedDrop()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-white text-xs">
                                 <option value="1">1 ფაზა (AC 220V)</option>
                                 <option value="3">3 ფაზა (AC 380V)</option>
@@ -293,17 +327,17 @@
                     </div>
                 </div>
 
-                <!-- კალკულატორი 5: დიამეტრის და კვეთის კონვერტორი -->
+                <!-- კალკულატორი 5: დიამეტრი და კვეთა -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4">
                     <h3 class="text-md font-bold text-blue-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📐</span> კვეთის ფართობი ↔ დიამეტრი</h3>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">შეიყვანეთ დიამეტრი (Ø მმ)</label>
+                            <label for="conv-dia" class="block text-xs text-gray-400 mb-1">შეიყვანეთ დიამეტრი (Ø მმ)</label>
                             <input type="number" id="conv-dia" value="1.78" step="0.01" oninput="convertDiaToSize()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-blue-500 font-mono text-sm">
                             <span class="text-[11px] text-gray-500 mt-1 block">შედეგი: <strong id="conv-res-size" class="text-blue-400">2.50 მმ²</strong></span>
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">შეიყვანეთ კვეთა (მმ²)</label>
+                            <label for="conv-size" class="block text-xs text-gray-400 mb-1">შეიყვანეთ კვეთა (მმ²)</label>
                             <input type="number" id="conv-size" value="2.5" step="0.1" oninput="convertSizeToDia()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white focus:border-blue-500 font-mono text-sm">
                             <span class="text-[11px] text-gray-500 mt-1 block">შედეგი: <strong id="conv-res-dia" class="text-blue-400">1.78 Ø მმ</strong></span>
                         </div>
@@ -315,11 +349,11 @@
                     <h3 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>💡</span> LED განათება და კვების ბლოკი</h3>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">ლენტის სიგრძე (მეტრი)</label>
+                            <label for="led-len" class="block text-xs text-gray-400 mb-1">ლენტის სიგრძე (მეტრი)</label>
                             <input type="number" id="led-len" value="5" oninput="calcLedPower()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">სიმძლავრე (W / მეტრზე)</label>
+                            <label for="led-wpm" class="block text-xs text-gray-400 mb-1">სიმძლავრე (W / მეტრზე)</label>
                             <input type="number" id="led-wpm" value="14.4" oninput="calcLedPower()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm">
                         </div>
                     </div>
@@ -329,13 +363,13 @@
                     </div>
                 </div>
 
-                <!-- 📑 ბლოკი: IEC / GOST სტანდარტების სწრაფი შპარგალკა -->
+                <!-- IEC / GOST ბლოკი -->
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg space-y-4 md:col-span-2">
                     <div class="flex justify-between items-center border-b border-gray-700 pb-2">
                         <h3 class="text-md font-bold text-amber-400 flex items-center gap-2">
                             <span>📑</span> IEC / GOST სტანდარტების სწრაფი შპარგალკა
                         </h3>
-                        <button onclick="openStandardsModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer">
+                        <button onclick="openStandardsModal()" aria-label="სტანდარტების ვრცლად ნახვა" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer">
                             მეტი ➔
                         </button>
                     </div>
@@ -373,14 +407,14 @@
             </div>
         </section>
 
-        <!-- 📑 ჩანართი 3: 🎛️ ფარის ამწყობი, გოფრეები და 3-ფაზიანი ძრავები -->
+        <!-- 📑 ჩანართი 3: ფარი და ძრავები -->
         <section id="panel-tab" class="tab-content hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-xl space-y-4">
                     <h3 class="text-md font-bold text-amber-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>🎛️</span> ელექტრო ფარის ასისტენტი</h3>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">აირჩიეთ ტექნიკა / ზონა:</label>
+                        <label for="panel-device" class="block text-xs text-gray-400 mb-1">აირჩიეთ ტექნიკა / ზონა:</label>
                         <select id="panel-device" onchange="onPanelDeviceChange()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-amber-500 outline-none">
                             <option value="washer" selected>სარეცხი მანქანა (საშუალო: ~2.2 კვტ)</option>
                             <option value="conditioner">კონდიციონერი (საშუალო: ~1.8 კვტ)</option>
@@ -397,7 +431,7 @@
                     </div>
 
                     <div id="exact-power-block" class="hidden bg-gray-900 p-3 rounded-lg border border-gray-700">
-                        <label class="block text-xs text-gray-400 mb-1">შეიყვანეთ ზუსტი სიმძლავრე (ვატი - W):</label>
+                        <label for="panel-exact-power" class="block text-xs text-gray-400 mb-1">შეიყვანეთ ზუსტი სიმძლავრე (ვატი - W):</label>
                         <input type="number" id="panel-exact-power" value="2200" oninput="calculatePanelSpecs()" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-amber-500 outline-none">
                     </div>
 
@@ -412,11 +446,11 @@
                     <h3 class="text-md font-bold text-violet-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>📦</span> გოფრირებული მილის შევსება</h3>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">კაბელის რაოდენობა:</label>
+                            <label for="gof-count" class="block text-xs text-gray-400 mb-1">კაბელის რაოდენობა:</label>
                             <input type="number" id="gof-count" value="3" min="1" oninput="calculateGofSize()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-violet-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">გარე დიამეტრი (მმ):</label>
+                            <label for="gof-cable-dia" class="block text-xs text-gray-400 mb-1">გარე დიამეტრი (მმ):</label>
                             <input type="number" id="gof-cable-dia" value="9.5" step="0.1" oninput="calculateGofSize()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-violet-500 outline-none">
                         </div>
                     </div>
@@ -430,15 +464,15 @@
                     <h3 class="text-md font-bold text-cyan-400 border-b border-gray-700 pb-2 flex items-center gap-2"><span>🏭</span> 3-ფაზიანი ძრავების სრული გაანგარიშება</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">ძრავის სიმძლავრე (kW):</label>
+                            <label for="motor-kw" class="block text-xs text-gray-400 mb-1">ძრავის სიმძლავრე (kW):</label>
                             <input type="number" id="motor-kw" value="5.5" step="0.1" oninput="calculateMotorSpecs()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">სიმძლავრის კოეფიციენტი (cos φ):</label>
+                            <label for="motor-cos" class="block text-xs text-gray-400 mb-1">სიმძლავრის კოეფიციენტი (cos φ):</label>
                             <input type="number" id="motor-cos" value="0.85" step="0.01" oninput="calculateMotorSpecs()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-white font-mono text-sm focus:border-cyan-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs text-gray-400 mb-1">კავშირის ტიპი:</label>
+                            <label for="motor-connect" class="block text-xs text-gray-400 mb-1">კავშირის ტიპი:</label>
                             <select id="motor-connect" onchange="calculateMotorSpecs()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-cyan-500 outline-none">
                                 <option value="3" selected>3 ფაზა (380V ქსელი)</option>
                                 <option value="1">1 ფაზაზე გადაყვანა (220V + კონდენსატორი)</option>
@@ -471,32 +505,32 @@
                 <div class="flex flex-col gap-4">
                     <div class="flex justify-between items-center p-4 bg-gray-900 rounded-lg border border-gray-700 hover:border-amber-500/50 transition">
                         <span class="text-gray-200 font-medium">ელექტრომოწყობილობათა დიაგნოსტიკა</span>
-                        <a href="museliani.pdf" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
+                        <a href="museliani.pdf" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
                     </div>
 
                     <div class="flex justify-between items-center p-4 bg-gray-900 rounded-lg border border-gray-700 hover:border-amber-500/50 transition">
                         <span class="text-gray-200 font-medium">ელექტრომოწობილობათა ტექნიკური დიაგნოსტიკა 2 ნაწილი</span>
-                        <a href="museliani2.pdf" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
+                        <a href="museliani2.pdf" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
                     </div>
 
                     <div class="flex justify-between items-center p-4 bg-gray-900 rounded-lg border border-gray-700 hover:border-amber-500/50 transition">
                         <span class="text-gray-200 font-medium">პროფესიული შრომის უსაფრთხოება</span>
-                        <a href="shroma.pdf" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
+                        <a href="shroma.pdf" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
                     </div>
 
                     <div class="flex justify-between items-center p-4 bg-gray-900 rounded-lg border border-gray-700 hover:border-amber-500/50 transition">
                         <span class="text-gray-200 font-medium">უსაფრთხოება სამშენებლო ობიექტზე</span>
-                        <a href="usaprtxoeba.pdf" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
+                        <a href="usaprtxoeba.pdf" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
                     </div>
 
                     <div class="flex justify-between items-center p-4 bg-gray-900 rounded-lg border border-gray-700 hover:border-amber-500/50 transition">
                         <span class="text-gray-200 font-medium">ელექტროობა ზოგადი თეორია</span>
-                        <a href="museliani3.pdf" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
+                        <a href="museliani3.pdf" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
                     </div>
 
                     <div class="flex justify-between items-center p-4 bg-gray-900 rounded-lg border border-gray-700 hover:border-amber-500/50 transition">
                         <span class="text-gray-200 font-medium">ელექტროობის ზოგადი თეორია და აღმნიშვნელი ნიშნები</span>
-                        <a href="bekeri.pdf" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
+                        <a href="bekeri.pdf" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-bold transition">გახსნა PDF</a>
                     </div>
                 </div>
                 <p class="text-xs text-gray-500 mt-8">დააწკაპუნეთ "გახსნა PDF"-ს წიგნის ახალ ფანჯარაში სანახავად.</p>
@@ -505,7 +539,7 @@
 
     </main>
 
-    <!-- 📜 მოდალური ფანჯარა: სრული IEC / GOST თეორია -->
+    <!-- 📜 მოდალური ფანჯარა: IEC / GOST -->
     <div id="standards-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
         <div class="bg-gray-800 border border-gray-700 w-full max-w-4xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
             
@@ -513,17 +547,17 @@
                 <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
                     <span>📑</span> IEC / GOST / PUE ელექტრომონტაჟის სტანდარტები
                 </h3>
-                <button onclick="closeStandardsModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer px-2">&times;</button>
+                <button onclick="closeStandardsModal()" aria-label="დახურვა" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer px-2">&times;</button>
             </div>
 
             <div class="p-6 overflow-y-auto space-y-6 text-sm text-gray-300">
                 <div>
                     <h4 class="text-md font-bold text-amber-400 border-b border-gray-700 pb-1 mb-2">1. ავტომატური ამომრთველების B, C, D მახასიათებლები (IEC 60898)</h4>
-                    <p class="text-xs text-gray-400 mb-2">განსაზღვრავს ავტომატის ელექტრომაგნიტური გამომრთველის მყისიერი ამოქმედების დენის ზღვარს ნომინალურ დენთან ($I_n$) მიმართებით.</p>
+                    <p class="text-xs text-gray-400 mb-2">განსაზღვრავს ავტომატის ელექტრომაგნიტური გამომრთველის მყისიერი ამოქმედების დენის ზღვარს ნომინალურ დენთან მიმართებით.</p>
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-1 text-xs">
-                        <p><strong class="text-amber-400">• B ტიპი ($3-5 \cdot I_n$):</strong> გამოიყენება მგრძნობიარე ელექტრონიკისთვის, განათების ხაზებისთვის და გრძელი ქსელებისთვის.</p>
-                        <p><strong class="text-emerald-400">• C ტიპი ($5-10 \cdot I_n$):</strong> სტანდარტული საყოფაცხოვრებო არჩევანი (როზეტები, ტექნიკა).</p>
-                        <p><strong class="text-rose-400">• D ტიპი ($10-20 \cdot I_n$):</strong> მაღალი საწყისი დენის მქონე მოწყობილობებისთვის (ძრავები, ტუმბოები, საველდინგო აპარატები).</p>
+                        <p><strong class="text-amber-400">• B ტიპი (3-5 I_n):</strong> გამოიყენება მგრძნობიარე ელექტრონიკისთვის, განათების ხაზებისთვის და გრძელი ქსელებისთვის.</p>
+                        <p><strong class="text-emerald-400">• C ტიპი (5-10 I_n):</strong> სტანდარტული საყოფაცხოვრებო არჩევანი (როზეტები, ტექნიკა).</p>
+                        <p><strong class="text-rose-400">• D ტიპი (10-20 I_n):</strong> მაღალი საწყისი დენის მქონე მოწყობილობებისთვის (ძრავები, ტუმბოები, საველდინგო აპარატები).</p>
                     </div>
                 </div>
 
@@ -532,9 +566,9 @@
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2 text-xs">
                         <div>
                             <p class="font-bold text-white mb-1">დენის ტიპის მიხედვით:</p>
-                            <p><strong class="text-slate-300">• AC ტიპი:</strong> რეაგირებს მხოლოდ ცვლად ($AC$) სინუსოიდურ გაჟონვაზე.</p>
-                            <p><strong class="text-cyan-400">• A ტიპი:</strong> რეაგირებს ცვლად და პულსირებად მუდმივ ($DC$) გაჟონვაზე (სარეცხი მანქანა, ინვერტორი, PC).</p>
-                            <p><strong class="text-amber-400">• B ტიპი:</strong> რეაგირებს სუფთა მუდმივ ($DC$) გაჟონვაზეც (მზის პანელები, EV დამტენები).</p>
+                            <p><strong class="text-slate-300">• AC ტიპი:</strong> რეაგირებს მხოლოდ ცვლად (AC) სინუსოიდურ გაჟონვაზე.</p>
+                            <p><strong class="text-cyan-400">• A ტიპი:</strong> რეაგირებს ცვლად და პულსირებად მუდმივ (DC) გაჟონვაზე (სარეცხი მანქანა, ინვერტორი, PC).</p>
+                            <p><strong class="text-amber-400">• B ტიპი:</strong> რეაგირებს სუფთა მუდმივ (DC) გაჟონვაზეც (მზის პანელები, EV დამტენები).</p>
                         </div>
                         <div class="border-t border-gray-800 pt-2">
                             <p class="font-bold text-white mb-1">მგრძნობელობის მიხედვით:</p>
@@ -558,7 +592,7 @@
             </div>
 
             <div class="p-4 border-t border-gray-700 bg-gray-900 flex justify-end">
-                <button onclick="closeStandardsModal()" class="bg-gray-700 hover:bg-gray-600 text-white px-5 py-2 rounded-lg text-xs font-bold transition cursor-pointer">
+                <button onclick="closeStandardsModal()" aria-label="ფანჯრის დახურვა" class="bg-gray-700 hover:bg-gray-600 text-white px-5 py-2 rounded-lg text-xs font-bold transition cursor-pointer">
                     დახურვა
                 </button>
             </div>
@@ -566,7 +600,7 @@
     </div>
 
     <!-- 🧮 მათემატიკური კალკულატორი -->
-    <button onclick="toggleMathCalc()" class="fixed bottom-6 right-6 z-50 bg-amber-500 hover:bg-amber-600 text-gray-900 p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 text-2xl focus:outline-none cursor-pointer">
+    <button onclick="toggleMathCalc()" aria-label="მათემატიკური კალკულატორის გახსნა" class="fixed bottom-6 right-6 z-50 bg-amber-500 hover:bg-amber-600 text-gray-900 p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 text-2xl focus:outline-none cursor-pointer">
         🧮
     </button>
 
@@ -574,428 +608,46 @@
         <div>
             <div class="flex justify-between items-center border-b border-gray-700 pb-3 mb-4">
                 <h3 class="font-bold text-amber-400 flex items-center gap-2"><span>🧮</span> მათ. კალკულატორი</h3>
-                <button onclick="toggleMathCalc()" class="text-gray-400 hover:text-white text-xl p-1 focus:outline-none cursor-pointer">&times;</button>
+                <button onclick="toggleMathCalc()" aria-label="დახურვა" class="text-gray-400 hover:text-white text-xl p-1 focus:outline-none cursor-pointer">&times;</button>
             </div>
             <div class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-right mb-4">
                 <div id="calc-history" class="text-xs text-gray-500 h-4 overflow-hidden tracking-wide"></div>
                 <div id="calc-display" class="text-2xl font-mono font-bold text-white truncate mt-1">0</div>
             </div>
             <div class="grid grid-cols-4 gap-2">
-                <button onclick="clearCalc()" class="col-span-2 bg-red-950/40 border border-red-900/60 text-red-400 p-3 rounded-lg font-bold hover:bg-red-900/40 transition">C</button>
-                <button onclick="backspaceCalc()" class="bg-gray-700 border border-gray-600 text-gray-200 p-3 rounded-lg font-bold hover:bg-gray-600 transition">⌫</button>
-                <button onclick="inputOperator('/')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">/</button>
+                <button onclick="clearCalc()" aria-label="გასუფთავება" class="col-span-2 bg-red-950/40 border border-red-900/60 text-red-400 p-3 rounded-lg font-bold hover:bg-red-900/40 transition">C</button>
+                <button onclick="backspaceCalc()" aria-label="წაშლა" class="bg-gray-700 border border-gray-600 text-gray-200 p-3 rounded-lg font-bold hover:bg-gray-600 transition">⌫</button>
+                <button onclick="inputOperator('/')" aria-label="გაყოფა" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">/</button>
 
-                <button onclick="inputNum('7')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">7</button>
-                <button onclick="inputNum('8')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">8</button>
-                <button onclick="inputNum('9')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">9</button>
-                <button onclick="inputOperator('*')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">*</button>
+                <button onclick="inputNum('7')" aria-label="7" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">7</button>
+                <button onclick="inputNum('8')" aria-label="8" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">8</button>
+                <button onclick="inputNum('9')" aria-label="9" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">9</button>
+                <button onclick="inputOperator('*')" aria-label="გამრავლება" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">*</button>
 
-                <button onclick="inputNum('4')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">4</button>
-                <button onclick="inputNum('5')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">5</button>
-                <button onclick="inputNum('6')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">6</button>
-                <button onclick="inputOperator('-')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">-</button>
+                <button onclick="inputNum('4')" aria-label="4" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">4</button>
+                <button onclick="inputNum('5')" aria-label="5" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">5</button>
+                <button onclick="inputNum('6')" aria-label="6" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">6</button>
+                <button onclick="inputOperator('-')" aria-label="გამოკლება" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">-</button>
 
-                <button onclick="inputNum('1')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">1</button>
-                <button onclick="inputNum('2')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">2</button>
-                <button onclick="inputNum('3')" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">3</button>
-                <button onclick="inputOperator('+')" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">+</button>
+                <button onclick="inputNum('1')" aria-label="1" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">1</button>
+                <button onclick="inputNum('2')" aria-label="2" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">2</button>
+                <button onclick="inputNum('3')" aria-label="3" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">3</button>
+                <button onclick="inputOperator('+')" aria-label="მიმატება" class="bg-gray-700 border border-gray-600 text-amber-400 p-3 rounded-lg font-bold hover:bg-gray-600 transition">+</button>
 
-                <button onclick="inputNum('0')" class="col-span-2 bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">0</button>
-                <button onclick="inputDecimal()" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">.</button>
-                <button onclick="calculateResult()" class="bg-emerald-600 border border-emerald-500 text-white p-3 rounded-lg font-bold hover:bg-emerald-500 transition">=</button>
+                <button onclick="inputNum('0')" aria-label="0" class="col-span-2 bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">0</button>
+                <button onclick="inputDecimal()" aria-label="წერტილი" class="bg-gray-900 border border-gray-700 text-white p-3 rounded-lg font-medium hover:bg-gray-700 transition">.</button>
+                <button onclick="calculateResult()" aria-label="ტოლია" class="bg-emerald-600 border border-emerald-500 text-white p-3 rounded-lg font-bold hover:bg-emerald-500 transition">=</button>
             </div>
         </div>
         <div class="text-[10px] text-gray-600 text-center tracking-wider uppercase border-t border-gray-700/50 pt-3">მოხერხებული გათვლებისთვის</div>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-gray-800 border-t border-gray-700 text-center py-4 text-xs text-gray-500">
-        ElectroCalc App &copy; 2026 • დამზადებულია GitHub-ზე
+        ElectroCalc &copy; 2026 • ყველა უფლება დაცულია.
     </footer>
 
-    <script>
-        let currentMaterial = 'copper'; 
-
-        let calcCurrentInput = '0';
-        let calcStoredExpression = '';
-        let isEquationFinished = false;
-
-        // 📊 ახალი განახლებული GOST / PUE მონაცემთა ბაზა
-        const cableSpecs = {
-            copper: {
-                "0.12": { amperage: { conduit: 1.5, air: 2.0, ground: 2.5 }, price_per_meter: 0.3 },
-                "0.2":  { amperage: { conduit: 2.5, air: 3.5, ground: 4.0 }, price_per_meter: 0.4 },
-                "0.35": { amperage: { conduit: 4.5, air: 6.0, ground: 7.0 }, price_per_meter: 0.5 },
-                "0.5":  { amperage: { conduit: 6,   air: 9,   ground: 11 },  price_per_meter: 0.7 },
-                "0.75": { amperage: { conduit: 10,  air: 12,  ground: 15 },  price_per_meter: 1.0 },
-                "1.0":  { amperage: { conduit: 14,  air: 16,  ground: 19 },  price_per_meter: 1.3 },
-                "1.5":  { amperage: { conduit: 18,  air: 21,  ground: 24 },  price_per_meter: 1.8 },
-                "2.5":  { amperage: { conduit: 24,  air: 29,  ground: 33 },  price_per_meter: 2.5 },
-                "4.0":  { amperage: { conduit: 32,  air: 38,  ground: 43 },  price_per_meter: 3.8 },
-                "6.0":  { amperage: { conduit: 41,  air: 49,  ground: 55 },  price_per_meter: 5.5 },
-                "10.0": { amperage: { conduit: 57,  air: 68,  ground: 75 },  price_per_meter: 8.5 },
-                "16.0": { amperage: { conduit: 76,  air: 91,  ground: 100 }, price_per_meter: 13.0 },
-                "25.0": { amperage: { conduit: 101, air: 119, ground: 130 }, price_per_meter: 19.0 },
-                "35.0": { amperage: { conduit: 125, air: 148, ground: 160 }, price_per_meter: 26.0 },
-                "50.0": { amperage: { conduit: 151, air: 179, ground: 195 }, price_per_meter: 35.0 },
-                "70.0": { amperage: { conduit: 192, air: 230, ground: 245 }, price_per_meter: 50.0 },
-                "95.0": { amperage: { conduit: 232, air: 278, ground: 295 }, price_per_meter: 68.0 },
-                "120.0":{ amperage: { conduit: 269, air: 322, ground: 340 }, price_per_meter: 85.0 },
-                "150.0":{ amperage: { conduit: 309, air: 370, ground: 390 }, price_per_meter: 105.0 },
-                "185.0":{ amperage: { conduit: 353, air: 422, ground: 445 }, price_per_meter: 130.0 },
-                "240.0":{ amperage: { conduit: 415, air: 496, ground: 520 }, price_per_meter: 170.0 },
-                "300.0":{ amperage: { conduit: 477, air: 570, ground: 600 }, price_per_meter: 210.0 },
-                "400.0":{ amperage: { conduit: 545, air: 650, ground: 685 }, price_per_meter: 280.0 }
-            },
-            aluminum: {
-                "0.12": { amperage: { conduit: 1.0, air: 1.5, ground: 2.0 }, price_per_meter: 0.15 },
-                "0.2":  { amperage: { conduit: 1.8, air: 2.5, ground: 3.0 }, price_per_meter: 0.20 },
-                "0.35": { amperage: { conduit: 3.0, air: 4.2, ground: 5.0 }, price_per_meter: 0.25 },
-                "0.5":  { amperage: { conduit: 4.5, air: 6.5, ground: 7.5 }, price_per_meter: 0.35 },
-                "0.75": { amperage: { conduit: 7.0, air: 9.0, ground: 10.5 }, price_per_meter: 0.50 },
-                "1.0":  { amperage: { conduit: 10.0, air: 12.0, ground: 14.0 }, price_per_meter: 0.65 },
-                "1.5":  { amperage: { conduit: 14.0, air: 16.0, ground: 18.0 }, price_per_meter: 0.80 },
-                "2.5":  { amperage: { conduit: 19.0, air: 23.0, ground: 26.0 }, price_per_meter: 1.10 },
-                "4.0":  { amperage: { conduit: 25.0, air: 30.0, ground: 34.0 }, price_per_meter: 1.60 },
-                "6.0":  { amperage: { conduit: 32.0, air: 38.0, ground: 43.0 }, price_per_meter: 2.20 },
-                "10.0": { amperage: { conduit: 45.0, air: 54.0, ground: 60.0 }, price_per_meter: 3.50 },
-                "16.0": { amperage: { conduit: 60.0, air: 72.0, ground: 80.0 }, price_per_meter: 5.00 },
-                "25.0": { amperage: { conduit: 80.0, air: 96.0, ground: 105.0 }, price_per_meter: 7.50 },
-                "35.0": { amperage: { conduit: 99.0, air: 118.0, ground: 130.0 }, price_per_meter: 10.00 },
-                "50.0": { amperage: { conduit: 120.0, air: 145.0, ground: 160.0 }, price_per_meter: 14.00 },
-                "70.0": { amperage: { conduit: 155.0, air: 185.0, ground: 205.0 }, price_per_meter: 19.00 },
-                "95.0": { amperage: { conduit: 190.0, air: 225.0, ground: 245.0 }, price_per_meter: 26.00 },
-                "120.0":{ amperage: { conduit: 220.0, air: 260.0, ground: 285.0 }, price_per_meter: 33.00 },
-                "150.0":{ amperage: { conduit: 255.0, air: 300.0, ground: 325.0 }, price_per_meter: 40.00 },
-                "185.0":{ amperage: { conduit: 295.0, air: 350.0, ground: 375.0 }, price_per_meter: 50.00 },
-                "240.0":{ amperage: { conduit: 345.0, air: 410.0, ground: 435.0 }, price_per_meter: 65.00 },
-                "300.0":{ amperage: { conduit: 395.0, air: 470.0, ground: 500.0 }, price_per_meter: 82.00 },
-                "400.0":{ amperage: { conduit: 455.0, air: 540.0, ground: 575.0 }, price_per_meter: 110.00 }
-            }
-        };
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
-            document.getElementById(tabId).classList.remove('hidden');
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-4 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-gray-200 transition cursor-pointer";
-            });
-            
-            const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.className = "tab-btn px-4 py-2 rounded-md text-sm font-medium transition bg-amber-500 text-gray-900 font-semibold cursor-pointer";
-
-            if (tabId === 'formulas-tab') {
-                calcFormulaAmperage();
-                calcFormulaWatts();
-                calcFormulaVoltage();
-                calcAdvancedDrop();
-                calcLedPower();
-            }
-            if (tabId === 'panel-tab') {
-                onPanelDeviceChange();
-                calculateGofSize();
-                calculateMotorSpecs();
-            }
-        }
-
-        function setMaterial(material) {
-            currentMaterial = material;
-            const btnCu = document.getElementById('btn-cu');
-            const btnAl = document.getElementById('btn-al');
-            const badge = document.getElementById('material-badge');
-
-            if (material === 'copper') {
-                btnCu.className = "px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-amber-500 text-gray-900 shadow-md cursor-pointer";
-                btnAl.className = "px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 text-gray-400 hover:text-gray-200 cursor-pointer";
-                badge.innerText = "სპილენძის ხაზი";
-                badge.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 uppercase tracking-wider";
-            } else {
-                btnAl.className = "px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 bg-slate-300 text-gray-900 shadow-md cursor-pointer";
-                btnCu.className = "px-6 py-2 rounded-lg text-sm font-bold transition flex items-center space-x-2 text-gray-400 hover:text-gray-200 cursor-pointer";
-                badge.innerText = "ალუმინის ხაზი";
-                badge.className = "text-xs px-2.5 py-1 rounded-full font-bold bg-slate-400/10 text-slate-300 border border-slate-500/30 uppercase tracking-wider";
-            }
-            calculateLoad(); 
-        }
-
-        function calculateLoad() {
-            const sizeStr = document.getElementById('wire-size').value;
-            const sizeValue = parseFloat(sizeStr) || 2.5;
-            const length = parseFloat(document.getElementById('wire-length').value) || 0;
-            const voltage = parseFloat(document.getElementById('wire-voltage').value) || 220;
-            const phase = document.getElementById('phase-type').value;
-            const install = document.getElementById('install-type').value;
-
-            let maxAmperage = 0;
-            let price = 0;
-
-            // უზრუნველყოფს მოძებნას როგორც "4.0", ისე "4" key-ს შემთხვევაში
-            const cleanKey = sizeValue.toString();
-            const formatKey = sizeValue.toFixed(1);
-
-            const matData = cableSpecs[currentMaterial];
-            if (matData) {
-                const spec = matData[sizeStr] || matData[cleanKey] || matData[formatKey];
-                if (spec) {
-                    maxAmperage = spec.amperage[install];
-                    price = spec.price_per_meter;
-                }
-            }
-
-            maxAmperage = parseFloat(maxAmperage.toFixed(1));
-
-            let maxPowerkW = 0;
-            if (phase === '1' || phase === 'dc') {
-                maxPowerkW = (maxAmperage * voltage) / 1000;
-            } else {
-                maxPowerkW = (maxAmperage * voltage * Math.sqrt(3)) / 1000;
-            }
-
-            const rho = (currentMaterial === 'copper') ? 0.0175 : 0.028;
-            let voltageDrop = 0;
-
-            if (phase === '1' || phase === 'dc') {
-                voltageDrop = (2 * rho * length * maxAmperage) / sizeValue;
-            } else {
-                voltageDrop = (Math.sqrt(3) * rho * length * maxAmperage) / sizeValue;
-            }
-
-            const dropPercent = voltage > 0 ? (voltageDrop / voltage) * 100 : 0;
-
-            document.getElementById('res-amperage').innerText = maxAmperage + " A";
-            document.getElementById('res-power').innerText = maxPowerkW.toFixed(2) + " kW";
-            document.getElementById('res-price').innerText = price.toFixed(2) + " ₾ / მეტრი";
-            document.getElementById('res-drop-volt').innerText = voltageDrop.toFixed(2) + " V";
-            document.getElementById('res-drop-percent').innerText = `(${dropPercent.toFixed(2)}%)`;
-
-            const statusEl = document.getElementById('res-drop-status');
-            if (dropPercent <= 3) {
-                statusEl.innerText = "✓ ვარდნა იდეალურ ნორმაშია (≤ 3%)";
-                statusEl.className = "text-xs mt-1 font-medium text-emerald-400";
-            } else if (dropPercent <= 5) {
-                statusEl.innerText = "⚠ ვარდნა დასაშვებ ზღვარზეა (3% - 5%)";
-                statusEl.className = "text-xs mt-1 font-medium text-amber-400";
-            } else {
-                statusEl.innerText = "❌ კრიტიკული ვარდნა (> 5%)! გაზარდეთ კვეთა!";
-                statusEl.className = "text-xs mt-1 font-medium text-rose-400 animate-pulse";
-            }
-        }
-
-        function calcFormulaAmperage() {
-            const power = parseFloat(document.getElementById('f-amp-power').value) || 0;
-            const volt = parseFloat(document.getElementById('f-amp-volt').value) || 1;
-            const phase = document.getElementById('f-amp-phase').value;
-            let amperage = 0;
-            if (phase === '1' || phase === 'dc') amperage = power / volt;
-            else amperage = power / (volt * Math.sqrt(3));
-            document.getElementById('f-amp-result').innerText = amperage.toFixed(2) + " A";
-        }
-
-        function calcFormulaWatts() {
-            const amp = parseFloat(document.getElementById('f-watt-amp').value) || 0;
-            const volt = parseFloat(document.getElementById('f-watt-volt').value) || 0;
-            const phase = document.getElementById('f-watt-phase').value;
-            let watts = 0;
-            if (phase === '1' || phase === 'dc') watts = amp * volt;
-            else watts = amp * volt * Math.sqrt(3);
-            const kw = watts / 1000;
-            document.getElementById('f-watt-result').innerText = `${watts.toFixed(0)} W (${kw.toFixed(2)} kW)`;
-        }
-
-        function calcFormulaVoltage() {
-            const power = parseFloat(document.getElementById('f-volt-power').value) || 0;
-            const amp = parseFloat(document.getElementById('f-volt-amp').value) || 1;
-            const phase = document.getElementById('f-volt-phase').value;
-            let volt = 0;
-            if (phase === '3') volt = power / (amp * Math.sqrt(3));
-            else volt = power / amp;
-            document.getElementById('f-volt-result').innerText = volt.toFixed(2) + " V";
-        }
-
-        function calcAdvancedDrop() {
-            const size = parseFloat(document.getElementById('vdrop-size').value) || 0.01;
-            const len = parseFloat(document.getElementById('vdrop-len').value) || 0;
-            const amp = parseFloat(document.getElementById('vdrop-amp').value) || 0;
-            const mat = document.getElementById('vdrop-mat').value;
-            const sys = document.getElementById('vdrop-sys').value;
-            const rho = (mat === 'cu') ? 0.0175 : 0.028;
-            let drop = 0;
-            if (sys === '1' || sys === 'dc') drop = (2 * rho * len * amp) / size;
-            else drop = (Math.sqrt(3) * rho * len * amp) / size;
-            document.getElementById('vdrop-res-volt').innerText = drop.toFixed(2) + " V";
-        }
-
-        function convertDiaToSize() {
-            const dia = parseFloat(document.getElementById('conv-dia').value) || 0;
-            const size = (Math.PI * Math.pow(dia, 2)) / 4;
-            document.getElementById('conv-res-size').innerText = size.toFixed(2) + " მმ²";
-        }
-
-        function convertSizeToDia() {
-            const size = parseFloat(document.getElementById('conv-size').value) || 0;
-            const dia = 2 * Math.sqrt(size / Math.PI);
-            document.getElementById('conv-res-dia').innerText = dia.toFixed(2) + " Ø მმ";
-        }
-
-        function calcLedPower() {
-            const len = parseFloat(document.getElementById('led-len').value) || 0;
-            const wpm = parseFloat(document.getElementById('led-wpm').value) || 0;
-            const pure = len * wpm;
-            const total = pure * 1.20;
-            document.getElementById('led-res-pure').innerText = pure.toFixed(1) + " W";
-            document.getElementById('led-res-total').innerText = "≥ " + total.toFixed(1) + " W";
-        }
-
-        const avgDevicePowers = {
-            washer: 2200,
-            conditioner: 1800,
-            boiler: 2500,
-            oven: 3500,
-            sockets: 2000,
-            lighting: 600
-        };
-
-        function onPanelDeviceChange() {
-            const dev = document.getElementById('panel-device').value;
-            document.getElementById('panel-exact-power').value = avgDevicePowers[dev];
-            calculatePanelSpecs();
-        }
-
-        function toggleExactPowerBlock() {
-            const block = document.getElementById('exact-power-block');
-            block.classList.toggle('hidden');
-        }
-
-        function calculatePanelSpecs() {
-            const dev = document.getElementById('panel-device').value;
-            const power = parseFloat(document.getElementById('panel-exact-power').value) || 0;
-            const amp = power / 220;
-
-            let wire = "3x2.5 მმ² (სპილენძი)";
-            let breaker = "16A (C ტიპი)";
-            let rcd = "საჭიროა (30mA გაჟონვაზე)";
-
-            if (dev === 'lighting' && power < 2000) {
-                wire = "3x1.5 მმ² (სპილენძი)";
-                breaker = "10A (B ტიპი)";
-                rcd = "არ არის სავალდებულო";
-            } else if (amp > 16 && amp <= 25) {
-                wire = "3x4.0 მმ² (სპილენძი)";
-                breaker = "25A (C ტიპი)";
-            } else if (amp > 25) {
-                wire = "3x6.0 მმ² (სპილენძი)";
-                breaker = "32A / 40A (C ტიპი)";
-            }
-
-            if (dev === 'washer' || dev === 'boiler') {
-                rcd = "⚠️ აუცილებელია! (სველი ზონა - რეკომენდებულია 10mA)";
-            }
-
-            document.getElementById('p-res-wire').innerText = wire;
-            document.getElementById('p-res-breaker').innerText = breaker;
-            document.getElementById('p-res-rcd').innerText = rcd;
-        }
-
-        function calculateGofSize() {
-            const count = parseInt(document.getElementById('gof-count').value) || 1;
-            const dia = parseFloat(document.getElementById('gof-cable-dia').value) || 0;
-
-            const totalCableArea = count * (Math.PI * Math.pow(dia, 2) / 4);
-            const requiredInnerArea = totalCableArea / 0.4;
-            const innerDia = 2 * Math.sqrt(requiredInnerArea / Math.PI);
-
-            let gofSize = "Ø 16 მმ";
-            if (innerDia > 10.7 && innerDia <= 14.1) gofSize = "Ø 20 მმ";
-            else if (innerDia > 14.1 && innerDia <= 18.2) gofSize = "Ø 25 მმ";
-            else if (innerDia > 18.2 && innerDia <= 24.3) gofSize = "Ø 32 მმ";
-            else if (innerDia > 24.3) gofSize = "Ø 40 მმ+";
-
-            document.getElementById('gof-result').innerText = gofSize;
-        }
-
-        function calculateMotorSpecs() {
-            const kw = parseFloat(document.getElementById('motor-kw').value) || 0;
-            const cos = parseFloat(document.getElementById('motor-cos').value) || 0.85;
-            const connect = document.getElementById('motor-connect').value;
-
-            let amp = 0;
-            let relay = "";
-            let capacitor = "არ სჭირდება";
-
-            if (connect === '3') {
-                amp = (kw * 1000) / (380 * Math.sqrt(3) * cos);
-                relay = `${(amp * 1.1).toFixed(1)} - ${(amp * 1.25).toFixed(1)}A რეგულირებადი`;
-            } else {
-                amp = (kw * 1000) / (220 * cos);
-                relay = `${(amp * 1.15).toFixed(1)}A ნომინალი`;
-                capacitor = `⚙️ სამუშაო: ${(kw * 70).toFixed(0)} μF (მინ. 450V)`;
-            }
-
-            document.getElementById('m-res-amp').innerText = amp.toFixed(1) + " A";
-            document.getElementById('m-res-relay').innerText = relay;
-            document.getElementById('m-res-capacitor').innerText = capacitor;
-        }
-
-        function toggleMathCalc() {
-            const sidebar = document.getElementById('math-calc-sidebar');
-            sidebar.classList.toggle('translate-x-full');
-        }
-        function updateCalcDisplay() {
-            document.getElementById('calc-display').innerText = calcCurrentInput;
-            document.getElementById('calc-history').innerText = calcStoredExpression;
-        }
-        function inputNum(num) {
-            if (isEquationFinished) { calcCurrentInput = num; isEquationFinished = false; }
-            else { if (calcCurrentInput === '0') calcCurrentInput = num; else calcCurrentInput += num; }
-            updateCalcDisplay();
-        }
-        function inputDecimal() {
-            if (isEquationFinished) { calcCurrentInput = '0.'; isEquationFinished = false; updateCalcDisplay(); return; }
-            if (!calcCurrentInput.includes('.')) calcCurrentInput += '.';
-            updateCalcDisplay();
-        }
-        function inputOperator(op) {
-            if (isEquationFinished) { calcStoredExpression = calcCurrentInput + ' ' + op + ' '; isEquationFinished = false; }
-            else { calcStoredExpression += calcCurrentInput + ' ' + op + ' '; }
-            calcCurrentInput = '0';
-            updateCalcDisplay();
-        }
-        function clearCalc() { calcCurrentInput = '0'; calcStoredExpression = ''; isEquationFinished = false; updateCalcDisplay(); }
-        function backspaceCalc() {
-            if (isEquationFinished) { clearCalc(); return; }
-            if (calcCurrentInput.length > 1) calcCurrentInput = calcCurrentInput.slice(0, -1);
-            else calcCurrentInput = '0';
-            updateCalcDisplay();
-        }
-        function calculateResult() {
-            if (calcStoredExpression === '') return;
-            let fullExpression = calcStoredExpression + calcCurrentInput;
-            try {
-                let result = new Function(`return (${fullExpression})`)();
-                if (result.toString().includes('.')) result = parseFloat(result.toFixed(4));
-                calcStoredExpression = fullExpression + ' =';
-                calcCurrentInput = result.toString();
-                isEquationFinished = true;
-            } catch (e) { calcCurrentInput = 'Error'; calcStoredExpression = ''; isEquationFinished = true; }
-            updateCalcDisplay();
-        }
-
-        function openStandardsModal() {
-            document.getElementById('standards-modal').classList.remove('hidden');
-        }
-
-        function closeStandardsModal() {
-            document.getElementById('standards-modal').classList.add('hidden');
-        }
-
-        window.onload = calculateLoad;
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('Service Worker დარეგისტრირდა!', reg))
-                    .catch(err => console.log('Service Worker შეცდომა:', err));
-            });
-        }
-    </script>
+    <!-- JavaScript ფაილის მიერთება -->
+    <script src="script.js"></script>
 </body>
 </html>
