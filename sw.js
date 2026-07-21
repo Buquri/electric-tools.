@@ -1,25 +1,22 @@
 const CACHE_NAME = 'electrocalc-v1';
-const ASSETS_TO_CACHE = [
+const urlsToCache = [
   '/',
   '/index.html',
+  '/script.js',
   '/manifest.json',
-  'https://cdn.tailwindcss.com' // თუ Tailwind CDN-ს იყენებ
+  '/icon-192.png'
 ];
 
-// ინსტალაციისას ფაილების ქეშირებას აკეთებს
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
   );
 });
 
-// მოთხოვნისას ჯერ ქეშიდან იღებს ფაილს (Offline მუშაობისთვის)
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((cachedResponse) => {
-      return cachedResponse || fetch(e.request);
-    })
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
   );
 });
