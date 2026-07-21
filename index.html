@@ -10,7 +10,7 @@
     <meta name="keywords" content="ელექტროობა, ელექტრიკოსი, კაბელი, კვეთა, ამპერი, ვატი, ძაბვის ვარდნა, ElectroCalc">
     <meta name="author" content="ElectroCalc">
     
-    <!-- Canonical URL (შეცვალე შენი რეალური დომენით) -->
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://შენისაიტი.com">
 
     <!-- Favicon & Web App icons -->
@@ -104,31 +104,32 @@
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label for="wire-size" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ² / AWG)</label>
+                            <label for="wire-size" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">კაბელის კვეთა (მმ²)</label>
                             <select id="wire-size" onchange="calculateLoad()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-500 transition font-mono text-xs md:text-sm">
-                                <option value="0.12">0.12 მმ² (~26 AWG)</option>
-                                <option value="0.2">0.20 მმ² (~24 AWG)</option>
-                                <option value="0.35">0.35 მმ² (~22 AWG)</option>
-                                <option value="0.5">0.50 მმ² (~20 AWG)</option>
-                                <option value="0.75">0.75 მმ² (~18 AWG)</option>
-                                <option value="1.0">1.00 მმ² (~17 AWG)</option>
-                                <option value="1.5">1.50 მმ² (~15 AWG)</option>
-                                <option value="2.5" selected>2.50 მმ² (~13/14 AWG)</option>
-                                <option value="4.0">4.00 მმ² (~11/12 AWG)</option>
-                                <option value="6.0">6.00 მმ² (~9/10 AWG)</option>
-                                <option value="10.0">10.00 მმ² (~7/8 AWG)</option>
-                                <option value="16.0">16.00 მმ² (~5/6 AWG)</option>
-                                <option value="25.0">25.00 მმ² (~3/4 AWG)</option>
-                                <option value="35.0">35.00 მმ² (~2 AWG)</option>
-                                <option value="50.0">50.00 მმ² (~1/0 AWG)</option>
-                                <option value="70.0">70.00 მმ² (~2/0 AWG)</option>
-                                <option value="95.0">95.00 მმ² (~3/0 AWG)</option>
-                                <option value="120.0">120.00 მმ² (~4/0 AWG)</option>
-                                <option value="150.0">150.00 მმ² (250 kcmil)</option>
-                                <option value="185.0">185.00 მმ² (350 kcmil)</option>
-                                <option value="240.0">240.00 მმ² (500 kcmil)</option>
-                                <option value="300.0">300.00 მმ² (600 kcmil)</option>
-                                <option value="400.0">400.00 მმ² (800 kcmil)</option>
+                                <option value="0.12">0.12 მმ²</option>
+                                <option value="0.2">0.20 მმ²</option>
+                                <option value="0.35">0.35 მმ²</option>
+                                <option value="0.5">0.50 მმ²</option>
+                                <option value="0.75">0.75 მმ²</option>
+                                <option value="1">1.00 მმ²</option>
+                                <option value="1.5">1.50 მმ²</option>
+                                <option value="2">2.00 მმ²</option>
+                                <option value="2.5" selected>2.50 მმ²</option>
+                                <option value="4">4.00 მმ²</option>
+                                <option value="6">6.00 მმ²</option>
+                                <option value="10">10.00 მმ²</option>
+                                <option value="16">16.00 მმ²</option>
+                                <option value="25">25.00 მმ²</option>
+                                <option value="35">35.00 მმ²</option>
+                                <option value="50">50.00 მმ²</option>
+                                <option value="70">70.00 მმ²</option>
+                                <option value="95">95.00 მმ²</option>
+                                <option value="120">120.00 მმ²</option>
+                                <option value="150">150.00 მმ²</option>
+                                <option value="185">185.00 მმ²</option>
+                                <option value="240">240.00 მმ²</option>
+                                <option value="300">300.00 მმ²</option>
+                                <option value="400">400.00 მმ²</option>
                             </select>
                         </div>
                         <div>
@@ -199,6 +200,12 @@
                             <p id="res-price" class="text-xl font-bold text-blue-400 mt-1">0.00 ₾ / მეტრი</p>
                         </div>
                         <span class="text-2xl bg-gray-900 p-3 rounded-lg">🏷️</span>
+                    </div>
+
+                    <!-- 🔴 წითელი შენიშვნა 10%-იან რეზერვზე -->
+                    <div id="max-limit-note" class="bg-rose-950/40 border border-rose-800/60 text-rose-400 text-xs p-3.5 rounded-xl flex items-center gap-2.5 shadow-inner">
+                        <span class="text-base">⚠️</span>
+                        <span id="max-limit-note-text"></span>
                     </div>
                 </div>
             </div>
