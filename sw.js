@@ -1,4 +1,4 @@
-const CACHE_NAME = 'electrocalc-v1';
+const CACHE_NAME = 'electrocalc-v2';
 const urlsToCache = [
   '/',
   '/index.html',
