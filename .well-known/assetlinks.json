@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.netlify.electrocalc1.twa",
+        "sha256_cert_fingerprints": ["24:F7:44:91:E8:B7:F6:BA:21:C5:83:00:DF:9F:C6:91:84:A4:ED:AF:49:7E:7D:6A:0C:78:D4:D1:DE:3B:0D:EE"]
+      }
+    }]
