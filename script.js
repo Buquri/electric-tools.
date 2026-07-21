@@ -384,6 +384,29 @@ function closeStandardsModal() {
     document.getElementById('standards-modal').classList.add('hidden');
 }
 
+// 📲 PWA აპლიკაციის დაყენების/ინსტალაციის ლოგიკა
+let deferredPrompt;
+const installBtn = document.getElementById('pwa-install-btn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                deferredPrompt = null;
+            }
+        } else {
+            alert('📲 აპლიკაციის დაყენება:\n\n1. დააჭირეთ ბრაუზერის ზედა მენიუს (3 წერტილს ⋮)\n2. აირჩიეთ "Add to Home screen" ან "Install app".\n\n(თუ აპლიკაცია უკვე დაყენებული გაქვთ ეკრანზე, ხელმეორედ აღარ დაყენდება).');
+        }
+    });
+}
+
 // 🚀 ინიციალიზაცია გვერდის ჩატვირთვისას
 window.onload = calculateLoad;
 
